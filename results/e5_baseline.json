@@ -1,0 +1,133 @@
+{
+ "m2_main.db": {
+  "geo_random": {
+   "size": {
+    "n": 1350,
+    "k": 4,
+    "adj_r2_ols": 0.3871,
+    "cv_r2_ridge": 0.6102
+   },
+   "size+density": {
+    "n": 1350,
+    "k": 7,
+    "adj_r2_ols": 0.3318,
+    "cv_r2_ridge": 0.6639
+   },
+   "size+density+structure": {
+    "n": 1350,
+    "k": 67,
+    "adj_r2_ols": -0.0286,
+    "cv_r2_ridge": 0.9762
+   },
+   "nested_F_test_H1": {
+    "F": 297.8,
+    "df": [
+     60,
+     1283
+    ],
+    "p": 0.0,
+    "n": 1350,
+    "k_reduced": 7,
+    "k_full": 67,
+    "spec": "size+density vs +structure nested OLS (full pairwise interactions, standardized; aligned decided-row subset)"
+   }
+  },
+  "geo_random_swapped": {
+   "size": {
+    "n": 86,
+    "k": 4,
+    "adj_r2_ols": 0.1771,
+    "cv_r2_ridge": 0.7781
+   },
+   "size+density": {
+    "n": 86,
+    "k": 7,
+    "adj_r2_ols": 0.0272,
+    "cv_r2_ridge": 0.8887
+   },
+   "size+density+structure": {
+    "n": 86,
+    "k": 67,
+    "note": "n<2k, 跳过"
+   },
+   "nested_F_test_H1": {
+    "F": 0.3,
+    "df": [
+     60,
+     19
+    ],
+    "p": 0.9995558931833963,
+    "n": 86,
+    "k_reduced": 7,
+    "k_full": 67,
+    "spec": "size+density vs +structure nested OLS (full pairwise interactions, standardized; aligned decided-row subset)"
+   }
+  }
+ },
+ "m2_e1e2.db": {
+  "random3sat": {
+   "size": {
+    "n": 233,
+    "k": 4,
+    "adj_r2_ols": 0.2868,
+    "cv_r2_ridge": 0.6917
+   },
+   "size+density": {
+    "n": 233,
+    "k": 7,
+    "adj_r2_ols": 0.064,
+    "cv_r2_ridge": 0.9028
+   },
+   "size+density+structure": {
+    "n": 233,
+    "k": 67,
+    "adj_r2_ols": -0.3089,
+    "cv_r2_ridge": 0.8975
+   },
+   "nested_F_test_H1": {
+    "F": 0.9,
+    "df": [
+     60,
+     166
+    ],
+    "p": 0.6253750006565157,
+    "n": 233,
+    "k_reduced": 7,
+    "k_full": 67,
+    "spec": "size+density vs +structure nested OLS (full pairwise interactions, standardized; aligned decided-row subset)"
+   }
+  },
+  "tw_controlled": {
+   "size": {
+    "n": 475,
+    "k": 4,
+    "adj_r2_ols": 0.9998,
+    "cv_r2_ridge": -0.012
+   },
+   "size+density": {
+    "n": 475,
+    "k": 7,
+    "adj_r2_ols": 0.9998,
+    "cv_r2_ridge": -0.012
+   },
+   "size+density+structure": {
+    "n": 475,
+    "k": 67,
+    "adj_r2_ols": 0.9013,
+    "cv_r2_ridge": -0.0793
+   },
+   "nested_F_test_H1": {
+    "F": 0.6,
+    "df": [
+     60,
+     408
+    ],
+    "p": 0.98571976298666,
+    "n": 475,
+    "k_reduced": 7,
+    "k_full": 67,
+    "spec": "size+density vs +structure nested OLS (full pairwise interactions, standardized; aligned decided-row subset)"
+   }
+  }
+ }
+}

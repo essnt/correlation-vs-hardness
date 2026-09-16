@@ -1,0 +1,9 @@
+{
+ "n": 1436,
+ "leave_r_out_cv_r2": 0.7598,
+ "baseline_zulkoski_cv_r2_random3sat": "see e5_baseline.json",
+ "families": [
+  "geo_random",
+  "geo_random_swapped"
+ ]
+}

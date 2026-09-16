@@ -1,0 +1,24 @@
+[project]
+name = "cvh"
+version = "0.1.0"
+description = "Correlation structure vs. computational hardness: interventional empirical study"
+requires-python = ">=3.11"
+dependencies = [
+    "python-sat[aiger,approxmc,pblib]",
+    "networkx", "numpy", "scipy", "pandas", "matplotlib",
+    "scikit-learn", "statsmodels", "lifelines", "python-igraph", "leidenalg",
+    "pypdf", "pdfminer.six",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+# cvh lives in a src/ layout; pytest needs pythonpath to pick up tests/
+# (no editable install required)
+pythonpath = ["src"]
+testpaths = ["tests"]

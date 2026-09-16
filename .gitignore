@@ -1,0 +1,19 @@
+# Large data files and local environment are not tracked (the result
+# databases results/*.db ARE the primary asset and must be tracked — only ~2MB total)
+data/instances/
+data/external/
+results/*.db-journal
+__pycache__/
+*.pyc
+.venv/
+*.log
+.DS_Store
+
+# probSAT binary (built from tools/probsat, not committed)
+tools/probsat/probSAT
+!data/external/e4prime/MANIFEST_prime.csv
+
+# Local tooling and build artifacts (not tracked; LESSONS #16)
+.zcode/
+src/cvh.egg-info/
+.mimosa/
