@@ -17,7 +17,8 @@ PDF_NAME = "SongJin_2026_LocalityCausesTractability_CompactVersion.pdf"
 EXCLUDE_DOCS = ["SESSION_HANDOFF.md", "POSITIONING.md", "VENUES_ROADMAP.md",
                 "RELEASE_CHECKLIST.md", "ZENODO_STEPS.md", "COVER_LETTER.md",
                 "VALUE_ASSESSMENT.md", "REVIEW_CHECKLIST.md", "LESSONS_LEARNED.md",
-                "BLIND_REVIEW_PROTOCOL.md"]
+                "BLIND_REVIEW_PROTOCOL.md", "AUDIT_MEMO.md", "M0_FINDINGS.md",
+                "PLAN_v5.md"]
 
 
 def main():
@@ -55,9 +56,9 @@ def main():
         for root, dirs, files in os.walk(snap):
             for f in files:
                 full = os.path.join(root, f)
-                # 归档元数据匿名化：不携带构建机的 uid/gid/用户名（tar 头即元数据，
-                # 文本级隐私扫描覆盖不到；2026-09-12 盲审发现构建用户名经此通道
-                # 进入归档头，遂改为写入前清零）
+                # 归档元数据匿名化：不携带构建机的 uid/gid 与身份字串（tar 头即元数据，
+                # 文本级隐私扫描覆盖不到；2026-09-12 独立审查发现构建机身份字串经此
+                # 通道进入归档头，遂改为写入前清零）
                 ti = tfo.gettarinfo(full, arcname="./" + os.path.relpath(full, snap))
                 ti.uid = 0
                 ti.gid = 0

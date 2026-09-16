@@ -217,7 +217,7 @@ fmv.jku.at、archive.dimacs.rutgers.edu 可达。
    paper_draft_en 清理 [RESULT-TBD]×4 与 queued×2；e3a_analysis.py 删死代码
    行（geo_swap 恒空过滤；e3a 重生成字节一致证明零行为变更）。
 6. **打包元数据**：rebuild_zenodo.py tar 写入改 uid/gid=0、uname/gname 空
-   （此前 82 成员头带构建机用户名，文本扫描结构性盲区）。
+   （此前 82 成员 tar 头未匿名化、携带构建机侧身份字串，文本扫描结构性盲区）。
 
 ## 2026-09-12 修复批二（独立审查发现）
 
@@ -240,6 +240,6 @@ fmv.jku.at、archive.dimacs.rutgers.edu 可达。
    2002–2024→2002–2026；附录 clone 占位符指向 Zenodo record；附录完成
    日期补 E4 重判注；REPORT_zh §0 "~1.8"→"≥1.7"、E2 峰位表述改
    "达峰后进入删失平台"；paper_draft_en ≈1.6→>1.7、314→313。
-5. rebuild_zenodo.py 注释去除用户名字面量（修复批一自己引入的泄漏，
+5. rebuild_zenodo.py 注释去除构建机身份字面量（修复批一自己引入的泄漏，
    自脚本豁免使文本闸门失效——B1 字面口径下 1 命中）；审查清单 B3
    加"大写精确匹配=凭证式扫描"口径注。

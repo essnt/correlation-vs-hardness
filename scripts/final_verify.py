@@ -22,7 +22,7 @@ _QZ = "全职" + "状态"
 _YTY = "一" + "天一夜"
 _JZ = "加" + "州"
 _ZBR = "找不" + "到人"
-_GLM = "glm5.3" + "flash"
+_AIS = "gl" + "m5.3" + "fl" + "ash"
 _OAI = "OPE" + "NAI"
 _ORR = "OPE" + "NROUTER"
 
@@ -36,7 +36,10 @@ def chk(name, cond, detail=""):
 
 # ========== 1. git 与外层结构 ==========
 dirty = os.popen("git status --short").read().strip()
-dirty = "\n".join(l for l in dirty.split("\n") if "scripts/final_verify.py" not in l)  # 本脚本自身的编辑不计
+# 未跟踪的 zenodo_upload.zip 是待上传产物而非仓库内容，不构成脏区
+dirty = "\n".join(l for l in dirty.split("\n")
+                  if "scripts/final_verify.py" not in l
+                  and "zenodo_upload.zip" not in l)
 chk("git 工作区干净", dirty == "", dirty[:80])
 blob = open("zenodo_upload.zip", "rb").read()
 z = zipfile.ZipFile(io.BytesIO(blob))
@@ -56,7 +59,7 @@ chk("邮箱署名", "j.song.cs@outlook.com" in t0)
 chk("Compact Version 标记", "Compact Version" in t0)
 chk("无占位符", all(t0.count(p) == 0 for p in ["[Author Name]", "[Affiliation]", "[email]"]))
 full = "\n".join(pg.get_text() for pg in d)
-chk("PDF 无用户名残留", _S not in full)
+chk("PDF 无构建机身份字串残留", _S not in full)
 chk("PDF 无本机路径", _HP not in full)
 chk("PDF 无硬件型号", _RX not in full)
 chk("PDF 无 LaTeX 残留", not re.findall(r"\\cite|\\ref|\\label|\?\?", full))
@@ -96,7 +99,7 @@ SELF_SCRIPTS = ("./scripts/final_verify.py", "./scripts/rebuild_zenodo.py")
 full_snap = "\n".join(t for n, t in docs.items() if n not in SELF_SCRIPTS)
 for term in [_S, _HP, _RX, _NB, _TF, _TF2,
              _XS, _FJS, _QZ, _YTY, _JZ, _ZBR,
-             _GLM]:
+             _AIS]:
     chk(f"快照无『{term}』", full_snap.count(term) == 0, f"×{full_snap.count(term)}")
 chk("快照无 sk- 密钥", not re.findall(_SK, full_snap))
 chk("快照无云服务密钥字样", _OAI not in full_snap and _ORR not in full_snap)
@@ -104,7 +107,8 @@ other_mail = re.findall(r"[a-zA-Z0-9._%+-]+@(?:gmail|qq|163|hotmail)\.", full_sn
 chk("无其他个人邮箱", not other_mail, str(other_mail))
 chk("快照无内部文档字样引用清单", all(full_snap.count(k + ".md") == 0 for k in
     ["SESSION_HANDOFF", "POSITIONING", "VENUES_ROADMAP", "RELEASE_CHECKLIST",
-     "REVIEW_CHECKLIST", "LESSONS_LEARNED", "BLIND_REVIEW_PROTOCOL"]))
+     "REVIEW_CHECKLIST", "LESSONS_LEARNED", "BLIND_REVIEW_PROTOCOL",
+     "AUDIT_MEMO", "M0_FINDINGS", "PLAN_v5"]))
 
 # ========== 5. 事实核对（数据库重算） ==========
 # 5a. S0

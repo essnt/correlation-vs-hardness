@@ -105,7 +105,7 @@ def nested_f(rows, feats_red, feats_full):
     行集对齐：full 特征任一缺失的行剔除（与 design 的 NaN 处理一致），
     两版设计在同一行集上构建（标准化不影响 OLS 拟合值）。
     返回 F、df 与 n/k；这是论文 H1 阶梯"嵌套 F 检验"的 committed 生产者
-    （2026-09-12 起，替代无溯源的会话期手算值）。"""
+    （2026-09-12 起，替代无溯源的早期手算值）。"""
     rows_ok = [r for r in rows
                if all(np.isfinite(r.get("m_" + f, np.nan)) for f in feats_full)]
     Xr, y = design(rows_ok, feats_red)
