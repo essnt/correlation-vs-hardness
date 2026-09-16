@@ -10,7 +10,7 @@
    - `src/cvh/` generators, solver harness (resume-per-row), metrics, statistics
    - `experiments/` every experiment script (S0, E1-E6, E4, E5, spotcheck)
    - `results/` SQLite databases (all raw solve runs), analysis JSON, figures
-   - `docs/` preregistration (HYPOTHESES.md + AMEND-1/2/3), prespecification audit
+   - `docs/` preregistration (HYPOTHESES.md + AMEND-1–4), prespecification audit
      (PRESPEC_AUDIT.md), experiment log (M2_LOG.md), Chinese report (REPORT_zh.md),
      literature notes, AI-use disclosure (AI_DISCLOSURE.md)
    - `data/external/e4prime/` external-instance manifest for E4-prime
