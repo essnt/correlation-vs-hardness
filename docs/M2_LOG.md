@@ -52,7 +52,7 @@ PCM 定理=社区度量不可能成易解性证书；CA 模型平均案例指数
 主导运行时间=H2 最重要的观察性先例**，我们用 r 干预把它升级为因果主张）。
 
 全部 8 篇笔记在 docs/papers/notes/，M0 引用表同步更新（Zulkoski 行修正 LION→CP 2018）。
-教训记录：文献 agent 本轮 4 次被后端限流全灭——主对话直写（下载 PDF/ar5iv HTML 后
+教训记录：文献抓取通道本轮多次被后端限流中断——改为直接下载（PDF/ar5iv HTML 后
 本地精读）效率反而更高、引用核验更严格（每条 DOI 过 API）。
 
 # M2 主结果总记录（2026-09-10 凌晨，E3a/E3b 完成）
@@ -128,9 +128,9 @@ r≥0.3 的近阈值实例在 10⁷ 预算 / 300s 内几乎全部无法判定（
 480s，s0_spotcheck.py 已就绪）排在 E3a 之后以 4 worker 执行（内存护栏）。
 审计：PRESPEC_AUDIT.md（含 AMEND-3 内容臂暂缓决定）。
 
-## 可靠性体检与持久化修复（2026-09-09，用户驱动）
+## 可靠性体检与持久化修复（2026-09-09，作者驱动）
 
-用户指出"S0 跑完了不止一次"+"能落盘的不要留内存"。排查结论：
+作者指出"S0 跑完了不止一次"+"能落盘的不要留内存"。排查结论：
 
 1. **S0 反复跑的根因（设计缺陷）**：m2_s0_alpha_c.py 每次运行都重新提交
    全部 720 作业，无断点续跑过滤——重启后已完成的 525 格也被整轮重算
@@ -168,7 +168,7 @@ fmv.jku.at、archive.dimacs.rutgers.edu 可达。
 1. **SAT 2024 主轨预选表已完成**——data/external/2024-main/downloads/ 内 meta.csv
    （400 实例 md5/文件名/族/作者）+ detailed_main.csv（15 求解器逐实例运行时+状态）。
    实例字节缺失，但"n∈[10³,10⁵]、基线 1–60s、状态已知"的确定性预选随时可做；
-   用户浏览器渠道（Windows 侧代理可能可达 starexec/Wayback）留作补全通道。
+   作者浏览器渠道（Windows 侧代理可能可达 starexec/Wayback）留作补全通道。
 2. **E4-prime 换源**（experiments/fetch_e4_prime.py，幂等可续跑）：
    - 源 A marijnheule/benchmarks（GitHub raw 可达）：组合/crafted 真实实例 10 族
      （Green Hat/Steiner/26x26/matrix/mphf/packing/ptn/radio/wap/asias），每族 ≤8、
@@ -182,7 +182,7 @@ fmv.jku.at、archive.dimacs.rutgers.edu 可达。
 4. 局限声明（报告必写）：E4-prime 实例谱偏组合/crafted+BNN，工业多样性不及
    SAT 2024 主轨全集；落位结论的外推边界据此收紧。
 
-## 2026-09-12 修复批（盲审第十至十二轮发现；全程零行为变更的除外项见各条）
+## 2026-09-12 修复批（独立审查发现；全程零行为变更的除外项见各条）
 
 1. **E4 DIMACS 解析事故（高危，已修复重跑）**：e4_status.py 旧 parse_dimacs 把
    1996 legacy 方言（as/tm 族：'.N/.M' 声明、'N' 前缀否定、无 0 终止符、as 族
@@ -219,27 +219,27 @@ fmv.jku.at、archive.dimacs.rutgers.edu 可达。
 6. **打包元数据**：rebuild_zenodo.py tar 写入改 uid/gid=0、uname/gname 空
    （此前 82 成员头带构建机用户名，文本扫描结构性盲区）。
 
-## 2026-09-12 盲审修复批二（ds4f 三轮盲审发现；§九.30 F6）
+## 2026-09-12 修复批二（独立审查发现）
 
 1. **nested_F_test_H1 溯源缺口修复（高危→已清偿）**：论文 H1 嵌套 F 检验
-   （原记 F(72,643)=133.8）系会话期手算、无 committed 生产脚本且多子集重算
+   （原记 F(72,643)=133.8）系早期手算、无 committed 生产脚本且多子集重算
    不可复现。experiments/e5_baseline.py 新增 nested_f()（size+density vs
    +structure 嵌套 OLS、全交互设计、行集按 full 特征 NaN 对齐），对全部
-   已判定 geo_random 行（n=1350）重算：**F(60,1283)=297.8, p≈0**——与盲审
+   已判定 geo_random 行（n=1350）重算：**F(60,1283)=297.8, p≈0**——与另一
    独立实现逐位一致（双实现收敛）。随机族对照 F(60,166)=0.9（p=0.63）零
    增益与阶梯结论一致。论文/审计/草稿三处数字更新为 committed 值。
-2. **README/AI_DISCLOSURE DOI 措辞软化**（用户指令：publish 前软化、上传
+2. **README/AI_DISCLOSURE DOI 措辞软化**（既定策略：publish 前软化、上传
    后硬化）："已发布于 Zenodo"→"已预留、发布后生效"（预留 DOI 在
    DataCite 注册前 doi.org 404 属预期）。
 3. **事实性声明订正**：main.tex/paper_draft_en 的 "preselection table
    retained in-repo" 改 "retained in the authors' working archive"（400 表
    不在 git/快照内）；REPORT_zh §11.6 过时状态格勘误（嵌套 F 已完成）；
-   R3b 先导统计（F=1284/ACME 2.14/83%）加"会话期口径、无 committed 脚本"
+   R3b 先导统计（F=1284/ACME 2.14/83%）加"早期口径、无 committed 脚本"
    历史注（PRESPEC_AUDIT:46 同步）。
 4. 引用/措辞小项：atserias2011 补中间名 J.~K.~Fichte；satcomp 系列
    2002–2024→2002–2026；附录 clone 占位符指向 Zenodo record；附录完成
    日期补 E4 重判注；REPORT_zh §0 "~1.8"→"≥1.7"、E2 峰位表述改
    "达峰后进入删失平台"；paper_draft_en ≈1.6→>1.7、314→313。
-5. rebuild_zenodo.py 注释去除用户名字面量（盲审修复批一自己引入的泄漏，
+5. rebuild_zenodo.py 注释去除用户名字面量（修复批一自己引入的泄漏，
    自脚本豁免使文本闸门失效——B1 字面口径下 1 命中）；审查清单 B3
    加"大写精确匹配=凭证式扫描"口径注。

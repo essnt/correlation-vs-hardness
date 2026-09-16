@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """终版发布包全量验证（每轮从头跑全部检查项）。
 用法: .venv/bin/python scripts/final_verify.py   → 输出 PASS/FAIL 清单与计数
-检查范围: zenodo_upload.zip 三层结构 + 论文 PDF 全文 + 快照 85 文件(含 2 个 .gitignore 与 README_en) + 事实核对(数据库重算)
+检查范围: zenodo_upload.zip 三层结构 + 论文 PDF 全文 + 快照 82 文件(含 2 个 .gitignore 与 README_zh) + 事实核对(数据库重算)
 """
 import zipfile, tarfile, io, re, os, sys, json, sqlite3, math, hashlib
 from collections import defaultdict

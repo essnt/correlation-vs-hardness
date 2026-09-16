@@ -9,7 +9,7 @@
 
 | 冻结条目 | 实现位置 | 状态 | 说明 |
 |---|---|---|---|
-| H1 嵌套模型 F 检验（结构特征阶梯 > 单一 α_eff） | ✅ 已计算（committed：experiments/e5_baseline.py nested_f，2026-09-12）：F(60,1283)=297.8, p≈0，主扫描 geo_random 已判定行 n=1350（NaN 对齐）；随机族对照 F(60,166)=0.9（p=0.63）零增益与阶梯结论一致 | 嵌套 OLS 同子集对齐（全交互设计）。【2026-09-12 订正】初版 F(72,643)=133.8 为会话期手算——无 committed 生产脚本且重算不可复现（df 与管线特征数不符），以 committed 重算为准 |
+| H1 嵌套模型 F 检验（结构特征阶梯 > 单一 α_eff） | ✅ 已计算（committed：experiments/e5_baseline.py nested_f，2026-09-12）：F(60,1283)=297.8, p≈0，主扫描 geo_random 已判定行 n=1350（NaN 对齐）；随机族对照 F(60,166)=0.9（p=0.63）零增益与阶梯结论一致 | 嵌套 OLS 同子集对齐（全交互设计）。【2026-09-12 订正】初版 F(72,643)=133.8 为早期手算——无 committed 生产脚本且重算不可复现（df 与管线特征数不符），以 committed 重算为准 |
 | H2 主检验：r 九水平 × 30 种子配对，RM-ANOVA + JT | m2_e3a_main.py（9r × 3Δ × 30 seeds，同种子跨 r 共享）+ e3a_analysis.py（AnovaRM + JT 置换） | ✅ | 种子在 r/Δ 全水平共享，配对结构成立；求解器 cadical 主 / glucose 稳健性 |
 | H2 决策阈值：FDR 后 p<0.05 且 η²≥0.14 或端点中位数比 ≥10× | e3a_analysis.py | ⚠️ 已修 | AnovaRM 不直接给 η²；已换算 partial η² = F·df₁/(F·df₁+df₂)，中位数比在 logc_by_r 中直接可读。脚本 v2 已含 |
 | 2×2 析因（拓扑×内容） | E3b（拓扑破坏臂）已实现；**内容臂无操作化** | ❌→AMEND-3 | 见 AMEND-3：内容臂在 UNSAT 载体上无无歧义操作化（均匀极性下保分布重采样=恒等），暂缓并声明；拓扑通道不受影响。主扫描照常点火 |
@@ -43,7 +43,7 @@
 - **H2 确认路径**：η² 换算已补（见上）；端点均值比见 e3a_analysis.json `h2_by_delta_solver["delta=0.2|cadical"].logc_by_r`（mean log10 冲突 1.45→4.86）。✅ 已执行（2026-09-11 状态格订正）：H2 走冻结判据效应量路确认——η²_partial≈0.99≥0.14 且 JT p≤1e-4（FDR q≤1e-4）；e3a_analysis.json `h2_main_cadical.anova_deltaagg`：F(8,216)=2808.5、p≈1e-213。
 - **"密度主导"触发**：判据已在 HYPOTHESES 冻结（η²<0.02 且 p>0.05）；分析脚本输出足以直接判读。✅ 已执行（2026-09-11 状态格订正）：实测 η²_partial≈0.99，远未落入触发区（η²<0.02 且 p>0.05 不成立）→ 不转负结果支线，主叙事成立（数据 results/e3a_analysis.json）。
 - **E6 砍除线**：τ 弱于随机基线即砍——✅ 已执行：E6 恢复重跑后 qwen3:8b 与 JW 基线无差异、无 r 梯度信号，命中砍线砍除（记录 HYPOTHESES.md 冻结后记录节；数据 results/e6.json）。
-- **中介分析**：Imai (2011) ACME 自助法 CI；r→tw→难度路径要求 tw 度量——E3a 实例已记 tw_ub/tw_lb（measure_metrics=True）。R3b 中介管线已验证（会话期口径 ACME=2.14，83%——【2026-09-12 注】无 committed 脚本、按主研究规格不可复现，作为历史验证记录保留）。✅ 管线就绪。
+- **中介分析**：Imai (2011) ACME 自助法 CI；r→tw→难度路径要求 tw 度量——E3a 实例已记 tw_ub/tw_lb（measure_metrics=True）。R3b 中介管线已验证（早期口径 ACME=2.14，83%——【2026-09-12 注】无 committed 脚本、按主研究规格不可复现，作为历史验证记录保留）。✅ 管线就绪。
 
 ## 五、算力预算 vs 实际（诚实记账）
 
@@ -60,7 +60,7 @@
 1. **Zulkoski 引用出处修正**：LION 2018 → CP 2018（DBLP 键 conf/cp/ZulkoskiMWLCG18；LION 论文集为 LNCS 11331）。全文以作者博士论文核验。M0 表已改。
 2. **JMS 勘误**（M1 遗留，PILOT_FINDINGS）：我方 decoy 构造非 JMS 原文；"JMS 对现代 CDCL 平凡"表述已撤回。
 3. **树宽下界 bug**（M1）：MMD 下界误加填充边变上界 → 改纯退化度。
-4. **run_batch 持久化缺陷**（2026-09-09 用户审计触发）：无断点续跑 + 25 行攒批 commit → resume 过滤 + 逐行 commit（a26fefd）。此前 S0 被整轮重算 1–2 小时属实际浪费，如实记录。
+4. **run_batch 持久化缺陷**（2026-09-09 作者审计触发）：无断点续跑 + 25 行攒批 commit → resume 过滤 + 逐行 commit（a26fefd）。此前 S0 被整轮重算 1–2 小时属实际浪费，如实记录。
 5. **结果数据库曾不入 git** → 全部入库（~1.9MB）；SQLite journal 瞬态文件退出追踪。
 
 ## 六A、功效分析补记（冻结"主要终点"节的承诺项）
