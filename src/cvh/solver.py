@@ -79,6 +79,9 @@ def solve_one(clauses: list[list[int]], n_vars: int, solver: str = "cadical",
     if p.is_alive():
         p.terminate()
         p.join(5)
+        if p.is_alive():
+            p.kill()
+            p.join()  # 收割干净，不留僵尸子进程
         return {"solver": solver, "status": "walltimeout", "conflicts": None,
                 "decisions": None, "propagations": None,
                 "wall_s": wall_timeout, "conflict_budget": conflict_budget}
@@ -156,7 +159,9 @@ def _worker(args):
 
 def run_batch(jobs: list[tuple], db_path: str, table: str = "runs",
               workers: int | None = None, resume: bool = True) -> int:
-    """jobs: (family, params_dict, seed, solver, conflict_budget, measure_metrics).
+    """jobs: (family, params_dict, seed, solver, conflict_budget,
+    measure_metrics[, wall_timeout]).  The optional 7th element overrides the
+    default wall timeout for that job (s0_spotcheck uses it).
 
     Dispatch is THREAD-based: each job's solve runs in its own spawned child
     process (see solve_one), and pool workers are daemon processes which are

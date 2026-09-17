@@ -70,7 +70,7 @@ def main():
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     from m2_s0_alpha_c import coarse_crossings
     coarse = coarse_crossings()
-    out = {"r_levels": R_LEVELS, "cells": {}, "alpha_c_frozen": {}, "alpha_c_censored_only": {},
+    out = {"r_levels": R_LEVELS, "cells": {}, "alpha_c_frozen": {},
            "flags": {}, "censor_rate": {}}
     for r in R_LEVELS:
         if r not in cells:

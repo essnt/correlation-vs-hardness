@@ -66,7 +66,12 @@ def save(rel: Path, data: bytes, rows, source, family, name, note=""):
     # 计数走 e4_status.parse_dimacs（legacy 方言感知 + 声明自校验，不符即
     # raise）——as/tm legacy 族无 p 行，早期标准路径解析曾产出垃圾计数进
     # manifest（M2_LOG 2026-09-12 修复批记录），2026-09-16 根治。
-    n_vars, clauses, _declared = parse_dimacs(rel)
+    try:
+        n_vars, clauses, _declared = parse_dimacs(rel)
+    except Exception:
+        # 解析失败不留残件：size-match 跳过重下，残件会把错误持久化
+        rel.unlink(missing_ok=True)
+        raise
     rows.append({
         "source": source, "family": family, "file": str(rel.relative_to(OUT)),
         "sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data),
@@ -118,8 +123,7 @@ def fetch_bnn(rows):
         if p.endswith(".gz"):
             raw = subprocess.run(["gzip", "-dc"], input=data, capture_output=True).stdout
         else:
-            raw = subprocess.run(["xz", "-dc"], input=data, capture_output=True).stdout \
-                if False else subprocess.run(["bzip2", "-dc"], input=data, capture_output=True).stdout
+            raw = subprocess.run(["bzip2", "-dc"], input=data, capture_output=True).stdout
         # WCNF -> CNF：保留硬子句（weight>=top），去权重；纯 CNF 原样
         head, hards = [], []
         top = None

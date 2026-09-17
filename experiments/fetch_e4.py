@@ -30,7 +30,6 @@ ARCHIVES = [
     "https://www.satlib.org/Benchmarks/SAT/bmc/ibm-bmc.tar.gz",
     "https://www.satlib.org/Benchmarks/SAT/structural/structural.tar.gz",
 ]
-WANTED = re.compile(r"(bmc|ibm|hw|hard|combined|planning|logistics|uf200|uf150|uf125)", re.I)
 
 ALLOWED_HOSTS = {"www.satlib.org", "codeload.github.com"}
 

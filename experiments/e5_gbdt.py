@@ -36,8 +36,10 @@ def load():
             continue
         m = json.loads(mj)
         p = json.loads(params)
-        feats = [v for v in m.values() if isinstance(v, (int, float))
-                 and not isinstance(v, bool)]
+        # 显式按排序键取值，与 names 的构造严格对齐（dict 插入序不可依赖）
+        keys = sorted(k for k in m if isinstance(m[k], (int, float))
+                      and not isinstance(m[k], bool))
+        feats = [m[k] for k in keys]
         if not feats or "r" not in p:
             continue
         X.append(feats + [p.get("r", np.nan), p.get("delta", np.nan)])

@@ -7,7 +7,7 @@ dependencies = [
     "python-sat[aiger,approxmc,pblib]",
     "networkx", "numpy", "scipy", "pandas", "matplotlib",
     "scikit-learn", "statsmodels", "lifelines", "python-igraph", "leidenalg",
-    "pypdf", "pdfminer.six",
+    "pymupdf", "pypdf", "pdfminer.six",
 ]
 
 [build-system]

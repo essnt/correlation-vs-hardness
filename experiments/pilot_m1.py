@@ -18,7 +18,7 @@ DB = ROOT / "results" / "pilot_m1.db"
 if not DB.resolve().is_relative_to(ROOT):  # V2 样式：路径包含性校验（行为不变）
     raise ValueError("DB path must stay inside the project root")
 
-N, ALPHA, TIMEOUT = 400, 4.3, 15.0
+N, ALPHA, BUDGET = 400, 4.3, 15.0  # BUDGET = 冲突预算（run_batch 第 5 参），非墙钟
 R_GRID = [0.04, 0.06, 0.08, 0.11, 0.15, 0.22, 0.30, 0.50, 0.80, 1.50]
 SEEDS = list(range(10))
 
@@ -26,12 +26,12 @@ jobs = []
 for r in R_GRID:
     for s in SEEDS:
         jobs.append(("locality_kernel", {"n": N, "alpha": ALPHA, "r": r},
-                     s, "cadical", TIMEOUT, True))
+                     s, "cadical", BUDGET, True))
 # E3b paired arms at two r values
 for r in [0.08, 0.30]:
     for s in SEEDS:
         jobs.append(("locality_swapped", {"n": N, "alpha": ALPHA, "r": r},
-                     s, "cadical", TIMEOUT, True))
+                     s, "cadical", BUDGET, True))
 # tiny-timeout probe of the censoring path (one job)
 jobs.append(("random3sat", {"n": 150, "alpha": 6.0}, 0, "cadical", 0.001, False))
 

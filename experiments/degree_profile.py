@@ -51,12 +51,12 @@ def main():
         d = json.loads(p)
         if d.get("delta") != 0.2:
             continue
-        seen[(d["r"], d["alpha"], seed)] = iid
+        seen[(d["r"], d["alpha"], seed)] = (iid, d["n"])
 
     per_r: dict = {}
     matched = 0
-    for (r, alpha, seed), iid in sorted(seen.items()):
-        inst = locality_kernel(d["n"], alpha, r, seed, planted=False)
+    for (r, alpha, seed), (iid, n) in sorted(seen.items()):
+        inst = locality_kernel(n, alpha, r, seed, planted=False)
         if inst.inst_id != iid:
             raise SystemExit(f"inst_id mismatch at r={r} alpha={alpha} seed={seed}")
         matched += 1

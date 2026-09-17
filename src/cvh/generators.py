@@ -271,7 +271,6 @@ def locality_kernel(n: int, alpha: float, r: float, seed: int,
         raise NotImplementedError("geo_scalefree variant lands in M2 (robustness arm)")
     if not planted:
         m = round(alpha * n)
-        deg = [0] * (n + 1)
         clauses = []
         for _ in range(m):
             for _attempt in range(1000):
@@ -280,9 +279,11 @@ def locality_kernel(n: int, alpha: float, r: float, seed: int,
                         if _torus_dist2(c, p) <= r ** 2]
                 if len(near) >= 3:
                     break
+            else:
+                raise ValueError(
+                    f"no r-ball with >=3 variables within 1000 attempts "
+                    f"(r={r}, n={n})")
             vs = rng.sample(near, 3)
-            for v in vs:
-                deg[v] += 1
             clauses.append([v if rng.random() < 0.5 else -v for v in vs])
         return Instance(clauses, n, "geo_random",
                         {"alpha": alpha, "m": m, "r": r, "host": "torus2d"}, seed)
@@ -299,17 +300,21 @@ def degree_preserving_randomize(inst: Instance, seed: int,
     """MCMC swap chain on the clause-variable bipartite graph.
 
     Each step picks two random clauses and swaps one literal-variable between
-    them; the swap is rejected if it (a) duplicates a variable inside a clause,
-    (b) creates a tautology (x and -x together), or (c) breaks planted
-    satisfiability (when sigma present).  Literal occurrence counts and clause
-    sizes are invariant by construction.
+    them; the swap is rejected if it duplicates a variable inside a clause
+    (a tautology proposal — x and -x in one clause — collapses to a duplicate
+    under the |l| check) or breaks planted satisfiability (when sigma
+    present).  Literal occurrence counts and clause sizes are invariant by
+    construction.
     """
     rng = random.Random(seed)
     clauses = [list(c) for c in inst.clauses]
-    steps = acc = rej_dup = rej_tau = rej_sat = 0
+    steps = acc = rej_dup = rej_sat = 0
     target = n_swaps_factor * len(clauses)
 
     def bad(c):
+        # |l| 折叠符号 → tautology 提案（x 与 -x 同子句）必然判为 duplicate：
+        # 两类提案不可分，统计上并入 reject_duplicate（2026-09-17 代码审查
+        # 修正：原先的 reject_tautology 计数器结构上恒为 0，已删除）
         vs = [abs(l) for l in c]
         return len(set(vs)) != len(vs) or any(-l in c for l in c)
 
@@ -334,7 +339,7 @@ def degree_preserving_randomize(inst: Instance, seed: int,
     out = Instance(clauses, inst.n_vars, inst.family + "_swapped",
                    {**inst.params, "swapped": True}, seed, sigma=inst.sigma)
     stats = {"steps": steps, "accepted": acc, "reject_duplicate": rej_dup,
-             "reject_tautology": rej_tau, "reject_sat": rej_sat,
+             "reject_sat": rej_sat,
              "rejection_rate": 1 - acc / max(steps, 1)}
     return out, stats
 

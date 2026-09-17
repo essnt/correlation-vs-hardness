@@ -70,3 +70,37 @@ def test_parse_dimacs_declared_count_mismatch_raises(tmp_path):
     p.write_text(cnf)
     with pytest.raises(Exception):
         parse_dimacs(p)
+
+
+def test_swap_stats_partition():
+    # 拒绝原因计数与 steps/accepted 的守恒（tautology 提案在 |l| 检查下
+    # 并入 reject_duplicate——stats 中不存在独立的 reject_tautology 键）
+    inst = locality_kernel(60, 3.0, 0.5, seed=5, planted=False)
+    _swapped, stats = degree_preserving_randomize(inst, seed=1)
+    assert stats["accepted"] == 10 * len(inst.clauses)
+    assert (stats["reject_duplicate"] + stats["reject_sat"]
+            <= stats["steps"] - stats["accepted"])
+    assert "reject_tautology" not in stats
+
+
+def test_adj_r2_df_penalty():
+    # 自由度惩罚方向：加入无用列必须降低 adjusted R²；强拟合保持高分。
+    # （2026-09-17 修正：分母 n-k，截距由 X 内 ones 列计一次）
+    import importlib.util
+
+    import numpy as np
+
+    _p = Path(__file__).resolve().parents[1] / "experiments" / "e5_baseline.py"
+    _spec = importlib.util.spec_from_file_location("e5_baseline", _p)
+    _eb = importlib.util.module_from_spec(_spec)
+    _spec.loader.exec_module(_eb)
+    rng = np.random.default_rng(0)
+    n = 80
+    x = rng.normal(size=n)
+    y = 2.0 * x + rng.normal(scale=0.5, size=n)
+    X1 = np.column_stack([np.ones(n), x])
+    X2 = np.column_stack([np.ones(n), x, rng.normal(size=n)])
+    a1 = _eb.adj_r2(X1, y)
+    a2 = _eb.adj_r2(X2, y)
+    assert a1 > 0.9
+    assert a1 > a2

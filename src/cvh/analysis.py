@@ -36,6 +36,9 @@ def load_runs(db_path: str) -> pd.DataFrame:
     con = sqlite3.connect(db_path)
     df = pd.read_sql("SELECT * FROM runs", con)
     con.close()
+    # error/childerror 行无有效冲突口径，不属删失语义——显式排除
+    #（当前库中为 0 行，纯防御性；censored 只覆盖 budget/walltimeout）
+    df = df[~df["status"].astype(str).str.startswith(("error", "childerror"))]
     df["params"] = df["params"].apply(json.loads)
     df["metrics"] = df["metrics_json"].apply(lambda s: json.loads(s) if s else {})
     pkeys = sorted({k for d in df["params"] for k in d})

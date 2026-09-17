@@ -28,7 +28,7 @@ def main():
     os.makedirs(snap)
     arc = subprocess.run(["git", "archive", "HEAD"], cwd=CWD, capture_output=True).stdout
     with tarfile.open(fileobj=io.BytesIO(arc)) as tf:
-        tf.extractall(snap)
+        tf.extractall(snap, filter="data")
     # 2) 排除
     for d in EXCLUDE_DOCS:
         p = os.path.join(snap, "docs", d)
