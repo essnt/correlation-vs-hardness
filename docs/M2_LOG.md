@@ -193,7 +193,9 @@ fmv.jku.at、archive.dimacs.rutgers.edu 可达。
    标签矛盾，3 求解器稳健），毫秒级全判定。E4 总判定数不变（22/59：sat 17、
    unsat 5、walltimeout 37），论文 §Results V / REPORT_zh §9 / paper_draft_en
    已按真实结果改写。MANIFEST_prime.csv（未入库）的垃圾计数源自
-   fetch_e4_prime.py 同源解析，待 GitHub 批一并修。
+   fetch_e4_prime.py 同源解析。【2026-09-16 处置】fetch_e4_prime.py 计数
+   改用 e4_status.parse_dimacs（legacy 分支 + 声明自校验），manifest 已
+   重生成，59 行 n_vars/n_clauses 与 m2_e4.db 修正值逐行一致。
 2. **度分布口径订正（中危，重测固化）**：初版 Threats 度形态数字
    （mean 1.5α 4.2→7.35、SD 2.23→2.73 ≈22%、max 16→22 ≈37%、CV 0.5→0.37）
    系 2026-09-11 未入库补测且误用"正向文字半口径"——冻结前提口径为全文字

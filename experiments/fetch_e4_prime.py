@@ -22,6 +22,8 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
+from e4_status import parse_dimacs
+
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data/external/e4prime"
 OUT.mkdir(parents=True, exist_ok=True)
@@ -61,31 +63,15 @@ def save(rel: Path, data: bytes, rows, source, family, name, note=""):
         pass
     else:
         rel.write_bytes(data)
+    # 计数走 e4_status.parse_dimacs（legacy 方言感知 + 声明自校验，不符即
+    # raise）——旧版 parse_nv/parse_nc 只认 p 行，as/tm legacy 族曾产出
+    # 垃圾计数（M2_LOG 2026-09-12 修复批记录，2026-09-16 修复）。
+    n_vars, clauses, _declared = parse_dimacs(rel)
     rows.append({
         "source": source, "family": family, "file": str(rel.relative_to(OUT)),
         "sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data),
-        "n_vars": parse_nv(data), "n_clauses": parse_nc(data), "note": note,
+        "n_vars": n_vars, "n_clauses": len(clauses), "note": note,
     })
-
-
-def parse_nv(data):
-    for line in data.decode("utf-8", "replace").splitlines():
-        if line.startswith("p "):
-            try:
-                return int(line.split()[2])
-            except (IndexError, ValueError):
-                return ""
-    return ""
-
-
-def parse_nc(data):
-    for line in data.decode("utf-8", "replace").splitlines():
-        if line.startswith("p "):
-            try:
-                return int(line.split()[3])
-            except (IndexError, ValueError):
-                return ""
-    return ""
 
 
 def fetch_heule(rows):
