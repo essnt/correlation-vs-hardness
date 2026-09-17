@@ -1,23 +1,30 @@
-# Locality Causes Tractability? An Intervention Study on the Variable-Interaction Radius in Geometric Random Satisfiability (Compact Version)
+# Locality Causes Tractability? An Intervention Study on the Variable-Interaction Radius in Geometric Random Satisfiability
 
 **Author:** Song Jin (Independent Researcher)
-**Version:** Compact version - a full journal version is in preparation.
+**Version:** Journal version, prepared for journal submission. A compact
+version of this work remains archived in Zenodo versions 1-3; this record
+carries the full journal version, substantially expanded with complete
+threshold tables, per-arm dose-response details, censoring-sensitivity
+analyses, and the protocol appendix (including the JAIR Reproducibility
+Checklist).
 **License:** PDF & text: CC-BY-4.0. Code in the snapshot: MIT, except the bundled probSAT tool (`tools/probsat/`), which retains its original research-use license (see `tools/probsat/LICENSE`).
 
 ## Contents
-1. `SongJin_2026_LocalityCausesTractability_CompactVersion.pdf` - the paper (11 pages).
+1. `SongJin_2026_LocalityCausesTractability_JournalVersion.pdf` - the paper (16 pages).
 2. `correlation-vs-hardness_snapshot.tar.gz` - full snapshot of the research repository:
    - `src/cvh/` generators, solver harness (resume-per-row), metrics, statistics
    - `experiments/` every experiment script (S0, E1-E6, E4, E5, spotcheck)
    - `results/` SQLite databases (all raw solve runs), analysis JSON, figures
    - `docs/` preregistration (HYPOTHESES.md + AMEND-1–4), prespecification audit
-     (PRESPEC_AUDIT.md), experiment log (M2_LOG.md), Chinese report (REPORT_zh.md),
+     (PRESPEC_AUDIT.md), experiment log (M2_LOG.md), full report (REPORT.md;
+     Chinese original REPORT_zh.md), reader's guide (REPORT_GUIDE.md),
      literature notes, AI-use disclosure (AI_DISCLOSURE.md)
    - `data/external/e4prime/` external-instance manifest for E4-prime
    - `scripts/` verification & packaging utilities (final_verify, rebuild_zenodo)
    - `tools/probsat/` bundled third-party probSAT solver (research-use license)
    - `tests/` unit tests; `LICENSE` + third-party license notices
-   - `arxiv/` LaTeX source of this preprint
+   - `jair/` LaTeX source of the journal version (official JAIR author kit format)
+   - `arxiv/` LaTeX source of the compact version (archived in Zenodo v1-v3)
 
 ## One-paragraph abstract
 Holding the number of variables fixed, matching clause density relative to each

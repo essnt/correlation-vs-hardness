@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """从当前 HEAD 重建 Zenodo 上传包（zenodo_upload.zip）。
-结构: README_ZENODO.md + 论文 PDF + correlation-vs-hardness_snapshot.tar.gz
-快照排除: EXCLUDE_DOCS 内部文档 10 个、docs/papers/*.pdf、
+结构: README_ZENODO.md + 论文 PDF（期刊版）+ correlation-vs-hardness_snapshot.tar.gz
+快照排除: EXCLUDE_DOCS 内部文档 13 个、docs/papers/*.pdf、
           zenodo_upload.zip 自身、egg-info、缓存。
 """
 import io
@@ -13,7 +13,7 @@ import zipfile
 
 CWD = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = "/tmp/zenodo_out/zenodo_upload_current.zip"
-PDF_NAME = "SongJin_2026_LocalityCausesTractability_CompactVersion.pdf"
+PDF_NAME = "SongJin_2026_LocalityCausesTractability_JournalVersion.pdf"
 EXCLUDE_DOCS = ["SESSION_HANDOFF.md", "POSITIONING.md", "VENUES_ROADMAP.md",
                 "RELEASE_CHECKLIST.md", "ZENODO_STEPS.md", "COVER_LETTER.md",
                 "VALUE_ASSESSMENT.md", "REVIEW_CHECKLIST.md", "LESSONS_LEARNED.md",
@@ -67,7 +67,7 @@ def main():
                 with open(full, "rb") as fsrc:
                     tfo.addfile(ti, fsrc)
     # 4) 外层 zip
-    pdf = open(os.path.join(CWD, "arxiv/main.pdf"), "rb").read()
+    pdf = open(os.path.join(CWD, "jair/main.pdf"), "rb").read()
     readme = open(os.path.join(CWD, "arxiv/ZENODO_README.md"), "rb").read()
     out = OUT
     if os.path.exists(out):

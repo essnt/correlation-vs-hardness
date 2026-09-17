@@ -13,7 +13,22 @@ __pycache__/
 tools/probsat/probSAT
 !data/external/e4prime/MANIFEST_prime.csv
 
-# Local tooling and build artifacts (not tracked; LESSONS #16)
+# Local tooling and build artifacts (not tracked)
 .zcode/
 src/cvh.egg-info/
 .mimosa/
+
+# LaTeX build artifacts of the journal paper (jair/main.tex and figures/ are
+# tracked; the compiled PDF enters the Zenodo package via rebuild_zenodo.py)
+jair/main.aux
+jair/main.bbl
+jair/main.bcf
+jair/main.blg
+jair/main.fdb_latexmk
+jair/main.fls
+jair/main.log
+jair/main.out
+jair/main.run.xml
+jair/main.pdf
+jair/main.spl
+jair/comment.cut

@@ -45,20 +45,23 @@ blob = open("zenodo_upload.zip", "rb").read()
 z = zipfile.ZipFile(io.BytesIO(blob))
 chk("外层 zip CRC", z.testzip() is None)
 chk("外层三文件清单", z.namelist() == ["README_ZENODO.md",
-    "SongJin_2026_LocalityCausesTractability_CompactVersion.pdf",
+    "SongJin_2026_LocalityCausesTractability_JournalVersion.pdf",
     "correlation-vs-hardness_snapshot.tar.gz"], str(z.namelist()))
 
 # ========== 2. 论文 PDF ==========
-pdfb = z.read("SongJin_2026_LocalityCausesTractability_CompactVersion.pdf")
+pdfb = z.read("SongJin_2026_LocalityCausesTractability_JournalVersion.pdf")
 d = pymupdf.open(stream=pdfb, filetype="pdf")
-chk("论文 11 页", d.page_count == 11, str(d.page_count))
+chk("论文 16 页", d.page_count == 16, str(d.page_count))
 t0 = d[0].get_text()
 chk("作者块 Song Jin", "Song Jin" in t0)
 chk("Independent Researcher", "Independent Researcher" in t0)
 chk("邮箱署名", "j.song.cs@outlook.com" in t0)
-chk("Compact Version 标记", "Compact Version" in t0)
 chk("无占位符", all(t0.count(p) == 0 for p in ["[Author Name]", "[Affiliation]", "[email]"]))
 full = "\n".join(pg.get_text() for pg in d)
+chk("期刊版声明", "full journal version" in full)
+chk("可复现性清单在 PDF 内", "Reproducibility Checklist for JAIR" in full)
+chk("AMEND-4 在 PDF 内", "AMEND-4" in full)
+chk("协议附录在 PDF 内", "Preregistration and Audit Protocol" in full)
 chk("PDF 无构建机身份字串残留", _S not in full)
 chk("PDF 无本机路径", _HP not in full)
 chk("PDF 无硬件型号", _RX not in full)
@@ -190,9 +193,11 @@ chk("E4 42+17", (sum(1 for x in fams if x["source"] == "heule"),
 
 # ========== 6. 跨文档一致性 ==========
 chk("快照 tex == HEAD", docs.get("./arxiv/main.tex") == os.popen("git show HEAD:arxiv/main.tex").read())
+chk("快照 jair tex == HEAD", docs.get("./jair/main.tex") == os.popen("git show HEAD:jair/main.tex").read())
 chk("快照 HYPOTHESES == HEAD", docs.get("./docs/HYPOTHESES.md") == os.popen("git show HEAD:docs/HYPOTHESES.md").read())
+chk("包内 PDF == jair/main.pdf", pdfb == open("jair/main.pdf", "rb").read())
 rm_ = z.read("README_ZENODO.md").decode()
-chk("README 11 页声明", "(11 pages)" in rm_)
+chk("README 16 页声明", "(16 pages)" in rm_)
 chk("README 无过时引用", "10 pages" not in rm_ and "5b36f34b" not in rm_)
 chk("快照无 4.5 旧口径", "climbs from ${\\sim}28$ to ${\\sim}72{,}000$ conflicts --- \\textbf{4.5 orders" not in docs.get("./arxiv/main.tex", ""))
 ai = re.sub(r"\s+", " ", docs.get("./docs/AI_DISCLOSURE.md", "").replace(">", ""))

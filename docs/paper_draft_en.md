@@ -270,7 +270,7 @@ ratio; a "density dominates" verdict is triggered by CI-based small-effect bound
 levels, and decision rules were frozen before the main scan (HYPOTHESES.md v1.0).
 Amendments are numbered and reason-stated: AMEND-1 (S0 budget 10⁷ for low-censoring
 threshold estimation), AMEND-2 (wall guard, bias declaration, spot-check protocol),
-AMEND-3 (content-arm operationalization deferral). A prespecification-vs-
+AMEND-3 (content-arm operationalization deferral), AMEND-4 (terminology normalization and content-arm disposition record). A prespecification-vs-
 implementation audit (PRESPEC_AUDIT.md) records every deviation found by
 item-by-item inspection — including one material bug (walltimeout rows initially
 counted as UNSAT in threshold estimation) that was fixed before the main scan
