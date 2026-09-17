@@ -57,6 +57,8 @@ chk("作者块 Song Jin", "Song Jin" in t0)
 chk("Independent Researcher", "Independent Researcher" in t0)
 chk("邮箱署名", "j.song.cs@outlook.com" in t0)
 chk("无占位符", all(t0.count(p) == 0 for p in ["[Author Name]", "[Affiliation]", "[email]"]))
+chk("PDF 时间戳 UTC（无构建机时区指纹）", "Z" in (d.metadata.get("creationDate") or ""),
+    str(d.metadata.get("creationDate")))
 full = "\n".join(pg.get_text() for pg in d)
 chk("期刊版声明", "full journal version" in full)
 chk("可复现性清单在 PDF 内", "Reproducibility Checklist for JAIR" in full)

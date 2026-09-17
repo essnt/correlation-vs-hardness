@@ -123,10 +123,15 @@ def main():
                                                          s["logc"].values, n_boot=1000)
 
     # ---------- 删失敏感性：Tobit（把删失行带上限纳入） ----------
-    dc = e3a[e3a["solver"] == "cadical"].copy()
+    # ---------- 删失敏感性：Tobit（预算删失行带上限纳入） ----------
+    # walltimeout 行无冲突口径（conflicts=None），按 AMEND-2 语义排除在
+    # 冲突空间分析之外——把它们带进似然只会产生 NaN（2026-09-17 独立
+    # 复核发现拟合退化的根因）。budget 行 conflicts≈预算值，作右删失界。
+    dc = e3a[(e3a["solver"] == "cadical")
+             & (e3a["status"] != "walltimeout")].copy()
     if len(dc) and "censored" in dc.columns:
         cens = dc["censored"].astype(bool).values
-        if 0 < cens.sum() < len(dc):
+        if 0 < cens.sum() < len(dc) and dc["logc"].notna().all():
             rep["tobit"] = tobit_fit(dc["logc"].values,
                                      dc[["p_r"] + [c for c in ["p_delta"] if c in dc.columns]].values,
                                      cens)

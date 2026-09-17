@@ -138,8 +138,8 @@ quantity the philosophical conjecture is about.
 \item \textbf{The first controlled intervention scan of locality radius.}
 Nine $r$ levels $\times$ three preregistered offsets $\Delta$ above each radius's
 \emph{own} operational threshold $\ac{r}$ (a fourth, $\Delta{=}{+}0.6$, at 4 of
-the 9 radii; $r{=}0.06$ anchors are historical pilot crossings --- conservative
-for the span) $\times$ 30 paired seeds $\times$ two
+the 9 radii; $r{=}0.06$ anchors are the lattice-nearest S0 grid value 2.6 (the grid
+brackets the true boundary below 2.5) --- conservative for the span) $\times$ 30 paired seeds $\times$ two
 solvers, with per-instance structural metrics (treewidth bracketed by min-fill
 upper and degeneracy lower bounds; modularity, community metrics, spectral
 gap).
@@ -278,7 +278,10 @@ Difficulty near threshold is U-shaped in density, so comparing arms at fixed
 absolute $\alpha$ confounds $r$-effects with threshold proximity. A dedicated
 threshold study (S0, \S\ref{sec:s0}) estimates the operational threshold
 $\ac{r}$ per radius; the main scan samples at $\alpha = \ac{r} + \Delta$,
-$\Delta \in \{+0.2, +0.4, +0.8\}$.
+$\Delta \in \{+0.2, +0.4, +0.8\}$. At $r{=}0.06$ the dosing anchor is the
+lattice-nearest S0 value 2.6 rather than a measured crossing (the grid
+brackets the true boundary below 2.5), so the realized offsets there exceed
+the nominal $\Delta$ --- conservative for the gradient.
 
 \section{Measures, Solvers, and Statistical Protocol}
 \label{sec:method}
@@ -344,6 +347,13 @@ $0.5$-crossing (Fig.~\ref{fig:alphac}):
 
 \begin{table}[h]
 \centering
+\caption{Operational threshold vs.\ locality radius. $^{*}$measurement-saturated
+radii: the crossing is unidentifiable; the table carries the pilot coarse
+value, flagged low-confidence, with spot-checks per AMEND-2. $^{\dagger}$the
+SAT rate never reaches 0.5 on the explored grid ($\alpha\in[2.5,3.1]$, rate
+${\sim}0.31$ at the grid floor declining to ${\sim}0.13$): the boundary at
+$r=0.06$ is bracketed from above, not pinpointed. The complete per-cell grid
+(52 cells $\times$ 16 seeds) is given in Appendix~\ref{app:s0grid}.}
 \begin{tabular}{lccccccccc}
 \toprule
 $r$ & 0.06 & 0.08 & 0.11 & 0.15 & 0.22 & 0.3 & 0.5 & 0.8 & 1.5\\
@@ -352,13 +362,7 @@ $\ac{r}$ & $<2.5^{\dagger}$ & 3.35 & 3.82 & 4.20 & 4.23 & 4.40$^{*}$ & 4.70$^{*}
 censoring & 2.1\% & 0\% & 0\% & 0\% & 0\% & 92.5\% & 98.8\% & 100\% & 100\%\\
 \bottomrule
 \end{tabular}
-\caption{Operational threshold vs.\ locality radius. $^{*}$measurement-saturated
-radii: the crossing is unidentifiable; the table carries the pilot coarse
-value, flagged low-confidence, with spot-checks per AMEND-2. $^{\dagger}$the
-SAT rate never reaches 0.5 on the explored grid ($\alpha\in[2.5,3.1]$, rate
-${\sim}0.31$ at the grid floor declining to ${\sim}0.13$): the boundary at
-$r=0.06$ is bracketed from above, not pinpointed. The complete per-cell grid
-(52 cells $\times$ 16 seeds) is given in Appendix~\ref{app:s0grid}.}
+
 \label{tab:alphac}
 \end{table}
 
@@ -407,8 +411,8 @@ visualizes both arms.
 RM-ANOVA on the $\Delta$-aggregated complete-seed subset ($\Delta\in\{0.2,
 0.4,0.6,0.8\}$, the $0.6$ arm present at 4 of the 9 radii; $n=28$ seeds
 observed at all radii): $F(8,216)=2808.5$, $p\approx1.1\times10^{-213}$.
-Collapsing the duplicate pair $r{=}0.8$ and $r{=}1.5$ into a single level
-(identical clause sets, \S\ref{sec:setup}) gives the same conclusion,
+Dropping the duplicate $r{=}1.5$ level (identical clause sets to $r{=}0.8$,
+\S\ref{sec:setup}) gives the same conclusion,
 $F(7,189)=2468.7$. Jonckheere--Terpstra (Monte Carlo permutation, $10^4$
 draws): $p\le10^{-4}$
 --- the resolution floor of the permutation distribution --- for every
@@ -423,6 +427,11 @@ plateaus --- half or more undecided at $r\ge0.5$, about a quarter at $r=0.3$.
 
 \begin{table}[h]
 \centering
+\caption{Dose--response at $\Delta=+0.2$ (the near-threshold arm, CaDiCaL).
+$^{*}$means over surviving (easier) instances only; the censoring-aware
+Jonckheere--Terpstra bounds the underlying trend. The complete per-radius
+grid for all seven $(\Delta, \text{solver})$ arms is given in
+Appendix~\ref{app:e3atable}.}
 \begin{tabular}{lccccccc}
 \toprule
 $r$ & 0.06 & 0.08 & 0.11 & 0.15 & 0.22 & 0.3 & 0.5\\
@@ -431,11 +440,7 @@ mean $\log_{10}$ conflicts & 1.45 & 1.68 & 2.30 & 3.02 & 4.86 & 5.87$^{*}$ & 5.9
 resolved $n$ & 30 & 30 & 30 & 30 & 30 & 9/30 & 2/30\\
 \bottomrule
 \end{tabular}
-\caption{Dose--response at $\Delta=+0.2$ (the near-threshold arm, CaDiCaL).
-$^{*}$means over surviving (easier) instances only; the censoring-aware
-Jonckheere--Terpstra bounds the underlying trend. The complete per-radius
-grid for all seven $(\Delta, \text{solver})$ arms is given in
-Appendix~\ref{app:e3atable}.}
+
 \label{tab:dose}
 \end{table}
 
@@ -499,19 +504,18 @@ fixed while destroying spatial locality. Paired Wilcoxon signed-rank:
 
 \begin{table}[h]
 \centering
+\caption{E3b paired results. 53 of the 82 resolved pairs flip satisfiability
+status under the swap (24 of 33 pairs at $\Delta{=}{+}0.2$; 29 of 49 at
+$\Delta{=}{+}0.6$).}
 \begin{tabular}{lccccc}
 \toprule
 $\Delta$ & pairs & original mean logc & swapped mean logc & ratio & $p$\\
 \midrule
 $+0.2$ & 33 & 1.79 & 2.99 & $\times 16$ & $7.0\times10^{-10}$\\
 $+0.6$ & 49 & 3.25 & 5.08 & $\times 68$ & $6.0\times10^{-13}$\\
-\midrule
-total & 82 & & & & \\
 \bottomrule
 \end{tabular}
-\caption{E3b paired results. 53 of the 82 resolved pairs flip satisfiability
-status under the swap (24 of 33 pairs at $\Delta{=}{+}0.2$; 29 of 49 at
-$\Delta{=}{+}0.6$).}
+
 \label{tab:e3b}
 \end{table}
 
@@ -530,6 +534,12 @@ Table~\ref{tab:mediation}.
 
 \begin{table}[h]
 \centering
+\caption{Causal mediation of the radius $\to$ difficulty path (total effect
+$3.26$ log units; product-of-coefficients estimator, bootstrap percentile
+CIs). Modularity carries ${\sim}94\%$ of the total effect; the spectral gap
+acts as a suppression channel (negative direct effect), evidence of a
+secondary pathway bypassing community structure. All CIs exclude zero: by the
+preregistered rule, \textbf{mediation is established} as mechanism evidence.}
 \begin{tabular}{lccc}
 \toprule
 mediator & ACME & 95\% CI & direct effect\\
@@ -540,12 +550,7 @@ mean degree & 2.34 & $[2.15, 2.60]$ & $0.92$\\
 clustering & 2.19 & $[2.02, 2.44]$ & $1.06$\\
 \bottomrule
 \end{tabular}
-\caption{Causal mediation of the radius $\to$ difficulty path (total effect
-$3.26$ log units; product-of-coefficients estimator, bootstrap percentile
-CIs). Modularity carries ${\sim}94\%$ of the total effect; the spectral gap
-acts as a suppression channel (negative direct effect), evidence of a
-secondary pathway bypassing community structure. All CIs exclude zero: by the
-preregistered rule, \textbf{mediation is established} as mechanism evidence.}
+
 \label{tab:mediation}
 \end{table}
 
@@ -701,13 +706,19 @@ next conjecture can be tested the same way.
 \section{Reproducibility Statement}
 \label{sec:repro}
 
-AI-assisted tools were used in data analysis and manuscript preparation (full
-disclosure in the accompanying Zenodo snapshot, DOI: 10.5281/zenodo.22777748).
+AI-assisted tools were used in an assistive capacity for literature search
+and citation verification, implementing the generators, solvers, and
+statistical pipelines, executing the experiment matrix, and manuscript
+preparation (full disclosure in the accompanying Zenodo snapshot, DOI:
+10.5281/zenodo.22777748).
 A compact version of this work was deposited on Zenodo to timestamp the
 results; the present article is the full journal version, substantially
 expanded with complete threshold tables, per-arm dose--response details,
 censoring-sensitivity analyses, and the protocol appendix.
 
+All CDCL experiments ran CPU-only on a consumer x86-64 laptop under Linux
+(WSL2), Python 3.14 with pinned dependencies (requirements.txt); per the
+project's privacy policy the machine is documented in this anonymized form.
 All instances are deterministically generated from
 $(\text{family}, \text{params}, \text{seed})$ tuples; the result store keys
 rows by $(\text{family}, \text{params}, \text{seed}, \text{solver})$ with
@@ -747,11 +758,13 @@ count; excluded from resolved-SAT rates per the AMEND-2 caliber). The
 resolved-SAT rate is $\#\text{sat}/(\#\text{sat}+\#\text{unsat})$.
 
 \begin{table}[h]
-\centering\small
+\centering
+\caption{S0 grid at $r=0.06$. The SAT rate never crosses 0.5 on the explored
+grid: the boundary is bracketed from above at $\alpha<2.5$.}
 \begin{tabular}{rrrrr}
 \toprule
 $\alpha$ & \#sat & \#unsat & \#wt & resolved-SAT rate\\
-\midrule
+\addlinespace
 \multicolumn{5}{l}{\emph{$r=0.06$ (12 cells; boundary bracketed below 2.5)}}\\
 2.50 & 5 & 11 & 0 & 0.313\\
 2.55 & 5 & 11 & 0 & 0.313\\
@@ -767,38 +780,39 @@ $\alpha$ & \#sat & \#unsat & \#wt & resolved-SAT rate\\
 3.10 & 2 & 14 & 0 & 0.125\\
 \bottomrule
 \end{tabular}
-\caption{S0 grid at $r=0.06$. The SAT rate never crosses 0.5 on the explored
-grid: the boundary is bracketed from above at $\alpha<2.5$.}
+
 \label{tab:s0r006}
 \end{table}
 
 \begin{table}[h]
-\centering\small
+\centering
+\caption{S0 grid at the intermediate radii $r=0.08$--$0.22$ (zero censoring;
+clean $0.5$-crossings).}
 \begin{tabular}{rrrrr}
 \toprule
 $\alpha$ & \#sat & \#unsat & \#wt & resolved-SAT rate\\
-\midrule
+\addlinespace
 \multicolumn{5}{l}{\emph{$r=0.08$ (5 cells; interpolated $\ac{0.08}=3.35$)}}\\
 3.20 & 12 & 4 & 0 & 0.750\\
 3.25 & 10 & 6 & 0 & 0.625\\
 3.30 & 8 & 8 & 0 & 0.500\\
 3.35 & 8 & 8 & 0 & 0.500\\
 3.40 & 7 & 9 & 0 & 0.438\\
-\midrule
+\addlinespace
 \multicolumn{5}{l}{\emph{$r=0.11$ (5 cells; interpolated $\ac{0.11}=3.82$)}}\\
 3.75 & 12 & 4 & 0 & 0.750\\
 3.80 & 10 & 6 & 0 & 0.625\\
 3.85 & 5 & 11 & 0 & 0.313\\
 3.90 & 4 & 12 & 0 & 0.250\\
 3.95 & 3 & 13 & 0 & 0.188\\
-\midrule
+\addlinespace
 \multicolumn{5}{l}{\emph{$r=0.15$ (5 cells; interpolated $\ac{0.15}=4.20$)}}\\
 4.05 & 14 & 2 & 0 & 0.875\\
 4.10 & 12 & 4 & 0 & 0.750\\
 4.15 & 9 & 7 & 0 & 0.563\\
 4.20 & 8 & 8 & 0 & 0.500\\
 4.25 & 6 & 10 & 0 & 0.375\\
-\midrule
+\addlinespace
 \multicolumn{5}{l}{\emph{$r=0.22$ (5 cells; interpolated $\ac{0.22}=4.23$)}}\\
 4.10 & 15 & 1 & 0 & 0.938\\
 4.15 & 13 & 3 & 0 & 0.813\\
@@ -807,38 +821,42 @@ $\alpha$ & \#sat & \#unsat & \#wt & resolved-SAT rate\\
 4.30 & 4 & 12 & 0 & 0.250\\
 \bottomrule
 \end{tabular}
-\caption{S0 grid at the intermediate radii $r=0.08$--$0.22$ (zero censoring;
-clean $0.5$-crossings).}
+
 \label{tab:s0mid}
 \end{table}
 
 \begin{table}[h]
-\centering\small
+\centering
+\caption{S0 grid at the measurement-saturated radii $r\ge0.3$: near-threshold
+instances collapse out of measurable range (313 \textsc{walltimeout} rows
+concentrated here), and the only resolved rows are \textsc{unsat}. The
+carried threshold values are pilot coarse crossings, flagged low-confidence,
+with spot-checks per AMEND-2 (\S\ref{sec:threats}).}
 \begin{tabular}{rrrrr}
 \toprule
 $\alpha$ & \#sat & \#unsat & \#wt & resolved-SAT rate\\
-\midrule
+\addlinespace
 \multicolumn{5}{l}{\emph{$r=0.3$ (5 cells; pilot value 4.40, low-confidence)}}\\
 4.30 & 0 & 0 & 16 & ---\\
 4.35 & 0 & 0 & 16 & ---\\
 4.40 & 0 & 0 & 16 & ---\\
 4.45 & 0 & 3 & 13 & 0.000\\
 4.50 & 0 & 3 & 13 & 0.000\\
-\midrule
+\addlinespace
 \multicolumn{5}{l}{\emph{$r=0.5$ (5 cells; pilot value 4.70, low-confidence)}}\\
 4.60 & 0 & 0 & 16 & ---\\
 4.65 & 0 & 0 & 16 & ---\\
 4.70 & 0 & 0 & 16 & ---\\
 4.75 & 0 & 0 & 16 & ---\\
 4.80 & 0 & 1 & 15 & 0.000\\
-\midrule
+\addlinespace
 \multicolumn{5}{l}{\emph{$r=0.8$ (5 cells; pilot value 4.60, low-confidence)}}\\
 4.50 & 0 & 0 & 16 & ---\\
 4.55 & 0 & 0 & 16 & ---\\
 4.60 & 0 & 0 & 16 & ---\\
 4.65 & 0 & 0 & 16 & ---\\
 4.70 & 0 & 0 & 16 & ---\\
-\midrule
+\addlinespace
 \multicolumn{5}{l}{\emph{$r=1.5$ (5 cells; pilot value 4.60, low-confidence)}}\\
 4.50 & 0 & 0 & 16 & ---\\
 4.55 & 0 & 0 & 16 & ---\\
@@ -847,11 +865,7 @@ $\alpha$ & \#sat & \#unsat & \#wt & resolved-SAT rate\\
 4.70 & 0 & 0 & 16 & ---\\
 \bottomrule
 \end{tabular}
-\caption{S0 grid at the measurement-saturated radii $r\ge0.3$: near-threshold
-instances collapse out of measurable range (313 \textsc{walltimeout} rows
-concentrated here), and the only resolved rows are \textsc{unsat}. The
-carried threshold values are pilot coarse crossings, flagged low-confidence,
-with spot-checks per AMEND-2 (\S\ref{sec:threats}).}
+
 \label{tab:s0sat}
 \end{table}
 
@@ -867,29 +881,56 @@ occurs; the censoring-aware Jonckheere--Terpstra statistic bounds the
 underlying trend in every arm ($p\le10^{-4}$, the permutation floor).
 
 \begin{table}[h]
-\centering\scriptsize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{llccccccccc}
+\centering
+\caption{Complete dose--response grid, CaDiCaL. Cell = mean
+$\log_{10}(\text{conflicts}+1)$ over resolved runs, resolved $n$ of 30 seeds
+in parentheses. ``---'' marks radii where the arm was not preregistered
+(the $\Delta{=}{+}0.6$ arm) or where the arm ran but produced no resolved
+runs (all 30 seeds censored at the $10^6$-conflict budget; the
+$\Delta{=}{+}0.2$ cells at $r{=}0.8$ and $r{=}1.5$ are of this kind). The
+censoring-aware Jonckheere--Terpstra statistic bounds the underlying trend in
+every arm ($p\le10^{-4}$, the permutation floor). Partial $\eta^2$ at the
+RM-ANOVA-computable arms: $0.988$ ($\Delta{=}{+}0.6$), $0.986$
+($\Delta{=}{+}0.8$) against the preregistered threshold of $0.14$.}
+\label{tab:e3afull}
+\begin{tabular}{lcccc}
 \toprule
-$\Delta$ & $r$ & 0.06 & 0.08 & 0.11 & 0.15 & 0.22 & 0.3 & 0.5 & 0.8 & 1.5\\
+$r$ & $\Delta{=}{+}0.2$ & $\Delta{=}{+}0.4$ & $\Delta{=}{+}0.6$ & $\Delta{=}{+}0.8$\\
 \midrule
-\multicolumn{11}{l}{\emph{CaDiCaL}}\\
-$+0.2$ & & 1.45 (30) & 1.68 (30) & 2.30 (30) & 3.02 (30) & 4.86 (30) & 5.87 (9) & 5.93 (2) & --- & ---\\
-$+0.4$ & & 1.40 (29) & 1.64 (30) & 2.08 (30) & 2.75 (30) & 4.39 (30) & 5.73 (23) & 5.88 (10) & 5.91 (4) & 5.91 (4)\\
-$+0.6$ & & --- & 1.57 (30) & --- & 2.50 (30) & --- & 5.47 (29) & --- & --- & 5.88 (18)\\
-$+0.8$ & & 1.29 (29) & 1.41 (30) & 1.79 (30) & 2.45 (29) & 3.84 (30) & 5.25 (30) & 5.69 (30) & 5.77 (28) & 5.77 (28)\\
-\midrule
-\multicolumn{11}{l}{\emph{Glucose}}\\
-$+0.2$ & & 1.46 (30) & 1.64 (29) & 2.16 (29) & 3.01 (30) & 4.90 (30) & 5.88 (10) & 5.95 (4) & --- & ---\\
-$+0.4$ & & 1.40 (28) & 1.57 (30) & 2.00 (30) & 2.62 (30) & 4.47 (30) & 5.70 (25) & 5.86 (16) & 5.86 (5) & 5.86 (5)\\
-$+0.8$ & & 1.27 (30) & 1.41 (30) & 1.66 (29) & 2.40 (30) & 3.90 (30) & 5.21 (30) & 5.55 (30) & 5.64 (29) & 5.64 (29)\\
+0.06 & 1.45 (30) & 1.40 (29) & --- & 1.29 (29)\\
+0.08 & 1.68 (30) & 1.64 (30) & 1.57 (30) & 1.41 (30)\\
+0.11 & 2.30 (30) & 2.08 (30) & --- & 1.79 (30)\\
+0.15 & 3.02 (30) & 2.75 (30) & 2.50 (30) & 2.45 (29)\\
+0.22 & 4.86 (30) & 4.39 (30) & --- & 3.84 (30)\\
+0.3 & 5.87 (9) & 5.73 (23) & 5.47 (29) & 5.25 (30)\\
+0.5 & 5.93 (2) & 5.88 (10) & --- & 5.69 (30)\\
+0.8 & --- & 5.91 (4) & --- & 5.77 (28)\\
+1.5 & --- & 5.91 (4) & --- & 5.77 (28)\\
 \bottomrule
 \end{tabular}
-\caption{Complete dose--response grid. Partial $\eta^2$ at the
-RM-ANOVA-computable arms: $0.988$ ($\Delta{=}{+}0.6$, CaDiCaL), $0.986$
-($\Delta{=}{+}0.8$, CaDiCaL), $0.985$ ($\Delta{=}{+}0.8$, Glucose) ---
-against the preregistered confirmation threshold of $0.14$.}
-\label{tab:e3afull}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Complete dose--response grid, Glucose (cross-check engine). Cells as
+in Table~\ref{tab:e3afull}. Partial $\eta^2$ at the RM-ANOVA-computable arm:
+$0.985$ ($\Delta{=}{+}0.8$).}
+\label{tab:e3afullg}
+\begin{tabular}{lcccc}
+\toprule
+$r$ & $\Delta{=}{+}0.2$ & $\Delta{=}{+}0.4$ & $\Delta{=}{+}0.8$\\
+\midrule
+0.06 & 1.46 (30) & 1.40 (28) & 1.27 (30)\\
+0.08 & 1.64 (29) & 1.57 (30) & 1.41 (30)\\
+0.11 & 2.16 (29) & 2.00 (30) & 1.66 (29)\\
+0.15 & 3.01 (30) & 2.62 (30) & 2.40 (30)\\
+0.22 & 4.90 (30) & 4.47 (30) & 3.90 (30)\\
+0.3 & 5.88 (10) & 5.70 (25) & 5.21 (30)\\
+0.5 & 5.95 (4) & 5.86 (16) & 5.55 (30)\\
+0.8 & --- & 5.86 (5) & 5.64 (29)\\
+1.5 & --- & 5.86 (5) & 5.64 (29)\\
+\bottomrule
+\end{tabular}
 \end{table}
 
 \section{Preregistration and Audit Protocol}
@@ -993,7 +1034,7 @@ Does this paper include computational experiments? \textbf{[yes]}
     \item If an algorithm depends on randomness, then the method used for generating random numbers and for setting seeds is described in a way sufficient to allow replication of results.
     \textbf{[yes]}
     \item The execution environment for experiments, the computing infrastructure (hardware and software) used for running them, is described, including GPU/CPU makes and models; amount of memory (cache and RAM); make and version of operating system; names and versions of relevant software libraries and frameworks.
-    \textbf{[yes]}
+    \textbf{[partially]}
     \item The evaluation metrics used in experiments are clearly explained and their choice is explicitly motivated.
     \textbf{[yes]}
     \item The number of algorithm runs used to compute each result is reported.
