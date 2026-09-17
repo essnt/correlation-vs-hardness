@@ -367,9 +367,12 @@ families, structural features carry a ~0.31 increment; contrast: the purely rand
 family 0.90 with zero gain, consistent with Zulkoski's whole-corpus conclusion) — direct
 evidence that **intervention can measure what observation cannot**. GBDT
 leave-one-r-out extrapolation (9 folds, training never sees the target r): **CV
-R²=0.76**. The full Tobit fit converges poorly under the censoring mixture (loglik=nan,
-reported as is); censoring sensitivity is carried by the dual-caliber JT + KM, with
-consistent conclusions.
+R²=0.76**. The full Tobit fit (excluding wall-clock rows per the AMEND-2 semantics, as
+of 2026-09-17) converges well: loglik=−1721.7, σ=2.13, with coefficient
+p-values ≈5.9e-194 and 8.9e-69 for r and Δ (the pre-fix version failed to
+converge because wall-clock rows carried NaN into the likelihood; fixed and
+regenerated with the analysis script); censoring sensitivity is carried by the
+dual-caliber JT + KM, with consistent conclusions.
 
 ## 9. E5 Predictors and E4 Placement
 
