@@ -222,7 +222,8 @@ ${\approx}\sqrt{n\log n}$. \citet{atserias2011} and
 \citet{beame2003} connect CDCL to (bounded-width) resolution.
 Together: low treewidth $\Rightarrow$ short proofs exist $\Rightarrow$
 CDCL with restarts finds them in polynomial time --- the theoretical face of
-our E1 result (width-controlled instances are flat and trivial at all $k$).
+our E1 result (\S\ref{sec:e1}: width-controlled instances are flat and
+trivial at all $k$).
 Correlation decay~\cite{weitz2006} and the overlap-gap property
 (see \parencite*{gamarnik2021}) delineate where local information provably suffices
 or fails; we use these as interpretive scaffolding only, since practical CDCL
@@ -254,7 +255,8 @@ $r$-invariant by construction: redundancy histograms are identical across $r$
 \paragraph{Width-controlled family.}
 $k$-tree skeletons give constructive treewidth $\le k$; matched random
 families at the same $(n,\alpha)$ provide controls. Planted and unplanted arms
-separate ``having a solution planted'' from ``being structured''.
+separate ``having a solution planted'' from ``being structured''. Outcomes are
+reported as \S\ref{sec:e1}.
 
 \paragraph{Structure-destruction intervention (E3b).}
 A bipartite swap chain (MCMC edge swaps on the variable--clause incidence
@@ -519,13 +521,61 @@ $+0.6$ & 49 & 3.25 & 5.08 & $\times 68$ & $6.0\times10^{-13}$\\
 \label{tab:e3b}
 \end{table}
 
-Together with E1 --- width-controlled instances are flat and trivial at all
-$k$ (per-$k$ medians pooling both sizes, unplanted arm: $7$--$10$ conflicts
-across $k\in\{3,5,8,12,16,20\}$, at $n\in
-\{300,600\}$) --- the asymmetry is sharp: what CDCL difficulty responds to
-is \emph{local geometry}, not any global topological summary.
+Together with E1 (\S\ref{sec:e1}) --- width-controlled instances stay flat
+and trivial at every treewidth cap --- the asymmetry is sharp: what CDCL
+difficulty responds to is \emph{local geometry}, not any global topological
+summary.
 
-\section{Results IV: Mediation and the Feature Ladder (H1)}
+\section{Results IV: The Width-Controlled Control Family (E1)}
+\label{sec:e1}
+
+E1 asks the complementary question to the intervention scan: if
+``structure'' in the coarse topological sense were what CDCL difficulty
+feeds on, then instances built to have small treewidth --- the canonical
+structural advantage --- should be easy, and difficulty should track the
+cap $k$. The $k$-tree construction gives constructive treewidth $\le k$ at
+every level $k \in \{3,5,8,12,16,20\}$, at $n \in \{300,600\}$ and matched
+density $\alpha = 4.0$, in two arms: a \emph{planted} arm (a satisfying
+assignment built into the instance) and an \emph{unplanted} arm. Matched
+random 3-SAT provides the density control (E2).
+
+Table~\ref{tab:e1} summarizes the outcome: flat and trivial. The unplanted
+arm is uniformly \textsc{unsat} at this density and refuted in
+single-digit-to-low-teens conflicts, with per-$k$ medians (pooling both
+sizes) confined to $7$--$10$ across the entire $k$ range --- no trend in
+$k$ --- while \emph{every} resolved planted instance (238 of them) is
+decided at zero conflicts. The density control at the same $\alpha = 4.0$
+(random 3-SAT, $n{=}400$, between the two widths' sizes) sits over three
+orders of magnitude higher, median $21{,}011$ conflicts, exactly where
+classical random-3-SAT behavior puts it. Low treewidth therefore delivers
+what the width backbone predicts (\S\ref{sec:related}: short proofs exist
+and CDCL finds them), and the contrast with the locality scan is the point:
+at a density where width-bounded families never leave the tens of
+conflicts, the geometric family spans $10^{1.45}$--$10^{4.86}$ at its
+\emph{lowest} matched offset (\S\ref{sec:e3a}). What difficulty responds to
+is local geometry, not any global topological summary --- and planting a
+solution, the classical tractability crutch, trivializes the width-bounded
+family completely.
+
+\begin{table}[h]
+\centering
+\caption{E1/E2: median conflicts to decision (CaDiCaL, $10^6$-conflict
+budget, $\alpha = 4.0$). Unplanted arm pools $n \in \{300,600\}$ (39--40
+resolved seeds per $k$); planted arm: all 238 resolved runs decided at
+zero conflicts. The density control (random 3-SAT, $n{=}400$, E2) is shown
+for reference.}
+\label{tab:e1}
+\begin{tabular}{lcccccc}
+\toprule
+$k$ & 3 & 5 & 8 & 12 & 16 & 20\\
+\midrule
+unplanted median & 7 & 7 & 8 & 10 & 9 & 10\\
+planted median & 0 & 0 & 0 & 0 & 0 & 0\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Results V: Mediation and the Feature Ladder (H1)}
 \label{sec:mediation}
 
 \citet{imai2011} causal mediation of the $r \to$ difficulty path (bootstrap
@@ -557,7 +607,7 @@ clustering & 2.19 & $[2.02, 2.44]$ & $1.06$\\
 The H1 feature ladder: on the main-scan data, ridge-CV $R^2$ rises from
 $0.610$ (size features) and $0.664$ (size+density) to $\mathbf{0.976}$ with
 structural features --- on controlled families, structure carries predictive
-power that observation on random families cannot see (random-family baseline:
+power that observation on random families cannot see (random-family baseline --- the E2 control of \S\ref{sec:e1}:
 $0.90$ with zero structural gain). The preregistered nested OLS
 $F$-test on the same subset confirms the ladder: $F(60,1283)=297.8$,
 $p<10^{-4}$ for the structural block beyond size+density. A
@@ -565,7 +615,7 @@ gradient-boosted predictor with leave-one-$r$-out extrapolation (training
 never sees the target radius) reaches $R^2 = 0.76$: structural features
 generalize to unseen locality levels.
 
-\section{Results V: Placement on Real Instances (E4-prime)}
+\section{Results VI: Placement on Real Instances (E4-prime)}
 \label{sec:e4}
 
 All 59 fetched real instances (42 combinatorial/crafted from a public
@@ -990,6 +1040,44 @@ the bias is bounded to $\in[-0.2,0]$ density units; at $r\ge0.5$ the
 $\pm0.2$ offsets fail to bracket the boundary (every instance at
 $\alpha_c+0.2$ decided \textsc{unsat}, every instance at $\alpha_c-0.2$
 undecided), so the carried values keep an unbounded-bias caveat.
+
+\section{Generator and Intervention Pseudocode}
+\label{app:pseudo}
+
+\paragraph{Locality kernel (\texttt{geo\_random}).}
+\begin{enumerate}
+    \item Place the $n$ variables uniformly at random on the discrete
+    $\sqrt{n} \times \sqrt{n}$ torus (seeded RNG; identical seeds reproduce
+    the instance byte-for-byte).
+    \item For each of the $m = \alpha n$ clauses, attempt up to 1000 times:
+    sample a centre uniformly; collect the variables within torus distance
+    $r$; if the ball contains at least three variables, sample 3 distinct
+    variables from it and continue to the polarity draw; otherwise resample
+    the centre.
+    \item Polarity draw. \texttt{planted=False}: uniform over the 8 sign
+    patterns. \texttt{planted=True}: draw a global assignment $\sigma$; for
+    each clause, draw the number of $\sigma$-satisfied positions uniformly
+    in $1\ldots k$ (where $k$ is the clause's satisfied-position count) and
+    then a subset of that cardinality; the decoy assignment $\beta$
+    constrains the fill of the hidden clause fraction in the
+    $q_{\text{hidden}}<1$ arm.
+\end{enumerate}
+
+\paragraph{Degree-preserving swap chain (E3b).}
+\begin{enumerate}
+    \item Start from the original variable--clause incidence graph; the
+    acceptance target is $10m$ swaps ($m$ = clause count).
+    \item Propose: pick two clauses uniformly; pick one literal position in
+    each; exchange the two variables.
+    \item Reject the proposal if it (a) duplicates a variable within a
+    clause, (b) creates a complementary-literal pair ($x$ and $\neg x$) in
+    one clause, or (c) breaks planted satisfiability when a planting is
+    present; otherwise accept.
+    \item Stop when the acceptance target is reached or the proposal budget
+    ($20\times$ the target) is exhausted; record the rejection rate.
+    Literal occurrence counts are invariant by construction (verified
+    programmatically, \S\ref{sec:e3b}).
+\end{enumerate}
 
 \section{Reproducibility Checklist for JAIR}
 \label{app:checklist}

@@ -51,7 +51,7 @@ chk("外层三文件清单", z.namelist() == ["README_ZENODO.md",
 # ========== 2. 论文 PDF ==========
 pdfb = z.read("SongJin_2026_LocalityCausesTractability_JournalVersion.pdf")
 d = pymupdf.open(stream=pdfb, filetype="pdf")
-chk("论文 16 页", d.page_count == 16, str(d.page_count))
+chk("论文 17 页", d.page_count == 17, str(d.page_count))
 t0 = d[0].get_text()
 chk("作者块 Song Jin", "Song Jin" in t0)
 chk("Independent Researcher", "Independent Researcher" in t0)
@@ -193,13 +193,32 @@ fams = list(csv.DictReader(open("data/external/e4prime/MANIFEST_prime.csv")))
 chk("E4 42+17", (sum(1 for x in fams if x["source"] == "heule"),
                  sum(1 for x in fams if x["source"] == "dimacs")) == (42, 17))
 
+# 5e. E1/E2（宽度受控对照族，2026-09-17 期刊版升格）
+import statistics
+con = sqlite3.connect("results/m2_e1e2.db")
+trows = con.execute("SELECT params, status, conflicts FROM runs WHERE family='tw_controlled'").fetchall()
+perk = defaultdict(list); pl_zero = True; pl_n = 0
+for p, st, c in trows:
+    j = json.loads(p)
+    if st in ("sat", "unsat"):
+        if j.get("planted"):
+            pl_n += 1; pl_zero = pl_zero and (c == 0)
+        else:
+            perk[j["k"]].append(c)
+r2 = con.execute("SELECT conflicts FROM runs WHERE family='random3sat' AND json_extract(params,'$.alpha')=4.0 AND json_extract(params,'$.n')=400 AND status IN ('sat','unsat')").fetchall()
+con.close()
+chk("E1 未种植 per-k 中位 7/7/8/10/9/10",
+    [statistics.median(perk[k]) for k in (3, 5, 8, 12, 16, 20)] == [7, 7, 8, 10, 9, 10])
+chk("E1 种植臂全零冲突（238）", pl_zero and pl_n == 238)
+chk("E2 随机对照 a=4.0 中位 21011", statistics.median([x[0] for x in r2]) == 21011)
+
 # ========== 6. 跨文档一致性 ==========
 chk("快照 tex == HEAD", docs.get("./arxiv/main.tex") == os.popen("git show HEAD:arxiv/main.tex").read())
 chk("快照 jair tex == HEAD", docs.get("./jair/main.tex") == os.popen("git show HEAD:jair/main.tex").read())
 chk("快照 HYPOTHESES == HEAD", docs.get("./docs/HYPOTHESES.md") == os.popen("git show HEAD:docs/HYPOTHESES.md").read())
 chk("包内 PDF == jair/main.pdf", pdfb == open("jair/main.pdf", "rb").read())
 rm_ = z.read("README_ZENODO.md").decode()
-chk("README 16 页声明", "(16 pages)" in rm_)
+chk("README 17 页声明", "(17 pages)" in rm_)
 chk("README 无过时引用", "10 pages" not in rm_ and "5b36f34b" not in rm_)
 chk("快照无 4.5 旧口径", "climbs from ${\\sim}28$ to ${\\sim}72{,}000$ conflicts --- \\textbf{4.5 orders" not in docs.get("./arxiv/main.tex", ""))
 ai = re.sub(r"\s+", " ", docs.get("./docs/AI_DISCLOSURE.md", "").replace(">", ""))
