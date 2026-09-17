@@ -26,7 +26,7 @@ difficulty.
   locality. (**Cut**: E6 hit the preregistered kill line; negative result
   recorded in docs/HYPOTHESES.md and docs/REPORT_zh.md §10.)
 
-## Main results (M2 complete, 2026-09-10)
+## Main results (completed 2026-09-10)
 
 - **Threshold curve**: α_c(r) is bracketed from above at <2.5 at r=0.06 (SAT
   rate declines from ~0.31 to ~0.13 across the probed grid; the 0.5-crossing is
@@ -62,11 +62,12 @@ results/       result databases (SQLite) and figures
 
 ## Milestones
 
-- **M0** literature check and novelty positioning (Go/No-Go)
-- **M1** infrastructure + pilot calibration + preregistration
-- **M2** core experiments (E1–E4)
-- **M3** predictors (E5), optional E6, analysis and writing
-- **M4** packaging and submission
+- **M0** ✅ literature check and novelty positioning (Go/No-Go)
+- **M1** ✅ infrastructure + pilot calibration + preregistration
+- **M2** ✅ core experiments (E1–E4)
+- **M3** ✅ predictors (E5), E6 (hit the preregistered kill line and was cut;
+  negative result archived), analysis and writing
+- **M4** ✅ wrap-up and release (archived on Zenodo, open-sourced on GitHub)
 
 ## Honest boundaries
 
