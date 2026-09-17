@@ -64,8 +64,8 @@ def save(rel: Path, data: bytes, rows, source, family, name, note=""):
     else:
         rel.write_bytes(data)
     # 计数走 e4_status.parse_dimacs（legacy 方言感知 + 声明自校验，不符即
-    # raise）——旧版 parse_nv/parse_nc 只认 p 行，as/tm legacy 族曾产出
-    # 垃圾计数（M2_LOG 2026-09-12 修复批记录，2026-09-16 修复）。
+    # raise）——as/tm legacy 族无 p 行，早期标准路径解析曾产出垃圾计数进
+    # manifest（M2_LOG 2026-09-12 修复批记录），2026-09-16 根治。
     n_vars, clauses, _declared = parse_dimacs(rel)
     rows.append({
         "source": source, "family": family, "file": str(rel.relative_to(OUT)),
