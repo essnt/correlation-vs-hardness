@@ -114,7 +114,7 @@ Written for non-technical readers: each term is first explained in plain languag
   once.
 - **Preregistration**: Freezing and publishing the hypotheses and decision criteria before the main experiment
   is run, to prevent "picking the good-looking results after the fact." *In this project*: HYPOTHESES.md v1.0
-  + the AMEND-1/2/3 revision chain + the PRESPEC_AUDIT.md audit.
+  + the AMEND-1–5 revision chain + the PRESPEC_AUDIT.md audit.
 
 ---
 

@@ -301,7 +301,6 @@
   "0.8": 4.6,
   "1.5": 4.6
  },
- "alpha_c_censored_only": {},
  "flags": {
   "0.06": {
    "frozen": "lattice_nearest"

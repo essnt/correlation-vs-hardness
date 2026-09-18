@@ -3,7 +3,7 @@
 
 > **Status marker**: v1.0 (2026-09-10) — all experiments (S0/E1/E2/E3a/E3b/E4/E5/E6) are
 > complete and filled in with numbers; frozen content in §1–§4 is governed by HYPOTHESES
-> v1.0-FROZEN + AMEND-1/2/3 + PRESPEC_AUDIT; the data and the decision chain are entirely
+> v1.0-FROZEN + AMEND-1–5 + PRESPEC_AUDIT; the data and the decision chain are entirely
 > in git history.
 > This report is aimed at non-technical readers; technical details are carried in gray
 > boxes/footnotes, and the "philosophical extensions" are concentrated in §12 and strictly
@@ -137,7 +137,7 @@ algorithm — the mapping is used only to partition regimes, not to prove solver
 
 ---
 
-## 3. Methods (Frozen: HYPOTHESES v1.0 + AMEND-1/2/3)
+## 3. Methods (Frozen: HYPOTHESES v1.0 + AMEND-1–5; AMEND-4/5 are non-hypothesis disposition records)
 
 ### 3.1 Generators (src/cvh/generators.py)
 - **geo_random(r)**: variables are sampled uniformly within an r-ball on the 2-D torus
@@ -355,11 +355,15 @@ what matters is **local geometry**, not any single summary of global topology.
 | mean degree | 2.34 | [2.15, 2.60] | 3.26 | ~72% |
 | clustering | 2.19 | [2.02, 2.44] | 3.26 | ~67% |
 
-No ACME confidence interval contains 0 — under the preregistered decision rule,
-**mediation is established** (mechanism evidence, not proof): the bulk of r's effect is
+No ACME confidence interval contains 0 — under the adapted rule (AMEND-5:
+the frozen criterion applied to the implemented mediator set; see the paper's
+Appendix C), **mediation is established** (mechanism evidence, not proof): the bulk of r's effect is
 transmitted to difficulty through the restructuring of "community/spectral structure";
 the suppression pattern of the spectral gap suggests that r also has a secondary channel
-bypassing community structure.
+bypassing community structure. The frozen width path, quantified through the
+recorded treewidth bounds (AMEND-5), is confirmed as well: ACME 2.34 [2.14, 2.60]
+(upper bound) / 2.69 [2.48, 2.99] (lower bound) — ~72% / ~83% of the total
+effect, both CIs excluding zero.
 
 **H1 feature ladder**: the E5 baseline (Zulkoski specification) on the main-scan data —
 the density ladder gives CV R²=0.664, + the structural ladder **0.976** (on controlled
