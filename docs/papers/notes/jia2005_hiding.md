@@ -1,6 +1,6 @@
 # 精读笔记：Generating Hard Satisfiable Formulas by Hiding Solutions Deceptively（Jia–Moore–Strain, q-hidden 诱骗构造）
 
-> 本目录笔记仅为本项目（correlation-vs-hardness）内部使用。
+> 本目录笔记为 correlation-vs-hardness 项目的文献精读记录。
 > **原文获取记录**：已成功获取全文，无虚构。论文有两个版本：AAAI-05 会议版（arXiv:cs/0503044，6 页 7 图）与 **JAIR 期刊扩展版**（12 页）。arXiv PDF 直连在本环境被 SSL 重置（重试 3 次失败），改从 **JAIR 官网下载期刊版全文 PDF**（`/tmp/jms.pdf`，pdfminer 提取为 `/tmp/jms.txt`，32 KB，逐字核对），AAAI 版元数据经 arXiv API 确认。**本笔记以内容更全的 JAIR 版为准**（两版构造定义一致）。
 > 与既有笔记（giraldez-cru-2017、li-2021）格式一致；因本文与 M1 pilot 的 R2 负结果直接相关，第 5 节为本次精读的重点产出。
 

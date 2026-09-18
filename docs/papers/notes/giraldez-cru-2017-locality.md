@@ -1,6 +1,6 @@
 # 精读笔记：Locality in Random SAT Instances
 
-> 本目录笔记仅为本项目（correlation-vs-hardness）内部使用。原文 PDF：`docs/papers/giraldez-cru-2017-locality.pdf`。
+> 本目录笔记为 correlation-vs-hardness 项目的文献精读记录。原文 PDF 为第三方论文，未随快照分发。
 
 ## 1. 书目信息
 

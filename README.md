@@ -71,7 +71,7 @@ results/       result databases (SQLite) and figures
 
 ## Honest boundaries
 
-This work does not attack P vs NP itself; it promises no new theorems and no
+This work does not attack P vs NP itself; it promises neither new theorems nor
 publication; negative results are reported just as completely.
 
 ## Reproduce
