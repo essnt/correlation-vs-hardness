@@ -10,7 +10,7 @@
 - 本文所用全文：作者博士论文完整版（比会议版多出理论证明与附录数据）：
   Edward Zulkoski, *Understanding and Enhancing CDCL-based SAT Solvers*, PhD thesis, University of
   Waterloo, 2018. UWSpace bitstream `11122410-2f45-4281-a8ca-682f15448372`（145 页 PDF，
-  已存档 `data/external/papers/zulkoski_thesis2018.pdf`）。会议版内容对应论文第 2.3.3、4、5 章；
+  本地核读用副本；论文 PDF 为第三方文件，未随快照分发）。会议版内容对应论文第 2.3.3、4、5 章；
   本笔记补充引用论文第 6 章（LSR backdoors）。
 - 引用规范：正文引 CP 2018 会议版；方法细节（算法、逐类别数值表）可引论文版补充。
 

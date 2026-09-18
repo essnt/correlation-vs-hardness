@@ -150,6 +150,11 @@ conflicts≥下限的子集）与 Tobit 版本交叉验证。
    开放库先行存档，Zenodo 在官方接受列表内）——Zenodo 先行与 JSAT 工作流
    天然吻合；投稿信需声明 Zenodo 紧凑版存在。作者：Song Jin, Independent
    Researcher, j.song.cs@outlook.com。
+5. **投稿路线更新（2026-09-17）**：期刊首选由 JSAT 改定 **JAIR**（评估
+   依据：JSAT 刊期停摆 2022–24 仅 6 篇；JAIR 零费用 Diamond OA、活跃
+   出刊、SAT 实证长期先例；预印本允许/强制模板与可复现性清单/单盲
+   8–12 周已经官网核实）。备选 AIJ → Constraints 串行转投。Zenodo 先行
+   存档策略不变。
 
 ## AMEND-4（2026-09-16，术语订正与 AMEND-3 内容臂处置记录，非假设修订）
 
