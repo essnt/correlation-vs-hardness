@@ -163,3 +163,26 @@ conflicts≥下限的子集）与 Tobit 版本交叉验证。
 集中于局部性干预），该内容臂不再推进：交互检验维持 AMEND-3 的暂缓
 声明，作为研究范围界定记录于论文与 PRESPEC_AUDIT.md。本条为处置状态
 记录，冻结假设正文仍一字未动。
+
+## AMEND-5（2026-09-18，中介路径实现适配处置记录，非假设修订）
+
+2026-09-18 独立全量审查发现：冻结决策规则的中介路径为 r→tw→难度，
+而分析实现（experiments/e3a_analysis.py）的中介变量集为四个连续结构
+度量（modularity/mean_degree/clustering/spectral_gap），未含 tw，且
+无处置记录。处置如下（本条为实现适配补录，冻结假设正文一字未动）：
+
+1. **偏离事实**：实例级 treewidth 仅记录了启发式上下界（metrics 的
+   tw_lb/tw_ub，min-fill + degeneracy 复合估计，整数、非精确
+   treewidth）；实现时选用连续度量承载中介路径，偏离未经记录。
+2. **决策判据不变**：冻结的确认判据（ACME 自助法 95% CI 不含 0 →
+   报告中介成立）全程按原文执行，偏离仅在中介变量集。
+3. **宽度路径补跑（闭环）**：按与主中介集完全相同的协议
+   （product-of-coefficients + 1000 次自助、seed=42、resolved 行
+   n=722）对两个界补跑——tw_ub：ACME=2.34，CI [2.14, 2.60]
+   （占总效应 3.26 的 ≈72%）；tw_lb：ACME=2.69，CI [2.48, 2.99]
+   （≈83%）。两界 CI 均不含 0，宽度通道获直接确认。数据
+   results/e3a_analysis.json（mediation_tw_ub / mediation_tw_lb），
+   论文附录 C（AMEND-5 段）与 §9 互指。
+4. **题注同步**：论文 Table 5 题注 "by the preregistered rule" 改为
+   "by the adapted rule (see Appendix C, AMEND-5)"——"preregistered"
+   一词仅用于描述冻结协议本身，不再用于声称已实现的中介集。

@@ -174,7 +174,7 @@ using conflict counts, not wall-clock, as the primary measure.
 \citet{ansotegui2009} introduced the scale-free (power-law) variable-incidence
 model of industrial-like instances, later extended with
 fractal-dimension analyses of incidence graphs (Ans\'otegui et al.\ 2014, as
-tabulated in \parencite*{zulkoski2018}); \citet{newsham2014} reported encouraging
+tabulated in \parencite{zulkoski2018}); \citet{newsham2014} reported encouraging
 runtime regressions on
 community features. \citet{zulkoski2018} scaled the design to
 ${\sim}7000$ instances from SAT Competitions 2007--2016 with MapleCOMSPS
@@ -225,7 +225,7 @@ CDCL with restarts finds them in polynomial time --- the theoretical face of
 our E1 result (\S\ref{sec:e1}: width-controlled instances are flat and
 trivial at all $k$).
 Correlation decay~\cite{weitz2006} and the overlap-gap property
-(see \parencite*{gamarnik2021}) delineate where local information provably suffices
+(see \parencite{gamarnik2021}) delineate where local information provably suffices
 or fails; we use these as interpretive scaffolding only, since practical CDCL
 carries components outside these models.
 
@@ -329,7 +329,8 @@ Hypotheses, censoring semantics, $r$ levels, and decision rules were frozen
 before the main scan. Amendments are numbered and reason-stated: AMEND-1 (S0
 budget $10^7$), AMEND-2 (wall guard, bias declaration, spot-check protocol),
 AMEND-3 (content-arm deferral), AMEND-4 (terminology normalization and
-content-arm disposition record). A prespecification-vs-implementation audit
+content-arm disposition record), AMEND-5 (mediation-path adaptation with the
+width-path quantification). A prespecification-vs-implementation audit
 records every deviation found by item-by-item inspection --- including one
 material bug (walltimeout rows initially counted as \textsc{unsat} in
 threshold estimation) fixed \emph{before} the main scan fired. One exploratory
@@ -486,7 +487,9 @@ intact, which is where the gradient evidence lives.
 \centering
 \includegraphics[width=0.9\linewidth]{figures/fig_km.png}
 \caption{Kaplan--Meier estimates of time-to-decision (conflicts; CaDiCaL,
-$\Delta$-pooled). Curves for small $r$ drop to zero within the budget; curves
+$\Delta$-pooled). Inclusion per \S\ref{sec:method}: budget-capped runs
+enter as censored at the $10^6$-conflict budget; \textsc{walltimeout} rows
+are excluded. Curves for small $r$ drop to zero within the budget; curves
 for $r\ge0.5$ plateau at high ``not yet decided'' probability (about a
 quarter at $r=0.3$) --- the
 measurability boundary of \S\ref{sec:s0}, seen at the solver level.}
@@ -580,7 +583,10 @@ planted median & 0 & 0 & 0 & 0 & 0 & 0\\
 
 \citet{imai2011} causal mediation of the $r \to$ difficulty path (bootstrap
 95\% CI; total effect 3.26 log units) is summarized in
-Table~\ref{tab:mediation}.
+Table~\ref{tab:mediation}. The frozen protocol named treewidth as the
+mediator; Appendix~\ref{app:protocol} (AMEND-5) records the adaptation of
+the mediator set and quantifies the width path through the recorded
+treewidth bounds (both CIs exclude zero).
 
 \begin{table}[h]
 \centering
@@ -589,7 +595,8 @@ $3.26$ log units; product-of-coefficients estimator, bootstrap percentile
 CIs). Modularity carries ${\sim}94\%$ of the total effect; the spectral gap
 acts as a suppression channel (negative direct effect), evidence of a
 secondary pathway bypassing community structure. All CIs exclude zero: by the
-preregistered rule, \textbf{mediation is established} as mechanism evidence.}
+adapted rule (see Appendix~\ref{app:protocol}, AMEND-5), \textbf{mediation is
+established} as mechanism evidence.}
 \begin{tabular}{lccc}
 \toprule
 mediator & ACME & 95\% CI & direct effect\\
@@ -603,6 +610,10 @@ clustering & 2.19 & $[2.02, 2.44]$ & $1.06$\\
 
 \label{tab:mediation}
 \end{table}
+
+The four mediators are estimated marginally (one two-step path each); several
+share the same instance graphs, so the shares are not additive across
+mediators.
 
 The H1 feature ladder: on the main-scan data, ridge-CV $R^2$ rises from
 $0.610$ (size features) and $0.664$ (size+density) to $\mathbf{0.976}$ with
@@ -941,7 +952,11 @@ $\Delta{=}{+}0.2$ cells at $r{=}0.8$ and $r{=}1.5$ are of this kind). The
 censoring-aware Jonckheere--Terpstra statistic bounds the underlying trend in
 every arm ($p\le10^{-4}$, the permutation floor). Partial $\eta^2$ at the
 RM-ANOVA-computable arms: $0.988$ ($\Delta{=}{+}0.6$), $0.986$
-($\Delta{=}{+}0.8$) against the preregistered threshold of $0.14$.}
+($\Delta{=}{+}0.8$) against the preregistered threshold of $0.14$. Per-arm
+RM-ANOVAs use per-arm complete seeds ($n{=}17$/$26$ at $\Delta{=}{+}0.6$/$
++0.8$ for CaDiCaL, $n{=}28$ at $+0.8$ for Glucose; arms with fewer than five
+complete seeds are not computable; the main text uses the $n{=}28$
+all-radius aggregate).}
 \label{tab:e3afull}
 \begin{tabular}{lcccc}
 \toprule
@@ -1024,7 +1039,22 @@ distribution-preserving operationalization on the unsatisfiable carrier; the
 interaction test was deferred rather than shipped ill-defined. AMEND-4:
 terminology normalization and the formal disposition record for the deferred
 content arm (it remains deferred as a scope definition; the frozen hypothesis
-text is unchanged).
+text is unchanged). AMEND-5 (2026-09-18, at independent-review disposition):
+mediation-path adaptation record and width-path quantification (next
+paragraph); frozen hypothesis text unchanged.
+
+\paragraph{Mediation path (AMEND-5).}
+The frozen protocol named treewidth as the mediation variable
+($r \to \mathrm{tw} \to$ difficulty); at implementation the mediator set was
+adapted to four continuous structural metrics, the recorded treewidth
+quantities being heuristic integer bounds (min-fill $+$ degeneracy), not
+exact widths. The adapted rule applies the frozen decision criterion (ACME
+bootstrap 95\% CI excluding zero) unchanged to the implemented set
+(Table~\ref{tab:mediation}); the width path through the recorded bounds,
+same estimator and protocol, gives ACME $= 2.34$ $[2.14, 2.60]$ (upper
+bound, ${\sim}72\%$ of the total effect) and $2.69$ $[2.48, 2.99]$ (lower
+bound, ${\sim}83\%$). The width channel is confirmed directly and all six
+recorded mediator paths agree.
 
 \paragraph{Prespecification-vs-implementation audit.}
 After the freeze and before the main scan fired, an item-by-item audit

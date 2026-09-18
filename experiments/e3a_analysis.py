@@ -113,8 +113,12 @@ def main():
                 }
 
     # ---------- 中介：r → 结构度量 → logc（cadical） ----------
+    # AMEND-5（2026-09-18）：冻结路径 r→tw→难度；实现中介集原为四连续度量。
+    # tw_ub/tw_lb（min-fill+degeneracy 启发式整数界）补入循环——宽度路径按
+    # 同协议补跑（同 n_boot/seed），处置记录见 HYPOTHESES.md AMEND-5 与论文附录 C。
     sub = ok(e3a[e3a["solver"] == "cadical"]).copy()
-    for med in ["m_modularity", "m_mean_degree", "m_clustering", "m_spectral_gap"]:
+    for med in ["m_modularity", "m_mean_degree", "m_clustering", "m_spectral_gap",
+                "m_tw_lb", "m_tw_ub"]:
         if med not in sub.columns:
             continue
         s = sub[["logc", "p_r", med]].dropna()

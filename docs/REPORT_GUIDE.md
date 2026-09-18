@@ -215,7 +215,7 @@ Written for non-technical readers: each term is first explained in plain languag
    **locality moves the satisfiable/unsatisfiable threshold boundary itself**.
 5. Dose–response: with the density difference pinned down, moving r from 0.06 to 0.22 spans
    **3.4 orders of magnitude** of hardness (28 → 72,000 crashes); taking the censoring-aware lower bound
-   into account, ≥4.5 orders of magnitude. p<0.001.
+   into account, ≥4.5 orders of magnitude. JT p≤10⁻⁴.
 6. The scalpel falls: destroying only the spatial entanglement while preserving the degree distribution,
    hardness immediately jumps 16–68-fold, and the satisfiability of 53 pairs of instances is flipped —
    **locality is the causal channel itself**.

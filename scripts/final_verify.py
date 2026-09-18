@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """终版发布包全量验证（每轮从头跑全部检查项）。
 用法: .venv/bin/python scripts/final_verify.py   → 输出 PASS/FAIL 清单与计数
-检查范围: zenodo_upload.zip 三层结构 + 论文 PDF 全文 + 快照 82 文件(含 2 个 .gitignore 与 README_zh) + 事实核对(数据库重算)
+检查范围: zenodo_upload.zip 三层结构 + 论文 PDF 全文 + 快照 95 文件(含 2 个 .gitignore 与中文文件名导读) + 事实核对(数据库重算)
 """
 import zipfile, tarfile, io, re, os, sys, json, sqlite3, math, hashlib
 from collections import defaultdict
@@ -51,7 +51,7 @@ chk("外层三文件清单", z.namelist() == ["README_ZENODO.md",
 # ========== 2. 论文 PDF ==========
 pdfb = z.read("SongJin_2026_LocalityCausesTractability_JournalVersion.pdf")
 d = pymupdf.open(stream=pdfb, filetype="pdf")
-chk("论文 17 页", d.page_count == 17, str(d.page_count))
+chk("论文 18 页", d.page_count == 18, str(d.page_count))
 t0 = d[0].get_text()
 chk("作者块 Song Jin", "Song Jin" in t0)
 chk("Independent Researcher", "Independent Researcher" in t0)
@@ -63,6 +63,8 @@ full = "\n".join(pg.get_text() for pg in d)
 chk("期刊版声明", "full journal version" in full)
 chk("可复现性清单在 PDF 内", "Reproducibility Checklist for JAIR" in full)
 chk("AMEND-4 在 PDF 内", "AMEND-4" in full)
+chk("AMEND-5 在 PDF 内", "AMEND-5" in full)
+chk("中介题注 adapted rule", "by the adapted rule" in full)
 chk("协议附录在 PDF 内", "Preregistration and Audit Protocol" in full)
 chk("PDF 无构建机身份字串残留", _S not in full)
 chk("PDF 无本机路径", _HP not in full)
@@ -218,7 +220,7 @@ chk("快照 jair tex == HEAD", docs.get("./jair/main.tex") == os.popen("git show
 chk("快照 HYPOTHESES == HEAD", docs.get("./docs/HYPOTHESES.md") == os.popen("git show HEAD:docs/HYPOTHESES.md").read())
 chk("包内 PDF == jair/main.pdf", pdfb == open("jair/main.pdf", "rb").read())
 rm_ = z.read("README_ZENODO.md").decode()
-chk("README 17 页声明", "(17 pages)" in rm_)
+chk("README 18 页声明", "(18 pages)" in rm_)
 chk("README 无过时引用", "10 pages" not in rm_ and "5b36f34b" not in rm_)
 chk("快照无 4.5 旧口径", "climbs from ${\\sim}28$ to ${\\sim}72{,}000$ conflicts --- \\textbf{4.5 orders" not in docs.get("./arxiv/main.tex", ""))
 ai = re.sub(r"\s+", " ", docs.get("./docs/AI_DISCLOSURE.md", "").replace(">", ""))

@@ -26,7 +26,7 @@
    measure how solving difficulty changes. **Main result: the conjecture holds (within
    the scope of this experiment)** — turning r alone moves the satisfiability threshold
    by ≥1.7 density units, and difficulty among decided instances spans 3.4 orders of
-   magnitude (≥4.5 as the censoring-aware lower bound; p<10⁻³);
+   magnitude (≥4.5 as the censoring-aware lower bound; JT p≤10⁻⁴);
    destroying only the spatial entanglement while preserving the degree distribution
    raises difficulty by 16–68×.
 

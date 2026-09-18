@@ -10,12 +10,12 @@ Checklist).
 **License:** PDF & text: CC-BY-4.0. Code in the snapshot: MIT, except the bundled probSAT tool (`tools/probsat/`), which retains its original research-use license (see `tools/probsat/LICENSE`).
 
 ## Contents
-1. `SongJin_2026_LocalityCausesTractability_JournalVersion.pdf` - the paper (17 pages).
+1. `SongJin_2026_LocalityCausesTractability_JournalVersion.pdf` - the paper (18 pages).
 2. `correlation-vs-hardness_snapshot.tar.gz` - full snapshot of the research repository:
    - `src/cvh/` generators, solver harness (resume-per-row), metrics, statistics
    - `experiments/` every experiment script (S0, E1-E6, E4, E5, spotcheck)
    - `results/` SQLite databases (all raw solve runs), analysis JSON, figures
-   - `docs/` preregistration (HYPOTHESES.md + AMEND-1–4), prespecification audit
+   - `docs/` preregistration (HYPOTHESES.md + AMEND-1–5), prespecification audit
      (PRESPEC_AUDIT.md), experiment log (M2_LOG.md), full report (REPORT.md;
      Chinese original REPORT_zh.md), reader's guide (REPORT_GUIDE.md),
      literature notes, AI-use disclosure (AI_DISCLOSURE.md)

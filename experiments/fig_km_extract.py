@@ -2,7 +2,10 @@
 """论文嵌图 fig_km 再生：Kaplan–Meier time-to-decision by locality radius (Δ-pooled)。
 
 数据: results/m2_main.db 的 geo_random × cadical 行（全部 Δ 臂合并，Δ-pooled）。
-duration = conflicts；event = status ∈ {sat, unsat}（budget/walltimeout 行按删失处理）。
+duration = conflicts；event = status ∈ {sat, unsat}。纳入口径与论文 §4 一致：
+budget 行按 10^6 预算作右删失进入 KM；walltimeout 行（conflicts=None）被
+剔除、不进 KM（2026-09-18 订正：此前本注释误述为 budget/walltimeout 均按
+删失处理）。
 输出 results/figures/fig_km.png 并同步 arxiv/figures/（论文嵌图单源双写，LESSONS #17）。
 """
 import json

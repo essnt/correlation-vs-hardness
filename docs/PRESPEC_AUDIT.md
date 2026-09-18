@@ -43,7 +43,7 @@
 - **H2 确认路径**：η² 换算已补（见上）；端点均值比见 e3a_analysis.json `h2_by_delta_solver["delta=0.2|cadical"].logc_by_r`（mean log10 冲突 1.45→4.86）。✅ 已执行（2026-09-11 状态格订正）：H2 走冻结判据效应量路确认——η²_partial≈0.99≥0.14 且 JT p≤1e-4（FDR q≤1e-4）；e3a_analysis.json `h2_main_cadical.anova_deltaagg`：F(8,216)=2808.5、p≈1e-213。
 - **"密度主导"触发**：判据已在 HYPOTHESES 冻结（η²<0.02 且 p>0.05）；分析脚本输出足以直接判读。✅ 已执行（2026-09-11 状态格订正）：实测 η²_partial≈0.99，远未落入触发区（η²<0.02 且 p>0.05 不成立）→ 不转负结果支线，主叙事成立（数据 results/e3a_analysis.json）。
 - **E6 砍除线**：τ 弱于随机基线即砍——✅ 已执行：E6 恢复重跑后 qwen3:8b 与 JW 基线无差异、无 r 梯度信号，命中砍线砍除（记录 HYPOTHESES.md 冻结后记录节；数据 results/e6.json）。
-- **中介分析**：Imai (2011) ACME 自助法 CI；r→tw→难度路径要求 tw 度量——E3a 实例已记 tw_ub/tw_lb（measure_metrics=True）。R3b 中介管线已验证（早期口径 ACME=2.14，83%——【2026-09-12 注】无 committed 脚本、按主研究规格不可复现，作为历史验证记录保留）。✅ 管线就绪。
+- **中介分析**：Imai (2011) ACME 自助法 CI；r→tw→难度路径要求 tw 度量——E3a 实例已记 tw_ub/tw_lb（measure_metrics=True）。R3b 中介管线已验证（早期口径 ACME=2.14，83%——【2026-09-12 注】无 committed 脚本、按主研究规格不可复现，作为历史验证记录保留）。✅ 管线就绪。【2026-09-18 AMEND-5 处置注】实现中介集为四连续度量，未含 tw 且当时无处置记录（2026-09-18 独立全量审查抓出）——tw_ub/tw_lb 系启发式整数界非精确 treewidth；宽度路径已按冻结判据补跑（tw_ub ACME=2.34 [2.14,2.60]、tw_lb ACME=2.69 [2.48,2.99]，均不含 0，占效应 ≈72%/83%）。完整处置记录见 HYPOTHESES.md AMEND-5 与论文附录 C；数据 results/e3a_analysis.json mediation_tw_ub/mediation_tw_lb。
 
 ## 五、算力预算 vs 实际（诚实记账）
 
