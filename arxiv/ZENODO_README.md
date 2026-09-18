@@ -19,7 +19,9 @@ Checklist).
      (PRESPEC_AUDIT.md), experiment log (M2_LOG.md), full report (REPORT.md;
      Chinese original REPORT_zh.md), reader's guide (REPORT_GUIDE.md),
      literature notes, AI-use disclosure (AI_DISCLOSURE.md)
-   - `data/external/e4prime/` external-instance manifest for E4-prime
+   - `data/external/e4prime/` external-instance manifest for E4-prime (SHA256 per
+     instance; the third-party benchmark files themselves are not redistributed —
+     refetch them from the public suites and verify against the manifest)
    - `scripts/` verification & packaging utilities (final_verify, rebuild_zenodo)
    - `tools/probsat/` bundled third-party probSAT solver (research-use license)
    - `tests/` unit tests; `LICENSE` + third-party license notices

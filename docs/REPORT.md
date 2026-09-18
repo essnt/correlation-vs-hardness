@@ -1,7 +1,9 @@
 # Does the "Locality Radius" of Variable Interactions Causally Determine SAT Solving Difficulty?
 ## — An Intervention-Based Empirical Study (Chinese In-Depth Report · M3 Draft)
 
-> **Status marker**: v1.0 (2026-09-10) — all experiments (S0/E1/E2/E3a/E3b/E4/E5/E6) are
+> **Status marker**: v1.2 (2026-09-18; v1.0 = 2026-09-10 initial complete version; since
+> updated by the Tobit-fit correction 2026-09-17 and the AMEND-5 sync 2026-09-18) — all
+> experiments (S0/E1/E2/E3a/E3b/E4/E5/E6) are
 > complete and filled in with numbers; frozen content in §1–§4 is governed by HYPOTHESES
 > v1.0-FROZEN + AMEND-1–5 + PRESPEC_AUDIT; the data and the decision chain are entirely
 > in git history.
@@ -409,7 +411,8 @@ check (excluding the legacy as family, see the erratum above).
 
 ## 10. E6 (H3, Exploratory): LLM Branch Ordering — Pruned per the Preregistered Cut Line
 
-Setup: planted geo_random n=50, guaranteed satisfiable, 3 r levels × 10 seeds × three
+Setup: planted geo_random n=50, guaranteed satisfiable, 3 r levels × 2 α tiers (4.0/7.0) ×
+10 seeds × three
 strategies (classical JW baseline / random / qwen3:8b taking over the first MAX-level
 decisions with JW as fallback), comparing σ-match rate and decision count. Results: LLM
 and JW nearly coincide at each r (σ-match 0.531/0.615/0.616 vs 0.534/0.605/0.611), with

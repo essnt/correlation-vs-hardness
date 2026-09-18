@@ -164,8 +164,8 @@ Written for non-technical readers: each term is first explained in plain languag
 12. **Why is the degree-preserving swap a "scalpel"?** It only changes "who is spatially adjacent to whom,"
     never "how many times each literal appears." Any change in hardness can only be attributed to the
     former — this is the "all other conditions held equal" of causal inference.
-13. **Has the preregistration been modified?** Yes, three times, all numbered and on the record
-    (AMEND-1/2/3), the reasons public, the original text unalterable. The modifications were made to keep
+13. **Has the preregistration been modified?** Yes, five times, all numbered and on the record
+    (AMEND-1–5; AMEND-4/5 are non-hypothesis disposition records), the reasons public, the original text unalterable. The modifications were made to keep
     the experiment feasible or to correct a discovered bias, not to make the results look good — the bias
     corrected by AMEND-2 ran precisely against our own hypothesis.
 14. **Are the 59 real E4 instances enough?** Not enough for the 200–500 target; they are a substitute source
