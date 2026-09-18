@@ -131,8 +131,8 @@ Written for non-technical readers: each term is first explained in plain languag
    exaggerated gradient), and it is bounded by spot-checks with the 10⁸ budget (AMEND-2). This is "facing the
    bias honestly," not "pretending it away."
 4. **Why can the threshold not be measured at large r after all?** Because at medium densities instance
-   hardness collapses out of the measurement range (the wall-clock truncations of 314/720 rows concentrate at
-   large r). This is itself a result: what locality changes is the "structure of hardness," not just the
+   hardness collapses out of the measurement range (313 of the 317 wall-clock truncations sit at
+   r ≥ 0.3; the remaining 4 are the r=0.06 censoring floor). This is itself a result: what locality changes is the "structure of hardness," not just the
    hardness values.
 5. **Isn't treewidth the mathematical notion of "good structure" — so why doesn't it create hardness in E1?**
    Low treewidth ⇒ a short proof exists ⇒ CDCL can find it — so low treewidth **guarantees easiness**; but
