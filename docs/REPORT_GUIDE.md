@@ -211,7 +211,7 @@ Written for non-technical readers: each term is first explained in plain languag
 2. The knob is the locality radius r: variables entangle with one another only within radius r on the torus.
 3. The readout is the conflict count: the number of times a modern solver crashes, comparable across
    machines.
-4. The threshold boundary moves with r: from below 2.5 up to about 4.4 —
+4. The threshold boundary moves with r: from below 2.5 up to ≈4.3 by r=0.22 —
    **locality moves the satisfiable/unsatisfiable threshold boundary itself**.
 5. Dose–response: with the density difference pinned down, moving r from 0.06 to 0.22 spans
    **3.4 orders of magnitude** of hardness (28 → 72,000 crashes); taking the censoring-aware lower bound

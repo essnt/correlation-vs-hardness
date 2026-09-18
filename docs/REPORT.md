@@ -304,7 +304,7 @@ of magnitude" in §0 and the abstract refers to the censoring-aware lower bound
 (1.45→6.0) or to the Δ+0.8-arm endpoints (1.29→5.77); the Δ+0.2-arm span among decided
 instances is 3.4.)
 
-**Effect sizes vs the preregistered confirmation line**: partial η² = **0.984–0.988**
+**Effect sizes vs the preregistered confirmation line**: partial η² = **0.985–0.988**
 (taken from the Δ=+0.6/+0.8 cells — their complete-seed subsets with n≥17 include
 large-r levels; the Δ=+0.2/+0.4 cells cannot be computed because heavy large-r
 censoring leaves too few complete seeds, and the trend in those two cells is carried by

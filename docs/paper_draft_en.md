@@ -32,8 +32,8 @@ generator, a degree-preserving swap intervention that destroys locality while ke
 the literal degree sequence exactly fixed, and censoring-aware statistics, we measure
 difficulty (conflict counts) and the operational satisfiability threshold α_c(r).
 Three findings. (i) The threshold is bracketed from above at <2.5 (r = 0.06) and
-rises to ≈4.4 (r = 0.3) — locality moves the satisfiability boundary itself, by
-≈1.9 density units — before becoming unmeasurable at r ≥ 0.3 under a
+rises to ≈4.3 (r = 0.22) — locality moves the satisfiability boundary itself, by
+≈1.7 density units — before becoming unmeasurable at r ≥ 0.3 under a
 10⁷-conflict budget. (ii) At density matched relative to each radius's own
 threshold, difficulty spans 3.4 orders of magnitude across r among decided
 instances, and ≥4.5 orders when budget-censored runs are counted at their lower
@@ -168,7 +168,7 @@ factor of 55 in variables but matched in community size differ by ~3× in runtim
 Their construction also demonstrates that "bridge" clauses connecting communities
 do not w.h.p. provide exploitable propagation shortcuts when communities are few —
 directly relevant to how coupling strength varies with r in our generator. Earlier,
-Jia, Moore and Strain [11] analyzed planted SAT with clustering; their planting
+Jia, Moore and Strain [11] analyzed planted SAT via solution hiding; their planting
 threshold explains why naive planted ensembles are CDCL-trivial — a pilot finding
 of ours (R1/R2) that motivated our non-planted difficulty carrier.
 
@@ -340,7 +340,7 @@ difficulty climbs from ~28 to ~72,000 conflicts — **3.4 orders of magnitude**
 among decided instances (≥4.5 counting budget-censored endpoints at their lower
 bound).
 The Δ = +0.8 arm repeats the pattern (1.29 → 5.77). Partial η² at computable
-cells is 0.984–0.988 against the preregistered confirmation threshold of 0.14,
+cells is 0.985–0.988 against the preregistered confirmation threshold of 0.14,
 and the censoring-aware endpoint ratio ~10^4.5 dwarfs the preregistered 10× line. **H2 is
 confirmed under its own preregistered decision rule.** Glucose replicates the
 pattern.
