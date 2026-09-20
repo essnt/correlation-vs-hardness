@@ -70,7 +70,7 @@ bash scripts/status.sh                         # 完成度对账
 所有图表均由 committed 脚本从 results/*.db 再生；逐实验方法论与完整记录见
 docs/REPORT_zh.md（§13 复现指南）。结果数据库随仓库分发：重跑实验脚本会
 断点续跑，已判定作业自动跳过（`status.sh` 可对账进度）；仓库跟踪内容
-（代码＋全部结果数据库）约 5 MB，含完整 git 历史的新鲜克隆约 140 MB
+（代码＋全部结果数据库）约 5 MB，含完整 git 历史的新鲜克隆约 9 MB
 （历史主要由结果数据库与打包产物的历次版本构成）。
 
 平台说明：以上路径在 Linux / macOS / Windows（Python 3.11–3.14）均可运行，
