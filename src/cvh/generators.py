@@ -94,8 +94,9 @@ def _sat_polarity(clause_vars, sigma, rng) -> list[int]:
     sigma satisfies), then a uniformly-random c-element subset of those positions;
     the chosen literals are forced sigma-true and each remaining position gets a
     free fair coin.  This is NOT uniform sampling over the 7 non-empty subsets
-    (whose expected size 12/7 does not apply here): the measured per-clause mean
-    sigma-redundancy is 2.14-2.23 and is r-invariant (pilot-verified).
+    (whose expected size 12/7 does not apply here): the measured per-radius
+    mean sigma-redundancy is 2.18-2.24 and is r-invariant (per-instance means
+    span 2.14-2.27; pilot-verified).
     """
     sat_pos = [i for i, v in enumerate(clause_vars) if sigma[v - 1]]
     if not sat_pos:                       # parity fluke: flip one var in sigma

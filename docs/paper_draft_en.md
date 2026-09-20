@@ -82,7 +82,7 @@ as a dose–response experiment. A **locality-kernel generator** samples each cl
 variables uniformly from an r-ball on a discrete 2-D torus, then draws polarities
 from a standardized content distribution (σ-satisfaction modes: a cardinality drawn
 uniformly in 1..k, then a subset of that cardinality — giving an r-invariant
-redundancy with measured mean ≈2.14–2.23); as r grows the generator interpolates
+redundancy with measured per-radius mean 2.18–2.24); as r grows the generator interpolates
 toward uniform random 3-SAT, and — in the planted arms only — degree-cap rejection
 keeps literal degrees near-identical across r (the geo_random main arm is uncapped;
 its degree-shape drift is disclosed in §10). The knob r has a physical reading: it is the *spatial span
@@ -200,7 +200,7 @@ Small r gives high intra-cluster variable reuse and sparse inter-cluster couplin
 r → ∞ recovers (approximately) uniform random 3-SAT. The *planted* variant
 (planted=True) draws polarities from σ-satisfaction modes — for each clause, draw a
 cardinality uniformly in 1..k (k = the positions a global σ satisfies) and then a
-subset of that cardinality — giving a measured mean σ-redundancy ≈2.14–2.23 (the
+subset of that cardinality — giving a measured per-radius mean σ-redundancy 2.18–2.24 (the
 naive 12/7 applies only to uniform sampling over the 7 non-empty subsets), verified
 in pilots to keep redundancy histograms identical across r. This generator is the
 non-planted regime of Bläsius et al.'s geometric family [9].
@@ -412,7 +412,7 @@ conflict counts under CDCL — a proxy for, not a definition of, hardness.
 **Internal.** Five controls close the confounding routes we identified: n and α
 (fixed or Δ-matched), literal degree profile (degree-cap rejection in the planted
 arms, exact preservation under the E3b swap), clause content (σ-satisfaction-mode
-polarity sampling via uniform cardinality then subset, redundancy ≈2.14–2.23
+polarity sampling via uniform cardinality then subset, per-radius mean redundancy 2.18–2.24
 r-invariant),
 and solver variance (two CDCL engines). The metric-computation channel cannot
 pseudo-correlate with runtime because metrics are computed on the generated

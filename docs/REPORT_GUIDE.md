@@ -65,7 +65,8 @@ Written for non-technical readers: each term is first explained in plain languag
 - **σ-satisfaction pattern / redundancy**: The polarity pattern for building clauses around σ — first draw a
   cardinality uniformly from 1..k among the positions satisfied under σ, then draw a subset of that
   cardinality (not the 7 non-empty subsets with equal probability). Redundancy (the average number of
-  literals per clause satisfied by σ) has a measured mean of ≈2.14–2.23, invariant in r. *In this project*:
+  literals per clause satisfied by σ) has a measured per-radius mean of 2.18–2.24 (per-instance spread
+  ≈2.14–2.27), invariant in r. *In this project*:
   the means of pinning down the "content distribution" — ruling out one confound.
 - **Degree-preserving swap (E3b)**: A shuffling technique that secretly swaps variables between two clauses
   while keeping the occurrence count of every literal **not one more, not one fewer**. Effect: spatial
@@ -158,8 +159,8 @@ Written for non-technical readers: each term is first explained in plain languag
     + a low-confidence flag.
 11. **Why σ-pattern sampling?** The literal positions of a 3-clause satisfied under σ have 7 non-empty
     combinations, but the implementation does not sample them with equal probability; it first draws a
-    cardinality uniformly from 1..k, then a subset of that cardinality. The measured redundancy is
-    ≈2.14–2.23, invariant across r — the content distribution is pinned down constructively and no longer
+    cardinality uniformly from 1..k, then a subset of that cardinality. The measured per-radius mean redundancy is
+    2.18–2.24, invariant across r — the content distribution is pinned down constructively and no longer
     depends on luck.
 12. **Why is the degree-preserving swap a "scalpel"?** It only changes "who is spatially adjacent to whom,"
     never "how many times each literal appears." Any change in hardness can only be attributed to the

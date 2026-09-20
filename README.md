@@ -88,8 +88,10 @@ All figures are regenerated from results/*.db by committed scripts; per-
 experiment methodology and the full record are in docs/REPORT_zh.md
 (§13 reproduction guide). The result databases ship with the repository:
 re-running experiment scripts resumes and automatically skips jobs that
-already carry a verdict (`status.sh` reconciles progress); the whole
-repository (code + all databases + git history) is about 7 MB.
+already carry a verdict (`status.sh` reconciles progress); the tracked
+repository content (code plus all result databases) is about 5 MB, and a
+fresh clone including the full git history is about 140 MB (past revisions
+of the result databases and packaged artifacts dominate the history).
 
 Platform notes: the paths above run on Linux / macOS / Windows
 (Python 3.11–3.14); all dependencies ship prebuilt wheels for the three

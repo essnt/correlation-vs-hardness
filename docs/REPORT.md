@@ -149,10 +149,14 @@ algorithm — the mapping is used only to partition regimes, not to prove solver
   (used by E1).
 - **σ-preserving polarity resampling**: σ-satisfaction-mode sampling + β-decoy
   constraint filling; content statistics are r-invariant by construction (pilots
-  verified identical histograms across r; measured mean σ-redundancy ≈2.14–2.23,
-  r-invariant). [2026-09-11 erratum] The earlier text's "constant 12/7" was wrong —
+  verified identical histograms across r; measured per-radius mean σ-redundancy
+  2.18–2.24, per-instance means 2.14–2.27). [2026-09-11 erratum] The earlier
+  text's "constant 12/7" was wrong —
   12/7 is only the expected number of σ-satisfying positions under pure uniform-7
-  sampling, not the redundancy caliber of this construction.
+  sampling, not the redundancy caliber of this construction. [2026-09-20
+  erratum] The previously recorded "≈2.14–2.23" mixed the two calibers; the
+  packaged pilot database (results/pilot_m1.db) gives per-instance means
+  2.14–2.27 and per-radius means 2.18–2.24.
 - **degree_preserving_randomize** (E3b): a bipartite swap chain that exactly preserves
   the literal degree sequence while destroying spatial locality — the
   "structure-destruction intervention".

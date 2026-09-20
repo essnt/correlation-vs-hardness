@@ -150,7 +150,8 @@ def backbone_fraction(inst) -> float | None:
 
 def sigma_redundancy_hist(inst) -> list[int]:
     """For planted instances: how many of the 3 literals sigma satisfies, per
-    clause.  Measured mean ≈2.14–2.23, r-invariant (pilot).  旧注"uniform-7
+    clause.  Measured per-radius mean 2.18–2.24, r-invariant (per-instance
+    means span 2.14–2.27; pilot).  旧注"uniform-7
     预言 12/7≈1.714"不适用于本构造：12/7 只是纯 uniform-7 抽样下满足位置数的
     期望；实际模式经 σ-子集均匀抽样 + β-诱饵约束填充（2026-09-11 勘误）。"""
     assert inst.sigma is not None
