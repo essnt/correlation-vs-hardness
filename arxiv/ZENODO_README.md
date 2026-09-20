@@ -17,8 +17,9 @@ Checklist).
    - `results/` SQLite databases (all raw solve runs), analysis JSON, figures
    - `docs/` preregistration (HYPOTHESES.md + AMEND-1–5), prespecification audit
      (PRESPEC_AUDIT.md), experiment log (M2_LOG.md), full report (REPORT.md;
-     Chinese original REPORT_zh.md), reader's guide (REPORT_GUIDE.md),
-     literature notes, AI-use disclosure (AI_DISCLOSURE.md)
+     Chinese original REPORT_zh.md), reader's guide (REPORT_GUIDE.md;
+     Chinese original REPORT_zh_导读.md), literature notes, AI-use
+     disclosure (AI_DISCLOSURE.md)
    - `data/external/e4prime/` external-instance manifest for E4-prime (SHA256 per
      instance; the third-party benchmark files themselves are not redistributed —
      refetch them from the public suites and verify against the manifest)

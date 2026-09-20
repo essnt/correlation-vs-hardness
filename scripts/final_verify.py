@@ -76,6 +76,8 @@ chk("PDF 无本机路径", _HP not in full)
 chk("PDF 无硬件型号", _RX not in full)
 chk("PDF 无 LaTeX 残留", not re.findall(r"\\cite|\\ref|\\label|\?\?", full))
 chk("PDF 嵌图 3 张", sum(len(pg.get_images()) for pg in d) == 3)
+# 对象字典层扫描：/PTEX.FileName 类构建机路径不在文本层，须扫原始字节
+chk("外层 PDF 原始字节无构建机身份/路径", _S not in pdfb and _HP not in pdfb)
 # 常见错拼与重复词
 typos = re.findall(r"\b(teh|recieve|seperate|occured|adress)\b", full, re.I)
 chk("常见错拼", not typos, str(typos))
@@ -140,6 +142,9 @@ chk("快照无工作流过程词", not _wf1, str(_wf1))
 _scripts_text = "\n".join(t for n, t in docs.items() if n in SELF_SCRIPTS)
 _wf2 = [t for t in _WF if _scripts_text.count(t)]
 chk("打包/验证脚本无工作流过程词", not _wf2, str(_wf2))
+
+_arx = tf.extractfile(tf.getmember("./arxiv/main.pdf")).read()
+chk("快照 PDF 原始字节无构建机身份/路径", _S not in _arx and _HP not in _arx)
 
 # ========== 5. 事实核对（数据库重算） ==========
 # 5a. S0

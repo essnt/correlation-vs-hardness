@@ -11,9 +11,13 @@ import io
 import os
 import shutil
 import subprocess
+import sys
 import tarfile
 import time
 import zipfile
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from sanitize_pdf import sanitize_pdf_bytes
 
 CWD = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = "/tmp/zenodo_out/zenodo_upload_current.zip"
@@ -94,6 +98,11 @@ def main():
                             tfo.addfile(ti, fsrc)
     # 4) 外层 zip（三条目时间戳显式 = HEAD 纪元 UTC）
     pdf = open(os.path.join(CWD, "jair/main.pdf"), "rb").read()
+    # PTEX.FileName 净化兜底：pdfTeX 为 PDF 输入（doclicense 徽标）记录的
+    # 绝对源路径携带构建机用户名/家目录，文本层扫描不可见（2026-09-20 盲
+    # 验证 V6 发现）——嵌入前等长原地改写；工作树 jair/main.pdf 亦须运行
+    # scripts/sanitize_pdf.py 保持与包内字节一致（闸门断言二者相等）
+    pdf, _n_sanitized = sanitize_pdf_bytes(pdf)
     readme = open(os.path.join(CWD, "arxiv/ZENODO_README.md"), "rb").read()
     out = OUT
     if os.path.exists(out):

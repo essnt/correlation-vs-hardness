@@ -10,8 +10,10 @@
   size+density: + alpha_eff, C/V    —— 加密度
   +structure:  + modularity, n_communities, largest_community_frac,
                community_size_cv, clustering, spectral_gap, tw_ub, tw_lb —— 全结构
-用法: .venv/bin/python3 experiments/e5_baseline.py [DB...]
-      默认 results/m2_e1e2.db；E3a 完成后追加 results/m2_e3a.db。
+用法: .venv/bin/python3 experiments/e5_baseline.py results/m2_main.db results/m2_e1e2.db
+      来源 DB 全部取自 argv（e5_baseline.json 为覆盖式写出：未传入的库其
+      节会从 JSON 消失；论文所引 geo_random 阶梯与嵌套 F 在
+      results/m2_main.db 节）。无参数时默认只算 results/m2_e1e2.db。
 """
 import json
 import sqlite3
