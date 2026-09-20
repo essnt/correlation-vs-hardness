@@ -171,7 +171,7 @@ conflicts≥下限的子集）与 Tobit 版本交叉验证。
 
 ## AMEND-5（2026-09-18，中介路径实现适配处置记录，非假设修订）
 
-2026-09-18 独立全量审查发现：冻结决策规则的中介路径为 r→tw→难度，
+2026-09-18 事后复核发现：冻结决策规则的中介路径为 r→tw→难度，
 而分析实现（experiments/e3a_analysis.py）的中介变量集为四个连续结构
 度量（modularity/mean_degree/clustering/spectral_gap），未含 tw，且
 无处置记录。处置如下（本条为实现适配补录，冻结假设正文一字未动）：

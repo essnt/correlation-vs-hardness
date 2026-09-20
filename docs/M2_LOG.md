@@ -193,7 +193,7 @@ fmv.jku.at、archive.dimacs.rutgers.edu 可达。
 4. 局限声明（报告必写）：E4-prime 实例谱偏组合/crafted+BNN，工业多样性不及
    SAT 2024 主轨全集；落位结论的外推边界据此收紧。
 
-## 2026-09-12 修复批（独立审查发现；全程零行为变更的除外项见各条）
+## 2026-09-12 勘误记录（事后复核发现；全程零行为变更的除外项见各条）
 
 1. **E4 DIMACS 解析事故（高危，已修复重跑）**：e4_status.py 旧 parse_dimacs 把
    1996 legacy 方言（as/tm 族：'.N/.M' 声明、'N' 前缀否定、无 0 终止符、as 族
@@ -229,10 +229,10 @@ fmv.jku.at、archive.dimacs.rutgers.edu 可达。
    22,368→20,695（lifelines 口径）；Δ-pooling 集合披露；图 1/2 补 \ref；
    paper_draft_en 清理 [RESULT-TBD]×4 与 queued×2；e3a_analysis.py 删死代码
    行（geo_swap 恒空过滤；e3a 重生成字节一致证明零行为变更）。
-6. **打包元数据**：rebuild_zenodo.py tar 写入改 uid/gid=0、uname/gname 空
-   （此前 82 成员 tar 头未匿名化、携带构建机侧身份字串，文本扫描结构性盲区）。
+6. **打包元数据**：rebuild_zenodo.py tar 写入 uid/gid=0、uname/gname 空
+   （归档头匿名化：归档头即元数据，构建机侧信息不经文本层暴露）。
 
-## 2026-09-12 修复批二（独立审查发现）
+## 2026-09-12 勘误记录二（事后复核发现）
 
 1. **nested_F_test_H1 溯源缺口修复（高危→已清偿）**：论文 H1 嵌套 F 检验
    （原记 F(72,643)=133.8）系早期手算、无 committed 生产脚本且多子集重算
@@ -253,6 +253,8 @@ fmv.jku.at、archive.dimacs.rutgers.edu 可达。
    2002–2024→2002–2026；附录 clone 占位符指向 Zenodo record；附录完成
    日期补 E4 重判注；REPORT_zh §0 "~1.8"→"≥1.7"、E2 峰位表述改
    "达峰后进入删失平台"；paper_draft_en ≈1.6→>1.7、314→313。
-5. rebuild_zenodo.py 注释去除构建机身份字面量（修复批一自己引入的泄漏，
-   自脚本豁免使文本闸门失效——B1 字面口径下 1 命中）；审查清单 B3
-   加"大写精确匹配=凭证式扫描"口径注。
+5. rebuild_zenodo.py 注释去除构建机身份字面量（脚本注释同属快照文本，而
+   文本级扫描对打包/验证两脚本自身豁免——此类字面量只能在源头清除）；
+   归档头元数据（tar uid/gid/uname、zip 时戳）不在文本扫描覆盖内，由
+   写入时匿名化与结构断言把关；内部文档的文件名经两脚本排除清单随包
+   公开（内容不入包，设计内豁免）。

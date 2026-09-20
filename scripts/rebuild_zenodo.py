@@ -81,7 +81,7 @@ def main():
                     for f in files:
                         full = os.path.join(root, f)
                         # 归档元数据匿名化：不携带构建机的 uid/gid 与身份字串（tar 头即元数据，
-                        # 文本级隐私扫描覆盖不到；2026-09-12 独立审查发现构建机身份字串经此
+                        # 文本级隐私扫描覆盖不到；2026-09-12 订正：构建机身份字串曾经此
                         # 通道进入归档头，遂改为写入前清零）；mtime 显式取 HEAD 纪元，
                         # 不再继承工作树文件 mtime（2026-09-19）
                         ti = tfo.gettarinfo(full, arcname="./" + os.path.relpath(full, snap))

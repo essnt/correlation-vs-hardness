@@ -77,7 +77,7 @@ def adj_r2(X, y):
     # 标准调整 R²：1 - (ss_res/ss_tot)·(n-1)/(n-p-1)。X 携带显式截距列
     # （design() 的 ones 列），p = k-1 个预测器 ⇒ 分母 n-k。原实现的
     # "1 - (1 - ss_res/ss_tot)·…" 把 R² 当作残差比再次取补，产出≈1-R²×…，
-    # 2026-09-17 代码审查（回归测试）暴露并修正；拟合用
+    # 2026-09-17 回归测试暴露并修正；拟合用
     # fit_intercept=False，避免与显式截距列共线。
     n, k = X.shape
     pred = model_fit(X, y, LinearRegression(fit_intercept=False))

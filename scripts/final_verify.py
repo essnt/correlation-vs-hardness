@@ -25,6 +25,11 @@ _ZBR = "找不" + "到人"
 _AIS = "gl" + "m5.3" + "fl" + "ash"
 _OAI = "OPE" + "NAI"
 _ORR = "OPE" + "NROUTER"
+# 工作流过程词族（拼接构造）：内部流程术语不得出现在公开快照任何位置
+_WF = ["修" + "复批", "独" + "立审查", "全" + "量审查", "盲" + "审",
+       "台" + "账", "主" + "会话", "会" + "话切换", "审" + "查清单",
+       "候" + "选包",
+       "repair " + "batch", "blind " + "review", "session " + "handoff"]
 
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -128,6 +133,13 @@ chk("快照无内部文档字样引用清单", all(full_snap.count(k + ".md") ==
     ["SESSION_HANDOFF", "POSITIONING", "VENUES_ROADMAP", "RELEASE_CHECKLIST",
      "REVIEW_CHECKLIST", "LESSONS_LEARNED", "BLIND_REVIEW_PROTOCOL",
      "AUDIT_MEMO", "M0_FINDINGS", "PLAN_v5"]))
+# 工作流过程词：快照全部文本成员 + 两打包/验证脚本自身（PII 扫描因排除清单
+# 豁免两脚本，过程词不在豁免理由内，须对两脚本一并扫描）
+_wf1 = [t for t in _WF if full_snap.count(t)]
+chk("快照无工作流过程词", not _wf1, str(_wf1))
+_scripts_text = "\n".join(t for n, t in docs.items() if n in SELF_SCRIPTS)
+_wf2 = [t for t in _WF if _scripts_text.count(t)]
+chk("打包/验证脚本无工作流过程词", not _wf2, str(_wf2))
 
 # ========== 5. 事实核对（数据库重算） ==========
 # 5a. S0

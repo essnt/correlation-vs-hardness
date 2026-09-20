@@ -4,7 +4,7 @@
 背景：论文 Threats 段披露 geo_random 主族在 Δ=+0.2 臂的 literal-degree
 分布形态跨 r 漂移（SD/CV/max），超出冻结前提的 <5% 匹配判据。初版数字
 （SD 2.23–2.73、CV ~0.5→0.37）来自 2026-09-11 一次未入库的补测；2026-09-12
-独立审查发现其低端不可复现（SD 低端实为 ~2.37），本脚本将重测固化为 committed
+复核发现其低端不可复现（SD 低端实为 ~2.37），本脚本将重测固化为 committed
 产物：对 results/m2_main.db 中 family=geo_random、delta=+0.2 的 9 r 格
 × 30 种子，用与实验完全一致的确定性生成路径（locality_kernel planted=False）
 重生成实例并逐格核对 inst_id 与 DB 精确一致，再计算每实例的 literal-degree

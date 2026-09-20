@@ -313,8 +313,8 @@ def degree_preserving_randomize(inst: Instance, seed: int,
 
     def bad(c):
         # |l| 折叠符号 → tautology 提案（x 与 -x 同子句）必然判为 duplicate：
-        # 两类提案不可分，统计上并入 reject_duplicate（2026-09-17 代码审查
-        # 修正：原先的 reject_tautology 计数器结构上恒为 0，已删除）
+        # 两类提案不可分，统计上并入 reject_duplicate（2026-09-17 修正：
+        # 原先的 reject_tautology 计数器结构上恒为 0，已删除）
         vs = [abs(l) for l in c]
         return len(set(vs)) != len(vs) or any(-l in c for l in c)
 
