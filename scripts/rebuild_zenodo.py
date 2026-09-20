@@ -99,8 +99,8 @@ def main():
     # 4) 外层 zip（三条目时间戳显式 = HEAD 纪元 UTC）
     pdf = open(os.path.join(CWD, "jair/main.pdf"), "rb").read()
     # PTEX.FileName 净化兜底：pdfTeX 为 PDF 输入（doclicense 徽标）记录的
-    # 绝对源路径携带构建机用户名/家目录，文本层扫描不可见（2026-09-20 盲
-    # 验证 V6 发现）——嵌入前等长原地改写；工作树 jair/main.pdf 亦须运行
+    # 绝对源路径携带构建机用户名/家目录，文本层扫描不可见（2026-09-20
+    # 隐私核验发现）——嵌入前等长原地改写；工作树 jair/main.pdf 亦须运行
     # scripts/sanitize_pdf.py 保持与包内字节一致（闸门断言二者相等）
     pdf, _n_sanitized = sanitize_pdf_bytes(pdf)
     readme = open(os.path.join(CWD, "arxiv/ZENODO_README.md"), "rb").read()

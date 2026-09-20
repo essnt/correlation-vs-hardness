@@ -4,7 +4,7 @@ r"""jair/main.pdf 构建后净化：剥离 pdfTeX 为 PDF 输入记录的绝对�
 pdfTeX 对被 \include 嵌入的 PDF（doclicense CC-BY 徽标，jair.cls 官方模板
 固有）在 Form XObject 字典写入 /PTEX.FileName (<绝对路径>)——构建机的用户
 名与家目录因此进入 PDF 对象字典，文本层扫描（get_text()）不可见，闸门曾
-因此漏检（2026-09-20 盲验证 V6 发现）。
+因此漏检（2026-09-20 隐私核验发现）。
 本脚本对全部 /PTEX.FileName 字符串做等长原地改写（绝对路径 → "./" + 文件
 名 + 空格补位）：字节偏移零位移，xref 与渲染不受影响；重复运行幂等。
 用法: .venv/bin/python3 scripts/sanitize_pdf.py jair/main.pdf

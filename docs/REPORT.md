@@ -187,12 +187,13 @@ CDCL" went beyond the evidence — our implementation (decoy β/p_flip) is not t
 original construction; it has been changed to "our planted variant is trivial".
 (PILOT_FINDINGS.md)
 
-### 4.2 R3b: Six-Order-of-Magnitude Signal + End-to-End Validation of the Statistical Pipeline
-geo_random spans ~10⁶ in conflict counts over n=400, α∈[3.0,4.6], r∈[0.06,1.5];
+### 4.2 R3b: Five-Order-of-Magnitude Signal + End-to-End Validation of the Statistical Pipeline
+geo_random spans about five orders of magnitude in resolved conflict counts (6 to ~10⁶)
+over n=400, α∈[2.8,4.8], r∈[0.06,1.5];
 RM-ANOVA F=1284 (p≈6e-69); JT trend test p≈2e-4; mediation ACME=2.14 (83% of the total
 effect). (results/pilot_m1_r3b.db, figures/fig_r3b_moneyplot.png). [2026-09-12 caliber
 note] The numbers in this section are preregistration-period session pipeline-validation
-computations (no committed analysis script); blind-review recomputation under the
+computations (no committed analysis script); independent recomputation under the
 main-study specification could not reproduce them (the F magnitude matches; the
 mediation-share caliber differs) — R3b is a pilot record superseded by the main study;
 the main conclusions follow the committed pipeline of §5–§9.

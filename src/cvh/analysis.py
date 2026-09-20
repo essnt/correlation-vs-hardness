@@ -60,9 +60,10 @@ def load_runs(db_path: str) -> pd.DataFrame:
 
 
 def tobit_fit(y, X, censored) -> dict:
-    """y observed (censored rows carry the censoring value), X design with
-    intercept column, censored boolean mask.  Returns beta, sigma, loglik,
-    per-coefficient Wald p-values."""
+    """y observed (censored rows carry the censoring value), X design used
+    as-is (no intercept added here; the sole caller passes [p_r, p_delta]
+    without an intercept column), censored boolean mask.  Returns beta,
+    sigma, loglik, per-coefficient Wald p-values."""
     from statsmodels.base.model import GenericLikelihoodModel
 
     y = np.asarray(y, float)

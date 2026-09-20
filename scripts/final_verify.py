@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """终版发布包全量验证（每轮从头跑全部检查项）。
 用法: .venv/bin/python scripts/final_verify.py   → 输出 PASS/FAIL 清单与计数
-检查范围: zenodo_upload.zip 三层结构 + 论文 PDF 全文 + 快照 95 文件(含 2 个 .gitignore 与中文文件名导读) + 事实核对(数据库重算)
+检查范围: zenodo_upload.zip 三层结构 + 论文 PDF 全文 + 快照全部成员(含 .gitignore 与中文文件名导读) + 事实核对(数据库重算)
 """
 import zipfile, tarfile, io, re, os, sys, json, sqlite3, math, hashlib, subprocess, time
 from collections import defaultdict
@@ -27,6 +27,7 @@ _OAI = "OPE" + "NAI"
 _ORR = "OPE" + "NROUTER"
 # 工作流过程词族（拼接构造）：内部流程术语不得出现在公开快照任何位置
 _WF = ["修" + "复批", "独" + "立审查", "全" + "量审查", "盲" + "审",
+       "盲" + "验证",
        "台" + "账", "主" + "会话", "会" + "话切换", "审" + "查清单",
        "候" + "选包",
        "repair " + "batch", "blind " + "review", "session " + "handoff"]
@@ -136,11 +137,17 @@ chk("快照无内部文档字样引用清单", all(full_snap.count(k + ".md") ==
      "REVIEW_CHECKLIST", "LESSONS_LEARNED", "BLIND_REVIEW_PROTOCOL",
      "AUDIT_MEMO", "M0_FINDINGS", "PLAN_v5"]))
 # 工作流过程词：快照全部文本成员 + 两打包/验证脚本自身（PII 扫描因排除清单
-# 豁免两脚本，过程词不在豁免理由内，须对两脚本一并扫描）
-_wf1 = [t for t in _WF if full_snap.count(t)]
+# 豁免两脚本，过程词不在豁免理由内，须对两脚本一并扫描）。匹配同时对去
+# 空白/连字符归一化文本进行——换行与连字符合并词形（CJK 跨行拆词、英文
+# 连字变体）由此同网；本注释自身不得含任何词族字面示例
+_norm_snap = re.sub(r"[\s\-]+", "", full_snap)
+_wf1 = [t for t in _WF if full_snap.count(t)
+        or re.sub(r"[\s\-]+", "", t) in _norm_snap]
 chk("快照无工作流过程词", not _wf1, str(_wf1))
 _scripts_text = "\n".join(t for n, t in docs.items() if n in SELF_SCRIPTS)
-_wf2 = [t for t in _WF if _scripts_text.count(t)]
+_norm_scripts = re.sub(r"[\s\-]+", "", _scripts_text)
+_wf2 = [t for t in _WF if _scripts_text.count(t)
+        or re.sub(r"[\s\-]+", "", t) in _norm_scripts]
 chk("打包/验证脚本无工作流过程词", not _wf2, str(_wf2))
 
 _arx = tf.extractfile(tf.getmember("./arxiv/main.pdf")).read()
