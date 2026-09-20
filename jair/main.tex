@@ -46,7 +46,7 @@ Satisfiability}
 \begin{abstract}
 {\bf Background:} A widespread intuition holds that real-world computational
 problems are easy because their ``causes act locally'': when variables
-interact only within small neighbourhoods, constraint solvers should scale
+interact only within small neighborhoods, constraint solvers should scale
 well. Observational evidence supports the intuition, but observation cannot
 separate locality from the many other regularities real instances carry.
 
@@ -110,7 +110,7 @@ and local are also many other things. The literature's own cautionary results
 make the point sharp. \citet{zulkoski2018}, in the largest
 correlational study to date (${\sim}7000$ competition instances), found that
 \emph{no single} structural parameter significantly predicts CDCL runtime
-across heterogeneous benchmark sets; the best six-feature regression reaches
+across heterogeneous benchmark sets. The best six-feature regression reaches
 adjusted $R^2 \approx 0.31$ on application instances, and the
 size-plus-treewidth feature set reaches only $0.05$. \citet{mull2016} prove that
 any ``polynomial-clique'' community metric, including modularity, admits
@@ -126,7 +126,7 @@ locality conjecture as a dose--response experiment. A \emph{locality-kernel
 generator} samples each clause's variables uniformly from an $r$-ball on a
 discrete 2-D torus and draws polarities from a standardized content
 distribution whose statistics are $r$-invariant by construction
-($\sigma$-redundancy histograms identical across $r$ in pilots); literal-degree
+($\sigma$-redundancy histograms identical across $r$ in pilots). Literal-degree
 means equal $3\alpha$ exactly, varying across $r$ only through the
 threshold-matched density $\alpha$, and the intervention arm's
 degree-preserving swap holds the degree profile exactly fixed. The knob $r$ has a physical
@@ -137,14 +137,14 @@ quantity the philosophical conjecture is about.
 \begin{enumerate}
 \item \textbf{The first controlled intervention scan of locality radius.}
 Nine $r$ levels $\times$ three preregistered offsets $\Delta$ above each radius's
-\emph{own} operational threshold $\ac{r}$ (a fourth, $\Delta{=}{+}0.6$, at 4 of
-the 9 radii; $r{=}0.06$ anchors are the lattice-nearest S0 grid value 2.6 (the grid
-brackets the true boundary below 2.5), conservative for the span) $\times$ 30 paired seeds $\times$ two
+\emph{own} operational threshold $\ac{r}$ $\times$ 30 paired seeds $\times$ two
 solvers, with per-instance structural metrics (treewidth bracketed by min-fill
 upper and degeneracy lower bounds; modularity, community metrics, spectral
-gap).
+gap). A fourth offset, $\Delta{=}{+}0.6$, is included at 4 of the 9 radii; the
+$r{=}0.06$ anchors are the lattice-nearest S0 grid value 2.6 (the grid
+brackets the true boundary below 2.5), conservative for the span.
 \item \textbf{A threshold curve $\ac{r}$} (832 solves at $10^7$-conflict
-budget): the operational threshold is not $r$-invariant --- the boundary lies below
+budget): the operational threshold is not $r$-invariant: the boundary lies below
 2.5 at $r=0.06$ and near ${\approx}4.3$ by $r=0.22$, before difficulty
 saturates beyond measurable range at $r\ge0.3$; the \emph{measurability
 boundary itself} tracks $r$.
