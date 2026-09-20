@@ -116,7 +116,7 @@ ogp_phase_transitions.md)
   single indicator can be a tractability certificate;
 - Empirical case: Zulkoski et al. (CP 2018), on ~7000 competition instances: the best
   combination of structural features reaches only adjusted R² ≈0.31 on application
-  instances, TW features only 0.05, with signs flipping across categories.
+  instances, the size-plus-treewidth feature set only 0.05, with signs flipping across categories.
 - **The question left for us**: after observational correlation has been capped, can an
   interventional design still measure the causal effect of r? (This is the division of
   labor between H1 and H2: H1 governs "explanation", H2 governs "intervention".)
@@ -205,8 +205,10 @@ with the theorem chain of §2.1 (low treewidth ⇒ narrow proofs ⇒ CDCL-easy);
 control arm is an all-zero plateau. **Treewidth by itself is not a sufficient source of
 CDCL hardness ("good structure" is only one-way insurance for tractability)** — this
 pushes the search space for the source of hardness from "global topology" toward "local
-interaction structure" (the candidate channel for r). (M2_LOG c6879b0; data
-results/m2_e1e2.db)
+interaction structure" (the candidate channel for r). (M2_LOG c6879b0 — an
+internal-history commit, not distributed with this package; its in-package
+semantic equivalent is listed in the commit-hash concordance of
+PRESPEC_AUDIT.md; data results/m2_e1e2.db)
 
 ### 4.4 E2: Reproduction of the Textbook Phase-Transition Curve (Anchor)
 Random 3-SAT α sweep (n=400): easy-hard-easy, with decided difficulty peaking at

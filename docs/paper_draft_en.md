@@ -67,8 +67,8 @@ benchmark curation. The literature's own cautionary results make the point sharp
 Zulkoski et al. [4], in the largest correlational study to date (~7000 competition
 instances), found that *no single* structural parameter significantly predicts CDCL
 runtime across heterogeneous benchmark sets; the best six-feature regression reaches
-adjusted R² ≈ 0.31 on application instances, and treewidth features alone reach only
-0.05. Mull, Fremont and Seshia [5] prove that any "polynomial-clique" community
+adjusted R² ≈ 0.31 on application instances, and the size-plus-treewidth feature
+set reaches only 0.05. Mull, Fremont and Seshia [5] prove that any "polynomial-clique" community
 metric — including modularity — admits instances with excellent scores that remain
 NP-hard, and that the pseudo-industrial community-attachment instances of
 Giráldez-Cru and Levy require exponentially long resolution proofs with high
@@ -134,7 +134,8 @@ and ridge regression over standardized features with full pairwise interactions.
 Their findings anchor our baseline expectations: (i) no single parameter
 significantly predicts runtime across heterogeneous sets; (ii) best heterogeneous
 combos reach adjusted R² ≈ 0.31 (application), 0.56 (crafted), 0.66 (random),
-0.96 (agile — a homogeneous source); (iii) treewidth features add almost nothing on
+0.96 (agile — a homogeneous source); (iii) the size-plus-treewidth feature set
+carries almost no explanatory power on
 application instances (R² ≈ 0.05); (iv) sub-category correlations are strong but
 *sign-flipping* across categories (e.g. mergeability/resolvability ratio:
 Spearman +0.94 on argumentation, −0.73 on hardware-manolios), which dilutes pooled

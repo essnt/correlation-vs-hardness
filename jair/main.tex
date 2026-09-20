@@ -111,8 +111,8 @@ make the point sharp. \citet{zulkoski2018}, in the largest
 correlational study to date (${\sim}7000$ competition instances), found that
 \emph{no single} structural parameter significantly predicts CDCL runtime
 across heterogeneous benchmark sets; the best six-feature regression reaches
-adjusted $R^2 \approx 0.31$ on application instances, and treewidth features
-alone reach only $0.05$. \citet{mull2016} prove that
+adjusted $R^2 \approx 0.31$ on application instances, and the
+size-plus-treewidth feature set reaches only $0.05$. \citet{mull2016} prove that
 any ``polynomial-clique'' community metric --- including modularity --- admits
 instances with excellent scores that remain \textsc{NP}-hard, and that
 pseudo-industrial community-attachment instances require exponentially long
@@ -182,8 +182,9 @@ runtimes and OLS/ridge regression over standardized features with full
 pairwise interactions. Their findings anchor our baseline expectations:
 no single parameter is significantly predictive in the aggregate; best
 combos reach adjusted $R^2 \approx 0.31$ (application), $0.56$ (crafted),
-$0.66$ (random); treewidth features add almost nothing on application
-instances; sub-category correlations are strong but \emph{sign-flipping}
+$0.66$ (random); the size-plus-treewidth feature set carries almost no
+explanatory power on application instances (adjusted $R^2 \approx 0.05$);
+sub-category correlations are strong but \emph{sign-flipping}
 (e.g.\ a mergeability ratio: Spearman $+0.94$ on argumentation, $-0.73$ on
 hardware); and pre-simplification plus corpus grouping materially change
 $R^2$ --- a sensitivity we inherit and control by reporting both calibers.
@@ -1205,6 +1206,10 @@ report. Censoring is handled by declared, preregistered semantics rather than
 silently dropped rows; one material implementation bug was caught by the
 prespecification audit before unblinding and is documented with its fix. The
 real-instance corpus (E4) was fetched from public archives cited in the
-bibliography.
+bibliography. One answer above is partial rather than yes, for a stated
+reason: the execution-environment item, where hardware identifiers are
+deliberately generalized in the public artifacts under our privacy policy and
+wall-clock enters only as a same-machine guard --- the primary difficulty
+caliber, conflict counts, is machine-independent.
 
 \end{document}

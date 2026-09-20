@@ -85,7 +85,7 @@ Atserias–Fichte–Thurley（JAIR 2011）+ Beame–Kautz–Sabharwal（IJCAI 20
 - 最坏情形：Mull-Fremont-Seshia 证明任何 PCM 型社区度量（含 modularity）给出
   "好结构"的实例仍 NP-hard——单指标不可能成为易解性证书；
 - 实证情形：Zulkoski et al.（CP 2018）在 ~7000 竞赛实例上：最佳结构特征组合对
-  application 实例 adjusted R² 仅 ≈0.31，TW 特征仅 0.05，且符号跨类别翻转。
+  application 实例 adjusted R² 仅 ≈0.31，规模+树宽组合特征集仅 0.05，且符号跨类别翻转。
 - **留给我们的问题**：观察性相关封顶之后，干预式设计还能不能测出 r 的因果
   效应？（这是 H1 与 H2 的分工：H1 管"解释"，H2 管"干预"。）
 
@@ -153,8 +153,9 @@ tw_controlled unplanted 臂在 k∈{3,5,8,12,16,20} 六个水平上中位冲突�
 n=400），与 2.1 节定理链（低树宽 ⇒
 窄证明 ⇒ CDCL 易）一致；planted 对照臂全零平台。**树宽本身不是 CDCL 难度的
 充分来源（"结构好"只是易解性的单向保险）**——这把难度来源的搜索空间从
-"全局拓扑"推向"局部交互结构"（r 的候选通道）。（M2_LOG c6879b0；数据
-results/m2_e1e2.db）
+"全局拓扑"推向"局部交互结构"（r 的候选通道）。（M2_LOG c6879b0——作者内部
+历史提交，未随本包分发，包内语义等价物见 PRESPEC_AUDIT.md 的"内部提交哈希
+对照"表；数据 results/m2_e1e2.db）
 
 ### 4.4 E2：教科书相变曲线复现（锚点）
 随机 3-SAT α 扫描（n=400）：easy-hard-easy，已判定难度在 α≈4.2–4.26 达峰后

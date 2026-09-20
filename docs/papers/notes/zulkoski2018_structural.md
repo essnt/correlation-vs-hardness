@@ -10,7 +10,7 @@
 - 本文所用全文：作者博士论文完整版（比会议版多出理论证明与附录数据）：
   Edward Zulkoski, *Understanding and Enhancing CDCL-based SAT Solvers*, PhD thesis, University of
   Waterloo, 2018. UWSpace bitstream `11122410-2f45-4281-a8ca-682f15448372`（145 页 PDF，
-  本地核读用副本；论文 PDF 为第三方文件，未随快照分发）。会议版内容对应论文第 2.3.3、4、5 章；
+  本地核读用副本；论文 PDF 为第三方文件，未随快照分发；UWSpace 公开可取）。会议版内容对应论文第 2.3.3、4、5 章；
   本笔记补充引用论文第 6 章（LSR backdoors）。
 - 引用规范：正文引 CP 2018 会议版；方法细节（算法、逐类别数值表）可引论文版补充。
 
@@ -49,6 +49,11 @@ M/R（mergeability/resolvability 比值）与 Q/Cmtys 为组合特征。
 3. **TW（树宽）特征在 application 上 R² 仅 0.05**（crafted 0.07、random 0.28）——
    拓扑结构度量的单独解释力在真实工业实例上几乎为零。这是"树宽≠难度"最直接的实证先例，
    与我们 E1 的发现（受控树宽变化下 unplanted 臂平坦）互相印证。
+   【2026-09-19 订正】该行（Table 4.3，linear；论文 PDF p.59）的特征集为
+   V⊕C⊕TW⊕TW/V 组合——0.05 (1087) / 0.07 (753) / 0.28 (126) / 0.91 (4968)，
+   并非 TW 单独；表中没有 TW 单独行（每行均含 V⊕C 基座），故本条应读作
+   "基座+树宽组合特征集"的解释力，"TW 单独几乎无增益"所需的对照基线在该表中
+   不存在。数值 0.05/0.07/0.28 与结论方向不变。
 4. 子类别内部相关强但**符号跨类别翻转**：M/R 在 argumentation 上 Spearman +0.94，
    在 hardware-manolios 上 −0.73；hardware-*/planning/scheduling 几乎与所有度量不相关。
    混合后信号相消——解释了全集回归弱。

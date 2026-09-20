@@ -3,7 +3,7 @@
 用法: .venv/bin/python scripts/final_verify.py   → 输出 PASS/FAIL 清单与计数
 检查范围: zenodo_upload.zip 三层结构 + 论文 PDF 全文 + 快照 95 文件(含 2 个 .gitignore 与中文文件名导读) + 事实核对(数据库重算)
 """
-import zipfile, tarfile, io, re, os, sys, json, sqlite3, math, hashlib
+import zipfile, tarfile, io, re, os, sys, json, sqlite3, math, hashlib, subprocess, time
 from collections import defaultdict
 import numpy as np
 import fitz as pymupdf  # PyMuPDF 别名兼容
@@ -96,6 +96,18 @@ internal = [n for n in names if any(k in n for k in
      "ZENODO_STEPS", "COVER_LETTER", "VALUE_ASSESSMENT",
      "REVIEW_CHECKLIST", "LESSONS_LEARNED", "BLIND_REVIEW_PROTOCOL"])]
 chk("无内部工作文档", not internal, str(internal))
+
+# ========== 3b. 归档时戳：显式 UTC 纪元，无构建时刻/本地时区指纹 ==========
+mtimes = {m.mtime for m in tf.getmembers()}
+chk("tar 成员 mtime 单值", len(mtimes) == 1, f"取值集 {sorted(mtimes)[:5]}")
+if len(mtimes) == 1:
+    epoch = mtimes.pop()
+    # zip 的 DOS 时间戳只有 2 秒粒度：期望值为纪元归偶后的 UTC 六元组
+    zt_want = time.gmtime(epoch - epoch % 2)[:6]
+    ztimes = {tuple(i.date_time) for i in z.infolist()}
+    chk("zip 条目时间 UTC 单值==tar 纪元", ztimes == {zt_want}, f"{sorted(ztimes)} vs {zt_want}")
+else:
+    chk("zip 条目时间 UTC 单值==tar 纪元", False, "tar mtime 非单值，纪元不可判定")
 
 # ========== 4. 快照全文隐私/措辞扫描 ==========
 docs = {m.name: tf.extractfile(m).read().decode("utf-8", "replace")
@@ -218,6 +230,15 @@ chk("E2 随机对照 a=4.0 中位 21011", statistics.median([x[0] for x in r2]) 
 chk("快照 tex == HEAD", docs.get("./arxiv/main.tex") == os.popen("git show HEAD:arxiv/main.tex").read())
 chk("快照 jair tex == HEAD", docs.get("./jair/main.tex") == os.popen("git show HEAD:jair/main.tex").read())
 chk("快照 HYPOTHESES == HEAD", docs.get("./docs/HYPOTHESES.md") == os.popen("git show HEAD:docs/HYPOTHESES.md").read())
+# 快照全部成员逐字节对 HEAD（含二进制；路径以 argv 传入，中文文件名不受 core.quotepath 影响）
+_mems = [m for m in tf.getmembers() if m.isfile()]
+_bad = []
+for _m in _mems:
+    _rel = _m.name[2:] if _m.name.startswith("./") else _m.name
+    _want = subprocess.run(["git", "show", f"HEAD:{_rel}"], cwd=ROOT, capture_output=True).stdout
+    if tf.extractfile(_m).read() != _want:
+        _bad.append(_rel)
+chk(f"快照全部成员 == HEAD 逐字节（{len(_mems) - len(_bad)}/{len(_mems)}）", not _bad, str(_bad[:5]))
 chk("包内 PDF == jair/main.pdf", pdfb == open("jair/main.pdf", "rb").read())
 rm_ = z.read("README_ZENODO.md").decode()
 chk("README 18 页声明", "(18 pages)" in rm_)

@@ -81,8 +81,8 @@ make the point sharp. Zulkoski et al.~\cite{zulkoski2018}, in the largest
 correlational study to date (${\sim}7000$ competition instances), found that
 \emph{no single} structural parameter significantly predicts CDCL runtime
 across heterogeneous benchmark sets; the best six-feature regression reaches
-adjusted $R^2 \approx 0.31$ on application instances, and treewidth features
-alone reach only $0.05$. Mull, Fremont and Seshia~\cite{mull2016} prove that
+adjusted $R^2 \approx 0.31$ on application instances, and the
+size-plus-treewidth feature set reaches only $0.05$. Mull, Fremont and Seshia~\cite{mull2016} prove that
 any ``polynomial-clique'' community metric --- including modularity --- admits
 instances with excellent scores that remain \textsc{NP}-hard, and that
 pseudo-industrial community-attachment instances require exponentially long
@@ -108,7 +108,8 @@ quantity the philosophical conjecture is about.
 \item \textbf{The first controlled intervention scan of locality radius.}
 Nine $r$ levels $\times$ three preregistered offsets $\Delta$ above each radius's
 \emph{own} operational threshold $\ac{r}$ (a fourth, $\Delta{=}{+}0.6$, at 4 of
-the 9 radii; $r{=}0.06$ anchors are historical pilot crossings --- conservative
+the 9 radii; $r{=}0.06$ anchors are the lattice-nearest S0 grid value 2.6 (the
+grid brackets the true boundary below 2.5) --- conservative
 for the span) $\times$ 30 paired seeds $\times$ two
 solvers, with per-instance structural metrics (treewidth bracketed by min-fill
 upper and degeneracy lower bounds; modularity, community metrics, spectral
@@ -151,8 +152,9 @@ runtimes and OLS/ridge regression over standardized features with full
 pairwise interactions. Their findings anchor our baseline expectations:
 no single parameter is significantly predictive in the aggregate; best
 combos reach adjusted $R^2 \approx 0.31$ (application), $0.56$ (crafted),
-$0.66$ (random); treewidth features add almost nothing on application
-instances; sub-category correlations are strong but \emph{sign-flipping}
+$0.66$ (random); the size-plus-treewidth feature set carries almost no
+explanatory power on application instances (adjusted $R^2 \approx 0.05$);
+sub-category correlations are strong but \emph{sign-flipping}
 (e.g.\ a mergeability ratio: Spearman $+0.94$ on argumentation, $-0.73$ on
 hardware); and pre-simplification plus corpus grouping materially change
 $R^2$ --- a sensitivity we inherit and control by reporting both calibers.
