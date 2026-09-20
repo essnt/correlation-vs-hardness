@@ -242,7 +242,8 @@ interrupt-based schemes). Secondary: wall-clock (same-machine comparisons),
 Glucose cross-checks, probSAT (compiled; local-search contrast). A 300 s
 subprocess-isolated wall guard returns status *walltimeout* for runs where conflicts
 are sparse but propagation explodes; these rows carry no conflict count and are
-excluded from conflict analyses, enter Kaplan–Meier/Tobit as unresolved, and their
+excluded from conflict analyses, from the Kaplan–Meier estimation, and from the
+Tobit fit (budget-censored rows are the ones entering both as unresolved), and their
 directional bias is declared (AMEND-2): truncation falls disproportionately on the
 UNSAT side near threshold, which *raises* resolved-SAT rates and pushes α_c(r)
 upward — an anti-conservative bias for our gradient hypothesis, bounded by
