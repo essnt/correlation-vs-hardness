@@ -68,10 +68,10 @@ philosophical diagnosis: problems resist algorithmic solution when variable
 interactions are strongly correlated at long range; the computational world is
 tractable because causation is local. As stated, the claim is unfalsifiable
 --- ``locality'', ``correlation'', and ``cause'' are unoperationalized. Yet the
-intuition has an empirically serious core. Industrial SAT instances --- the
+intuition has an empirically serious core. Industrial SAT instances, the
 reason conflict-driven clause-learning (CDCL) solvers~\cite{marques2009}
 routinely decide formulas with millions of variables from competition and
-application repositories~\cite{satcomp} --- exhibit community structure, small
+application repositories~\cite{satcomp}, exhibit community structure, small
 backdoors, and heavy-tailed variable-incidence patterns. Observationally,
 structure and ease co-occur.
 
@@ -83,7 +83,7 @@ correlational study to date (${\sim}7000$ competition instances), found that
 across heterogeneous benchmark sets; the best six-feature regression reaches
 adjusted $R^2 \approx 0.31$ on application instances, and the
 size-plus-treewidth feature set reaches only $0.05$. Mull, Fremont and Seshia~\cite{mull2016} prove that
-any ``polynomial-clique'' community metric --- including modularity --- admits
+any ``polynomial-clique'' community metric, including modularity, admits
 instances with excellent scores that remain \textsc{NP}-hard, and that
 pseudo-industrial community-attachment instances require exponentially long
 resolution proofs with high probability when communities are few. Structure,
@@ -109,7 +109,7 @@ quantity the philosophical conjecture is about.
 Nine $r$ levels $\times$ three preregistered offsets $\Delta$ above each radius's
 \emph{own} operational threshold $\ac{r}$ (a fourth, $\Delta{=}{+}0.6$, at 4 of
 the 9 radii; $r{=}0.06$ anchors are the lattice-nearest S0 grid value 2.6 (the
-grid brackets the true boundary below 2.5) --- conservative
+grid brackets the true boundary below 2.5), conservative
 for the span) $\times$ 30 paired seeds $\times$ two
 solvers, with per-instance structural metrics (treewidth bracketed by min-fill
 upper and degeneracy lower bounds; modularity, community metrics, spectral
@@ -417,7 +417,7 @@ pattern.
 For flagged radii the $\alpha_c$ carries a bounded (and for $r\ge0.5$,
 unbounded) overestimate (\S\ref{sec:threats}); this shifts the precise
 horizontal placement of those cells but leaves the matched-comparison
-structure --- within-$r$ across $\Delta$, within-$\Delta$ across $r$ ---
+structure (within-$r$ across $\Delta$, within-$\Delta$ across $r$)
 intact, which is where the gradient evidence lives.
 
 \begin{figure}[t]
@@ -452,10 +452,10 @@ status under the swap.}
 \label{tab:e3b}
 \end{table}
 
-Together with E1 --- width-controlled instances are flat and trivial at all
+Together with E1, whose width-controlled instances are flat and trivial at all
 $k$ (per-$k$ medians pooling both sizes, unplanted arm: $7$--$10$ conflicts
 across $k\in\{3,5,8,12,16,20\}$, at $n\in
-\{300,600\}$) --- the asymmetry is sharp: what CDCL difficulty responds to
+\{300,600\}$), the asymmetry is sharp: what CDCL difficulty responds to
 is \emph{local geometry}, not any global topological summary.
 
 \section{Results IV: Mediation and the Feature Ladder (H1)}
@@ -471,7 +471,7 @@ $2.19\ [2.02, 2.44]$. All CIs exclude zero: by the preregistered rule,
 
 The H1 feature ladder: on the main-scan data, ridge-CV $R^2$ rises from
 $0.610$ (size features) and $0.664$ (size+density) to $\mathbf{0.976}$ with
-structural features --- on controlled families, structure carries predictive
+structural features: on controlled families, structure carries predictive
 power that observation on random families cannot see (random-family baseline:
 $0.90$ with zero structural gain). The preregistered nested OLS
 $F$-test on the same subset confirms the ladder: $F(60,1283)=297.8$,
@@ -509,18 +509,19 @@ hardness.
 Five controls close the confounding routes we identified: the variable count
 $n$; the density $\alpha$ (fixed or $\Delta$-matched); the literal degree
 profile (degree-cap rejection in the planted arms; \emph{exact} preservation
-under the E3b swap --- the decisive control); the clause content (standardized
+under the E3b swap, the decisive control); the clause content (standardized
 polarity sampling, $r$-invariant redundancy); and the solver engine (two
 engines). Metrics are computed deterministically before solving, so the
 metric-computation channel cannot pseudo-correlate with runtime. Censoring is
 the residual internal threat: the wall guard is directionally biased
-(AMEND-2), the direction was declared before unblinding, and spot-checks at
-$10^8$ conflicts bound the $\alpha_c$ bias --- at $r=0.3$, \textsc{sat}
+(AMEND-2), and the direction was declared before unblinding. Spot-checks at
+$10^8$ conflicts bound the $\alpha_c$ bias. At $r=0.3$, \textsc{sat}
 instances appear $0.2$ below the operational threshold (bias $\in[-0.2,0]$
-density units); at $r\ge0.5$ $\pm0.2$ offsets fail to bracket the boundary at
-$10^8/480$\,s --- every instance at $\alpha_c+0.2$ is decided \textsc{unsat}
-while those at $\alpha_c-0.2$ stay undecided --- so the measurability boundary
-is robust and the flagged $\alpha_c$ values carry an unbounded-bias caveat.
+density units); at $r\ge0.5$, the $\pm0.2$ offsets fail to bracket the
+boundary at $10^8/480$\,s, since every instance at $\alpha_c+0.2$ is decided
+\textsc{unsat} while those at $\alpha_c-0.2$ stay undecided. The
+measurability boundary is thus robust, and the flagged $\alpha_c$ values
+carry an unbounded-bias caveat.
 One material implementation
 deviation was caught by the prespecification audit \emph{before} unblinding
 and fixed; the trail is public.
@@ -528,21 +529,21 @@ and fixed; the trail is public.
 \paragraph{Literal-degree profile.}
 Because density is $\Delta$-matched to each radius's own threshold, the mean
 literal degree ($3\alpha$: $8.4$ at $r=0.06$ vs.\ $14.7$ at $r=0.5$ in the
-$\Delta{=}{+}0.2$ arms) necessarily co-varies with $r$ --- inherent to
+$\Delta{=}{+}0.2$ arms) necessarily co-varies with $r$; this is inherent to
 threshold matching, and standardized by measuring density as a distance from
 each radius's own boundary. The \emph{shape} of the literal-degree
 distribution, however, is monitored rather than enforced in the main
-\texttt{geo\_random} family: across the $\Delta{=}{+}0.2$ cells (30 seeds
-each) its per-cell worst-case maximum degree spans $24$--$31$ (${\sim}29\%$
-above the low-$r$ endpoint) across $r$, exceeding the ${<}5\%$ matching
-criterion laid down in the frozen H2 premise, while the per-cell standard
+\texttt{geo\_random} family. Across the $\Delta{=}{+}0.2$ cells (30 seeds
+each) the per-cell worst-case maximum degree spans $24$--$31$ across $r$
+(${\sim}29\%$ above the low-$r$ endpoint), exceeding the ${<}5\%$ matching
+criterion laid down in the frozen H2 premise; the per-cell standard
 deviation stays within it ($3.75 \to 3.85$, ${\sim}3\%$). We disclose this
 deviation rather than silently incur it. It does not carry the causal
 attribution, which rests on the E3b swap alone: that intervention preserves
 the literal occurrence counts of every instance \emph{exactly}, so the
 $16$--$68\times$ paired difficulty shift cannot be carried by degrees. We do
 not lean on the direction of the residual shape drift, because the two tail
-readings point opposite ways --- absolute tails grow toward the \emph{large}-$r$
+readings point opposite ways: absolute tails grow toward the \emph{large}-$r$
 end (where heavier tails are typically the \emph{easier} regime for CDCL),
 while the relative dispersion falls (coefficient of variation ${\sim}0.45 \to
 0.26$ across $r$), i.e.\ the small-$r$ end is the relatively heavier-tailed
@@ -554,7 +555,7 @@ one. Either reading leaves the causal claim unchanged. A degree-capped
 the real-instance placement is restricted to decided instances, with the
 industrial-diversity caveat documented (the canonical SAT 2024 main-track
 files were unreachable from our network; the deterministic preselection table
---- 400 instances with hashes and 15-solver reference runtimes --- is retained
+(400 instances with hashes and 15-solver reference runtimes) is retained
 in the authors' working archive for future completion). All conclusions are scoped to CDCL-family solvers, direct CNF
 encodings, $n=400$, and conflict-count difficulty.
 
@@ -572,20 +573,20 @@ intuitions of this kind deserve attention precisely because they can be
 operationalized and then shot down.
 
 \paragraph{Phase transitions and a portable diagnostic.}
-A classical observation --- dating to Cheeseman, Kanefsky and Taylor's
-``Where the really hard problems are''~\cite{cheeseman1991} --- holds that
+A classical observation, dating to Cheeseman, Kanefsky and Taylor's
+``Where the really hard problems are''~\cite{cheeseman1991}, holds that
 combinatorial problems are hardest near structural phase transitions. Our
 results give that observation a \emph{causal, solver-relative} reading for
 SAT/CDCL: the locality radius moves the transition itself and restructures
-difficulty within matched offsets. The framework --- one structural knob,
+difficulty within matched offsets. The framework (one structural knob,
 threshold-matched dosing, a structure-destruction intervention,
-censoring-aware statistics --- is offered as a \emph{portable diagnostic
+censoring-aware statistics) is offered as a \emph{portable diagnostic
 protocol}: any claim of the form ``structural property $P$ helps algorithm $A$
 on family $F$'' can be subjected to the same treatment. We explicitly do
 \emph{not} claim our conclusions extend to local-search solvers; the contrast
 is a preregistered prediction: if difficulty is a structure$\times$algorithm
-relation, a stochastic local-search solver should respond to $r$ differently
---- possibly inversely --- and running it on our instances is a cheap,
+relation, a stochastic local-search solver should respond to $r$ differently,
+possibly inversely, and running it on our instances is a cheap,
 decisive test.
 
 \paragraph{Tractability is a relational property.}
@@ -612,8 +613,8 @@ Structure--difficulty research has leaned on observational regression for two
 decades --- with the field's own flagship study concluding that no structural
 measure is strongly predictive of CDCL performance in the
 aggregate~\cite{zulkoski2018}.
-Intervention designs --- one knob, everything else pinned, preregistered
-decision rules, censoring declared --- are the standard remedy in every
+Intervention designs (one knob, everything else pinned, preregistered
+decision rules, censoring declared) are the standard remedy in every
 empirical science that has faced the same impasse. The generator, the swap
 chain, the statistical protocol and the audit trail are released so that the
 next conjecture can be tested the same way.
