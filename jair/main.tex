@@ -778,13 +778,17 @@ encodings, $n=400$, and conflict-count difficulty.
 
 \paragraph{Statistical conclusion.}
 Paired designs with 30 seeds per cell, preregistered effect-size thresholds,
-FDR over the primary family, and censoring-robust cross-checks. No a priori
-power analysis was performed: 30 seeds per cell was set by the compute
-budget at design time, and the negative-branch trigger ($\eta^2<0.02$ with
-$p>0.05$) carries no formal power calculation --- the confirmatory branch is
-insensitive to this (observed effects exceed the thresholds by orders of
-magnitude), but the negative branch's interpretability would have rested on
-it.
+FDR over the primary family, and censoring-robust cross-checks. No formal
+power analysis was performed for the negative branch: 30 seeds per cell
+was set by the compute budget at design time, and the prespecification
+audit's design-stage power note (a minimum detectable paired effect of
+$dz\ge0.52$ at power $0.80$ under pilot dispersion, i.e.,
+${\sim}0.2$--$0.3$ orders of magnitude between adjacent cells) does not
+extend to a power calculation under the realized censoring --- the
+negative-branch trigger ($\eta^2<0.02$ with $p>0.05$) therefore carries
+none, the confirmatory branch is insensitive to this (observed effects
+exceed the thresholds by orders of magnitude), but the negative branch's
+interpretability would have rested on it.
 
 \section{Discussion: What This Does and Does Not Say About P vs NP}
 \label{sec:discussion}

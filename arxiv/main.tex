@@ -375,7 +375,8 @@ spot-checks (\S\ref{sec:threats}).
 
 The main scan places 9 radii $\times$ 3 offsets above each radius's own
 $\ac{r}$, 30 paired seeds, two solvers: 1740 runs, of which 1350 resolved
-and 390 censored (Table~\ref{tab:e3afull}). The store additionally carries
+and 390 censored (the per-arm grid appears in the journal version's
+appendix). The store additionally carries
 the 240 swap-arm rows of \S\ref{sec:e3b} (86 resolved, 154 censored), for
 1980 runs with zero errored rows and 544 censored overall (27.5\%,
 concentrated at $r\ge0.3$); of those 544, 535 hit the $10^6$-conflict
@@ -612,13 +613,17 @@ encodings, $n=400$, and conflict-count difficulty.
 
 \paragraph{Statistical conclusion.}
 Paired designs with 30 seeds per cell, preregistered effect-size thresholds,
-FDR over the primary family, and censoring-robust cross-checks. No a priori
-power analysis was performed: 30 seeds per cell was set by the compute
-budget at design time, and the negative-branch trigger ($\eta^2<0.02$ with
-$p>0.05$) carries no formal power calculation --- the confirmatory branch is
-insensitive to this (observed effects exceed the thresholds by orders of
-magnitude), but the negative branch's interpretability would have rested on
-it.
+FDR over the primary family, and censoring-robust cross-checks. No formal
+power analysis was performed for the negative branch: 30 seeds per cell
+was set by the compute budget at design time, and the prespecification
+audit's design-stage power note (a minimum detectable paired effect of
+$dz\ge0.52$ at power $0.80$ under pilot dispersion, i.e.,
+${\sim}0.2$--$0.3$ orders of magnitude between adjacent cells) does not
+extend to a power calculation under the realized censoring --- the
+negative-branch trigger ($\eta^2<0.02$ with $p>0.05$) therefore carries
+none, the confirmatory branch is insensitive to this (observed effects
+exceed the thresholds by orders of magnitude), but the negative branch's
+interpretability would have rested on it.
 
 \section{Discussion: What This Does and Does Not Say About P vs NP}
 \label{sec:discussion}
