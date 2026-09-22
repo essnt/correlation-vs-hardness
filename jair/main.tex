@@ -4,7 +4,15 @@
 \documentclass[manuscript, screen, review]{jair}
 
 \setcopyright{cc}
-\acmDOI{10.5281/zenodo.22777748}
+%% \acmDOI is deliberately empty for submission: JAIR assigns the paper DOI
+%% at publication, and the Zenodo deposit DOI (10.5281/zenodo.22777748) is
+%% cited in the text. The JAIR class prints the bibstrip DOI label
+%% unconditionally, so guard it here to suppress the line while \acmDOI is
+%% empty; a non-empty \acmDOI renders unchanged.
+\acmDOI{}
+\makeatletter
+\renewcommand{\@formatdoi}[1]{\ifx#1\@empty\else\textsc{doi:} \href{https://doi.org/#1}{#1}\fi}
+\makeatother
 
 \JAIRAE{}
 \JAIRTrack{}
