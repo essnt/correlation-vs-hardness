@@ -40,7 +40,9 @@ difficulty.
   JT p≤1e-4 (q≤1e-4 after FDR), partial η²≈0.99.
 - **E3b scalpel**: degree-preserving swaps that destroy locality raise
   difficulty ×16–68 (p≤7e-10), flipping 53 of the 82 resolved pairs'
-  satisfiability.
+  satisfiability; the ratio is a composite spanning those status changes
+  (within the 29 status-stable pairs the elevation persists, ×11/×1.8 per
+  arm, p≤3.9e-3).
 - **Mediation (exploratory, post-hoc mediator set per AMEND-5)**: modularity
   ACME 3.06 [2.84,3.37] (~94% of total effect);
   all four channels' CIs exclude 0.

@@ -40,7 +40,9 @@ spans 3.4 orders of magnitude among decided instances (>=4.5 counting
 budget-censored runs at their lower bound; F(8,216)=2808.5; JT p<=1e-4, FDR
 q<=1e-4; partial eta^2~0.99). A degree-preserving swap that destroys locality raises
 difficulty 16-68x (p<=7e-10) and flips 53 of the 82 resolved pairs'
-satisfiability; post-hoc, exploratory causal mediation analysis is consistent
+satisfiability; the ratio is a composite spanning those status changes
+(within the 29 status-stable pairs the elevation persists, 11x/1.8x per
+arm, p<=3.9e-3); post-hoc, exploratory causal mediation analysis is consistent
 with ~94% of the effect flowing through
 community-structure restructuring. Scope: n=400, direct CNF, CDCL solvers.
 

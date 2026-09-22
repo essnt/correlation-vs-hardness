@@ -50,7 +50,10 @@ Jonckheere--Terpstra $p\le 10^{-4}$ with FDR $q\le 10^{-4}$; partial
 $\eta^2 \approx 0.99$. \emph{(iii)}~A degree-preserving swap that destroys
 spatial locality while keeping every literal's occurrence count exactly fixed
 raises difficulty by $16$--$68\times$ (Wilcoxon $p\le 7\times10^{-10}$) and
-flips the satisfiability status of 53 instance pairs; post-hoc, exploratory
+flips the satisfiability status of 53 instance pairs; the ratio is a
+composite spanning those status changes (within the 29 status-stable pairs
+the elevation persists at $\times 11$ and $\times 1.8$ per offset arm,
+$p\le 3.9\times10^{-3}$); post-hoc, exploratory
 causal mediation analysis is consistent with ${\sim}94\%$ of the radius effect
 flowing through community-structure
 restructuring (ACME 3.06, bootstrap CI $[2.84, 3.37]$). Locality is not merely
@@ -371,7 +374,9 @@ $\ac{r}$, 30 paired seeds, two solvers: 1740 runs, of which 1350 resolved
 and 390 censored (Table~\ref{tab:e3afull}). The store additionally carries
 the 240 swap-arm rows of \S\ref{sec:e3b} (86 resolved, 154 censored), for
 1980 runs with zero errored rows and 544 censored overall (27.5\%,
-concentrated at $r\ge0.3$). Figure~\ref{fig:dose}
+concentrated at $r\ge0.3$); of those 544, 535 hit the $10^6$-conflict
+budget and 9 the $300$\,s wall guard, which excludes at scale only in the
+S0 screen (313 rows). Figure~\ref{fig:dose}
 visualizes both arms.
 
 \paragraph{Primary tests (CaDiCaL, $\Delta$-pooled, seeds as subjects).}
@@ -477,13 +482,18 @@ status under the swap.}
 \label{tab:e3b}
 \end{table}
 
-The effect is not an artifact of comparing across decision boundaries:
-within the 29 status-stable pairs (9 sat--sat at $\Delta{=}{+}0.2$, 20
-unsat--unsat at $\Delta{=}{+}0.6$), swapped instances still take more
-conflicts in 25 of 29 ($\times 11$, $p=3.9\times10^{-3}$ at $+0.2$;
-$\times 1.8$, $p=3.2\times10^{-4}$ at $+0.6$; pooled $p=6.3\times10^{-7}$),
-with magnitudes below the pooled ratios of Table~\ref{tab:e3b} because the
-flip stratum concentrates the extreme cases.
+As a sensitivity check, the effect is not an artifact of comparing across
+decision boundaries: within the 29 status-stable pairs (9 sat--sat at
+$\Delta{=}{+}0.2$, 20 unsat--unsat at $\Delta{=}{+}0.6$), swapped instances
+still take more conflicts in 25 of 29 ($\times 11$, $p=3.9\times10^{-3}$ at
+$+0.2$; $\times 1.8$, $p=3.2\times10^{-4}$ at $+0.6$; pooled
+$p=6.3\times10^{-7}$), with magnitudes below the pooled ratios of
+Table~\ref{tab:e3b} because the flip stratum concentrates the extreme cases.
+Each arm attempts 120 swap pairings (4 radii $\times$ 30 seeds; the
+original-arm rows are shared with the main scan and not re-stored);
+completions fall to 33 and 49 because the large-radius cells saturate the
+budget in either arm (at $+0.2$ the original arm decides $9/30$ and $0/30$
+at $r{=}0.3$ and $r{=}1.5$, and the swap arm $0/30$ at both).
 
 Together with E1, whose width-controlled instances are flat and trivial at all
 $k$ (per-$k$ medians pooling both sizes, unplanted arm: $7$--$10$ conflicts
