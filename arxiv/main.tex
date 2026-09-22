@@ -50,9 +50,10 @@ Jonckheere--Terpstra $p\le 10^{-4}$ with FDR $q\le 10^{-4}$; partial
 $\eta^2 \approx 0.99$. \emph{(iii)}~A degree-preserving swap that destroys
 spatial locality while keeping every literal's occurrence count exactly fixed
 raises difficulty by $16$--$68\times$ (Wilcoxon $p\le 7\times10^{-10}$) and
-flips the satisfiability status of 53 instance pairs; the ratio is a
-composite spanning those status changes (within the 29 status-stable pairs
-the elevation persists at $\times 11$ and $\times 1.8$ per offset arm,
+flips the satisfiability status of 53 of the 82 resolved instance pairs;
+the ratio is a composite spanning those status changes (within the 29
+status-stable pairs the elevation persists at $\times 11$ and $\times 1.8$
+per offset arm,
 $p\le 3.9\times10^{-3}$); post-hoc, exploratory
 causal mediation analysis is consistent with ${\sim}94\%$ of the radius effect
 flowing through community-structure
@@ -253,7 +254,8 @@ Difficulty near threshold is U-shaped in density, so comparing arms at fixed
 absolute $\alpha$ confounds $r$-effects with threshold proximity. A dedicated
 threshold study (S0, \S\ref{sec:s0}) estimates the operational threshold
 $\ac{r}$ per radius; the main scan samples at $\alpha = \ac{r} + \Delta$,
-$\Delta \in \{+0.2, +0.4, +0.8\}$.
+$\Delta \in \{+0.2, +0.4, +0.8\}$, plus a post-freeze fourth offset
+$\Delta{=}{+}0.6$ at 4 of the 9 radii (deviation E3b-$\Delta$).
 
 \section{Measures, Solvers, and Statistical Protocol}
 \label{sec:method}
@@ -311,7 +313,9 @@ budget $10^7$), AMEND-2 (wall guard, bias declaration, spot-check protocol),
 AMEND-3 (content-arm deferral). A prespecification-vs-implementation audit
 records every deviation found by item-by-item inspection --- including one
 material bug (walltimeout rows initially counted as \textsc{unsat} in
-threshold estimation) fixed \emph{before} the main scan fired.
+threshold estimation) fixed \emph{before} the main scan fired, and the
+post-freeze fourth dosing offset $\Delta{=}{+}0.6$ at 4 of the 9 radii
+(deviation E3b-$\Delta$).
 
 \section{Results I: The Threshold Curve \texorpdfstring{$\ac{r}$}{alpha\_c(r)} (S0)}
 \label{sec:s0}
@@ -375,8 +379,8 @@ and 390 censored (Table~\ref{tab:e3afull}). The store additionally carries
 the 240 swap-arm rows of \S\ref{sec:e3b} (86 resolved, 154 censored), for
 1980 runs with zero errored rows and 544 censored overall (27.5\%,
 concentrated at $r\ge0.3$); of those 544, 535 hit the $10^6$-conflict
-budget and 9 the $300$\,s wall guard, which excludes at scale only in the
-S0 screen (313 rows). Figure~\ref{fig:dose}
+budget and 9 the $300$\,s wall guard, which excludes at scale only in S0
+(317 rows, 313 at $r\ge0.3$). Figure~\ref{fig:dose}
 visualizes both arms.
 
 \paragraph{Primary tests (CaDiCaL, $\Delta$-pooled, seeds as subjects).}
@@ -489,11 +493,11 @@ still take more conflicts in 25 of 29 ($\times 11$, $p=3.9\times10^{-3}$ at
 $+0.2$; $\times 1.8$, $p=3.2\times10^{-4}$ at $+0.6$; pooled
 $p=6.3\times10^{-7}$), with magnitudes below the pooled ratios of
 Table~\ref{tab:e3b} because the flip stratum concentrates the extreme cases.
-Each arm attempts 120 swap pairings (4 radii $\times$ 30 seeds; the
-original-arm rows are shared with the main scan and not re-stored);
-completions fall to 33 and 49 because the large-radius cells saturate the
-budget in either arm (at $+0.2$ the original arm decides $9/30$ and $0/30$
-at $r{=}0.3$ and $r{=}1.5$, and the swap arm $0/30$ at both).
+Each arm attempts 120 swap pairings (4 radii $\times$ 30 seeds;
+original-arm counterparts come from the main-scan store); completions fall
+to 33 and 49 because the large-radius cells saturate the budget in either
+arm (at $+0.2$ the original arm decides $9/30$ and $0/30$ at $r{=}0.3$ and
+$r{=}1.5$, the swap arm $0/30$ at both and $3/30$ at $r{=}0.15$).
 
 Together with E1, whose width-controlled instances are flat and trivial at all
 $k$ (per-$k$ medians pooling both sizes, unplanted arm: $7$--$10$ conflicts
