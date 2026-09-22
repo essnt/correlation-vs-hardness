@@ -34,14 +34,14 @@ Holding the number of variables fixed, matching clause density relative to each
 radius's own threshold, and with clause-content statistics r-invariant by
 construction, varying only the radius r within which clause variables are sampled
 from a 2-D
-torus causally changes CDCL SAT difficulty: the operational satisfiability
+torus changes CDCL SAT difficulty: the operational satisfiability
 boundary lies below 2.5 at r=0.06 and near ≈4.3 by r=0.22, and at matched threshold offsets difficulty
 spans 3.4 orders of magnitude among decided instances (>=4.5 counting
 budget-censored runs at their lower bound; F(8,216)=2808.5; JT p<=1e-4, FDR
 q<=1e-4; partial eta^2~0.99). A degree-preserving swap that destroys locality raises
 difficulty 16-68x (p<=7e-10) and flips 53 of the 82 resolved pairs'
-satisfiability; post-hoc causal mediation analysis is consistent with ~94%
-of the effect flowing through
+satisfiability; post-hoc, exploratory causal mediation analysis is consistent
+with ~94% of the effect flowing through
 community-structure restructuring. Scope: n=400, direct CNF, CDCL solvers.
 
 ## Reproduce

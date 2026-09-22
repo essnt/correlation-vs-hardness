@@ -84,8 +84,8 @@ counted at their lower bound; RM-ANOVA $F(8,216)=2808.5$; Jonckheere--Terpstra
 $p\le 10^{-4}$ with FDR $q\le 10^{-4}$; partial $\eta^2 \approx 0.99$.
 \emph{(iii)}~The structure-destruction swap raises difficulty by
 $16$--$68\times$ (Wilcoxon $p\le 7\times10^{-10}$) and flips the
-satisfiability status of 53 instance pairs; post-hoc causal mediation
-analysis is consistent with ${\sim}94\%$ of the radius effect flowing
+satisfiability status of 53 instance pairs; post-hoc, exploratory causal
+mediation analysis is consistent with ${\sim}94\%$ of the radius effect flowing
 through community-structure restructuring (ACME
 3.06, bootstrap CI $[2.84, 3.37]$).
 
@@ -302,8 +302,9 @@ claim-specific: it keeps the threshold-displacement claim
 it over-doses the easy end --- difficulty at $r{=}0.06$ falls with dose
 ($1.45/1.40/1.29$ across the three arms; Table~\ref{tab:e3afull}) --- so the
 cross-$r$ span and the gradient's steepness are mildly
-\emph{anti}-conservative, bounded above by the $0.16$-decade spread between
-the $r{=}0.06$ arm endpoints.
+\emph{anti}-conservative, on the order of $0.1$--$0.2$ decades (the
+$r{=}0.06$ arm endpoints span $0.16$ decades across a $0.6$-unit dose
+difference; the crossing below the probed range is undetermined).
 
 \section{Measures, Solvers, and Statistical Protocol}
 \label{sec:method}
@@ -347,9 +348,10 @@ $p>0.05$.
 \paragraph{Preregistration and audit.}
 Hypotheses, censoring semantics, $r$ levels, and decision rules were frozen
 before the main scan (2026-09-09; scan completed 2026-09-10). The first
-\emph{public} timestamp of the frozen documents, the amendment records, and
-the audit trail is the Zenodo deposit of 2026-09-15 (\S\ref{sec:repro}) ---
-we disclose this freeze-to-publication gap rather than let
+\emph{public} timestamp of the frozen documents, the amendment records
+AMEND-1--4, and the audit trail is the Zenodo deposit of 2026-09-15
+(\S\ref{sec:repro}); AMEND-5, dated 2026-09-18, first appeared with the
+deposit's fourth version --- we disclose this freeze-to-publication gap rather than let
 ``preregistered'' imply an independent registry. Throughout,
 \emph{unblinding} denotes the first examination of main-scan outcome
 statistics; the S0 thresholds that dose the scan are examined beforehand by
@@ -434,8 +436,11 @@ spot-checks (\S\ref{sec:threats}).
 \label{sec:e3a}
 
 The main scan places 9 radii $\times$ 3 offsets above each radius's own
-$\ac{r}$, 30 paired seeds, two solvers. 1980 runs, zero errored rows; 1436
-resolved, 544 censored (27.5\%, concentrated at $r\ge0.3$). Figure~\ref{fig:dose}
+$\ac{r}$, 30 paired seeds, two solvers: 1740 runs, of which 1350 resolved
+and 390 censored (Table~\ref{tab:e3afull}). The store additionally carries
+the 240 swap-arm rows of \S\ref{sec:e3b} (86 resolved, 154 censored), for
+1980 runs with zero errored rows and 544 censored overall (27.5\%,
+concentrated at $r\ge0.3$). Figure~\ref{fig:dose}
 visualizes both arms.
 
 \paragraph{Primary tests (CaDiCaL, $\Delta$-pooled, seeds as subjects).}
@@ -700,7 +705,8 @@ $n$; the density $\alpha$ (fixed or $\Delta$-matched); the literal degree
 profile (degree-cap rejection in the planted arms; \emph{exact} preservation
 under the E3b swap, the decisive control); the clause content (standardized
 polarity sampling, $r$-invariant redundancy); and the solver engine (two
-engines). Metrics are computed deterministically before solving, so the
+engines, both VSIDS-family CDCL; the registered local-search prediction of
+\S\ref{sec:discussion} is the declared probe beyond that family). Metrics are computed deterministically before solving, so the
 metric-computation channel cannot pseudo-correlate with runtime. Censoring is
 the residual internal threat: the wall guard is directionally biased
 (AMEND-2), and the direction was declared before unblinding. Spot-checks at
@@ -850,7 +856,9 @@ bash scripts/status.sh && .venv/bin/python experiments/e3a_analysis.py
 .venv/bin/python experiments/e5_baseline.py results/m2_main.db results/m2_e1e2.db
 \end{verbatim}
 All experiments completed 2026-09-10 (E4 DIMACS re-solved 2026-09-12 after a
-parsing fix); re-runs resume per row, skipping decided jobs.
+parsing fix); re-runs resume per row, skipping decided jobs. Both engines run
+through the python-sat 1.9.dev15 bindings (CaDiCaL 1.5.3, Glucose 4), stock
+configurations.
 
 \begin{acks}
 The author thanks the SAT competition organizers and the maintainers of the
@@ -1109,7 +1117,10 @@ same estimator and protocol, gives ACME $= 2.34$ $[2.14, 2.60]$ (upper
 bound, ${\sim}72\%$ of the total effect) and $2.69$ $[2.48, 2.99]$ (lower
 bound, ${\sim}83\%$). The width channel shows the same pattern and all six
 recorded mediator paths agree; as above, the block is exploratory, and the
-confirmatory weight for the causal claim rests with E3b.
+confirmatory weight for the causal claim rests with E3b. (The width
+upper-bound path and the mean-degree path carry nearly identical point
+estimates, $2.340$ vs.\ $2.337$ --- a numerical coincidence of two distinct
+mediator variables, not a duplicated entry.)
 
 \paragraph{Prespecification-vs-implementation audit.}
 After the freeze and before the main scan fired, an item-by-item audit
