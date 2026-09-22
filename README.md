@@ -41,7 +41,8 @@ difficulty.
 - **E3b scalpel**: degree-preserving swaps that destroy locality raise
   difficulty ×16–68 (p≤7e-10), flipping 53 of the 82 resolved pairs'
   satisfiability.
-- **Mediation holds**: modularity ACME 3.06 [2.84,3.37] (~94% of total effect);
+- **Mediation (exploratory, post-hoc mediator set per AMEND-5)**: modularity
+  ACME 3.06 [2.84,3.37] (~94% of total effect);
   all four channels' CIs exclude 0.
 - **H1 ladder**: across the main scan, structural-feature CV R² 0.66→0.976
   (random-family control shows zero gain); GBDT leave-one-r-out extrapolation

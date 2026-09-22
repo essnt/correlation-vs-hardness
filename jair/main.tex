@@ -84,12 +84,13 @@ counted at their lower bound; RM-ANOVA $F(8,216)=2808.5$; Jonckheere--Terpstra
 $p\le 10^{-4}$ with FDR $q\le 10^{-4}$; partial $\eta^2 \approx 0.99$.
 \emph{(iii)}~The structure-destruction swap raises difficulty by
 $16$--$68\times$ (Wilcoxon $p\le 7\times10^{-10}$) and flips the
-satisfiability status of 53 instance pairs; causal mediation attributes
-${\sim}94\%$ of the radius effect to community-structure restructuring (ACME
+satisfiability status of 53 instance pairs; post-hoc causal mediation
+analysis is consistent with ${\sim}94\%$ of the radius effect flowing
+through community-structure restructuring (ACME
 3.06, bootstrap CI $[2.84, 3.37]$).
 
 {\bf Conclusions:} Locality is not merely correlated with tractability ---
-under our controls it is the causal channel. All claims are scoped to
+under our controls it behaves as the causal channel. All claims are scoped to
 $n=400$, direct CNF encodings, and CDCL-family solvers; we discuss what this
 does and does not say about P versus NP. Code, seeds, data, preregistration,
 and the full audit trail are public.
@@ -149,8 +150,10 @@ Nine $r$ levels $\times$ three preregistered offsets $\Delta$ above each radius'
 solvers, with per-instance structural metrics (treewidth bracketed by min-fill
 upper and degeneracy lower bounds; modularity, community metrics, spectral
 gap). A fourth offset, $\Delta{=}{+}0.6$, is included at 4 of the 9 radii; the
-$r{=}0.06$ anchors are the lattice-nearest S0 grid value 2.6 (the grid
-brackets the true boundary below 2.5), conservative for the span.
+$r{=}0.06$ anchors are the lattice-nearest S0 grid value 2.6 (the grid shows
+the true boundary lies below 2.5), which keeps the threshold-displacement
+claim a conservative lower bound and over-doses the $r{=}0.06$ scan cells by
+a bounded amount, quantified in \S\ref{sec:setup}.
 \item \textbf{A threshold curve $\ac{r}$} (832 solves at $10^7$-conflict
 budget): the operational threshold is not $r$-invariant: the boundary lies below
 2.5 at $r=0.06$ and near ${\approx}4.3$ by $r=0.22$, before difficulty
@@ -290,9 +293,17 @@ absolute $\alpha$ confounds $r$-effects with threshold proximity. A dedicated
 threshold study (S0, \S\ref{sec:s0}) estimates the operational threshold
 $\ac{r}$ per radius; the main scan samples at $\alpha = \ac{r} + \Delta$,
 $\Delta \in \{+0.2, +0.4, +0.8\}$. At $r{=}0.06$ the dosing anchor is the
-lattice-nearest S0 value 2.6 rather than a measured crossing (the grid
-brackets the true boundary below 2.5), so the realized offsets there exceed
-the nominal $\Delta$ --- conservative for the gradient.
+lattice-nearest S0 value 2.6 rather than a measured crossing (the S0 grid
+there never reaches a $0.5$ SAT rate, $0.31 \to 0.13$ over densities
+$2.5$--$3.1$, so the true boundary lies below the probed range); the
+realized offsets therefore exceed the nominal $\Delta$. The consequence is
+claim-specific: it keeps the threshold-displacement claim
+(\S\ref{sec:s0}) a conservative lower bound, while for the scan comparisons
+it over-doses the easy end --- difficulty at $r{=}0.06$ falls with dose
+($1.45/1.40/1.29$ across the three arms; Table~\ref{tab:e3afull}) --- so the
+cross-$r$ span and the gradient's steepness are mildly
+\emph{anti}-conservative, bounded above by the $0.16$-decade spread between
+the $r{=}0.06$ arm endpoints.
 
 \section{Measures, Solvers, and Statistical Protocol}
 \label{sec:method}
@@ -335,7 +346,15 @@ $p>0.05$.
 
 \paragraph{Preregistration and audit.}
 Hypotheses, censoring semantics, $r$ levels, and decision rules were frozen
-before the main scan. Amendments are numbered and reason-stated: AMEND-1 (S0
+before the main scan (2026-09-09; scan completed 2026-09-10). The first
+\emph{public} timestamp of the frozen documents, the amendment records, and
+the audit trail is the Zenodo deposit of 2026-09-15 (\S\ref{sec:repro}) ---
+we disclose this freeze-to-publication gap rather than let
+``preregistered'' imply an independent registry. Throughout,
+\emph{unblinding} denotes the first examination of main-scan outcome
+statistics; the S0 thresholds that dose the scan are examined beforehand by
+design, and the audit and its one material fix predate unblinding.
+Amendments are numbered and reason-stated: AMEND-1 (S0
 budget $10^7$), AMEND-2 (wall guard, bias declaration, spot-check protocol),
 AMEND-3 (content-arm deferral), AMEND-4 (terminology normalization and
 content-arm disposition record), AMEND-5 (mediation-path adaptation with the
@@ -423,6 +442,12 @@ visualizes both arms.
 RM-ANOVA on the $\Delta$-aggregated complete-seed subset ($\Delta\in\{0.2,
 0.4,0.6,0.8\}$, the $0.6$ arm present at 4 of the 9 radii; $n=28$ seeds
 observed at all radii): $F(8,216)=2808.5$, $p\approx1.1\times10^{-213}$.
+\emph{Scoring convention:} cell means average \emph{decided} rows only
+(budget-censored and walltimeout runs are excluded, per the declared
+semantics), computed per (seed, radius) across the $\Delta$ arms present, so
+at heavily censored radii the mean rests on whichever arms resolved
+(unequal arm weights); a seed enters the subset only if every radius
+contributes at least one decided run ($28$ of $30$ seeds qualify).
 Dropping the duplicate $r{=}1.5$ level (identical clause sets to $r{=}0.8$,
 \S\ref{sec:setup}) gives the same conclusion,
 $F(7,189)=2468.7$. Jonckheere--Terpstra (Monte Carlo permutation, $10^4$
@@ -482,7 +507,11 @@ ${\approx}4.5$ orders).
 Partial $\eta^2$ at computable cells is $0.985$--$0.988$ against the
 preregistered confirmation threshold of $0.14$, and the $\Delta=+0.8$ arm's
 endpoint ratio ${\sim}10^{4.5}$ dwarfs the preregistered $10\times$ line. \textbf{H2 is
-confirmed under its own preregistered decision rule.} Glucose replicates the
+confirmed under its own preregistered decision rule} (the statistical
+branch; the degree-\emph{shape} premise holds in dispersion but not in the
+max-degree tail, ${\sim}29\%$ against the frozen ${<}5\%$ criterion ---
+\S\ref{sec:threats} quantifies the deviation and why the attribution does
+not rest on it). Glucose replicates the
 pattern.
 
 \paragraph{$\Delta$ semantics under $\ac{r}$ bias.}
@@ -595,17 +624,22 @@ planted median & 0 & 0 & 0 & 0 & 0 & 0\\
 Table~\ref{tab:mediation}. The frozen protocol named treewidth as the
 mediator; Appendix~\ref{app:protocol} (AMEND-5) records the adaptation of
 the mediator set and quantifies the width path through the recorded
-treewidth bounds (both CIs exclude zero).
+treewidth bounds (both CIs exclude zero). Because the adaptation postdates
+the outcome data (AMEND-5, at independent-review disposition), we read the
+whole mediation block as \emph{exploratory, supportive} mechanism evidence,
+not a confirmatory test.
 
 \begin{table}[h]
 \centering
 \caption{Causal mediation of the radius $\to$ difficulty path (total effect
 $3.26$ log units; product-of-coefficients estimator, bootstrap percentile
 CIs). Modularity carries ${\sim}94\%$ of the total effect; the spectral gap
-acts as a suppression channel (negative direct effect), evidence of a
-secondary pathway bypassing community structure. All CIs exclude zero: by the
-adapted rule (see Appendix~\ref{app:protocol}, AMEND-5), \textbf{mediation is
-established} as mechanism evidence.}
+enters as a suppressor (negative direct effect, ACME exceeding the total
+effect) --- consistent with a secondary pathway, though marginal
+single-mediator fits can also produce this pattern under misspecification,
+so no claim rests on it. All CIs exclude zero; by the adapted rule
+(Appendix~\ref{app:protocol}, AMEND-5) the block passes its criterion and is
+read as exploratory, supportive mechanism evidence.}
 \begin{tabular}{lccc}
 \toprule
 mediator & ACME & 95\% CI & direct effect\\
@@ -716,7 +750,13 @@ encodings, $n=400$, and conflict-count difficulty.
 
 \paragraph{Statistical conclusion.}
 Paired designs with 30 seeds per cell, preregistered effect-size thresholds,
-FDR over the primary family, and censoring-robust cross-checks.
+FDR over the primary family, and censoring-robust cross-checks. No a priori
+power analysis was performed: 30 seeds per cell was set by the compute
+budget at design time, and the negative-branch trigger ($\eta^2<0.02$ with
+$p>0.05$) carries no formal power calculation --- the confirmatory branch is
+insensitive to this (observed effects exceed the thresholds by orders of
+magnitude), but the negative branch's interpretability would have rested on
+it.
 
 \section{Discussion: What This Does and Does Not Say About P vs NP}
 \label{sec:discussion}
@@ -739,10 +779,13 @@ censoring-aware statistics) is offered as a \emph{portable diagnostic
 protocol}: any claim of the form ``structural property $P$ helps algorithm $A$
 on family $F$'' can be subjected to the same treatment. We explicitly do
 \emph{not} claim our conclusions extend to local-search solvers; the contrast
-is a preregistered prediction: if difficulty is a structure$\times$algorithm
+is a registered prediction: if difficulty is a structure$\times$algorithm
 relation, a stochastic local-search solver should respond to $r$ differently,
-possibly inversely, and running it on our instances is a cheap,
-decisive test.
+possibly inversely. We deliberately leave that test unexecuted here --- a
+result produced after unblinding would be post-hoc by construction --- so
+the prediction stays falsifiable and open; the generator, seeds, and the
+probSAT source ship with the snapshot, putting the test within reach of any
+reader.
 
 \paragraph{Tractability is a relational property.}
 E1 (width-controlled instances are flat) and the threshold curve together
@@ -1064,8 +1107,9 @@ bootstrap 95\% CI excluding zero) unchanged to the implemented set
 (Table~\ref{tab:mediation}); the width path through the recorded bounds,
 same estimator and protocol, gives ACME $= 2.34$ $[2.14, 2.60]$ (upper
 bound, ${\sim}72\%$ of the total effect) and $2.69$ $[2.48, 2.99]$ (lower
-bound, ${\sim}83\%$). The width channel is confirmed directly and all six
-recorded mediator paths agree.
+bound, ${\sim}83\%$). The width channel shows the same pattern and all six
+recorded mediator paths agree; as above, the block is exploratory, and the
+confirmatory weight for the causal claim rests with E3b.
 
 \paragraph{Prespecification-vs-implementation audit.}
 After the freeze and before the main scan fired, an item-by-item audit

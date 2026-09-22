@@ -348,7 +348,7 @@ boundary.)
 occurrence count is identical literal-by-literal; under paired control, the only
 difference is "whether the variables still cluster in space". Destroying the clusters
 raises difficulty by 1.2–1.8 orders of magnitude. **Locality is not a third variable
-co-occurring with difficulty; it is the causal channel itself.** Combined with E1
+co-occurring with difficulty; under our controls it behaves as the causal channel.** Combined with E1
 (treewidth alone does not produce hardness), this yields an asymmetric conclusion:
 what matters is **local geometry**, not any single summary of global topology.
 
@@ -366,7 +366,9 @@ what matters is **local geometry**, not any single summary of global topology.
 
 No ACME confidence interval contains 0 — under the adapted rule (AMEND-5:
 the frozen criterion applied to the implemented mediator set; see the paper's
-Appendix C), **mediation is established** (mechanism evidence, not proof): the bulk of r's effect is
+Appendix C), **the mediation block passes its criterion and is read as
+exploratory, supportive mechanism evidence, not proof** (the mediator set was
+adapted post hoc): the bulk of r's effect is
 transmitted to difficulty through the restructuring of "community/spectral structure";
 the suppression pattern of the spectral gap suggests that r also has a secondary channel
 bypassing community structure. The frozen width path, quantified through the

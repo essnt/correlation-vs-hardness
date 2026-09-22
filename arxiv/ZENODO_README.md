@@ -10,7 +10,7 @@ Checklist).
 **License:** PDF & text: CC-BY-4.0. Code in the snapshot: MIT, except the bundled probSAT tool (`tools/probsat/`), which retains its original research-use license (see `tools/probsat/LICENSE`).
 
 ## Contents
-1. `SongJin_2026_LocalityCausesTractability_JournalVersion.pdf` - the paper (18 pages).
+1. `SongJin_2026_LocalityCausesTractability_JournalVersion.pdf` - the paper (19 pages).
 2. `correlation-vs-hardness_snapshot.tar.gz` - full snapshot of the research repository:
    - `src/cvh/` generators, solver harness (resume-per-row), metrics, statistics
    - `experiments/` every experiment script (S0, E1-E6, E4, E5, spotcheck)
@@ -40,7 +40,8 @@ spans 3.4 orders of magnitude among decided instances (>=4.5 counting
 budget-censored runs at their lower bound; F(8,216)=2808.5; JT p<=1e-4, FDR
 q<=1e-4; partial eta^2~0.99). A degree-preserving swap that destroys locality raises
 difficulty 16-68x (p<=7e-10) and flips 53 of the 82 resolved pairs'
-satisfiability; causal mediation attributes ~94% of the effect to
+satisfiability; post-hoc causal mediation analysis is consistent with ~94%
+of the effect flowing through
 community-structure restructuring. Scope: n=400, direct CNF, CDCL solvers.
 
 ## Reproduce

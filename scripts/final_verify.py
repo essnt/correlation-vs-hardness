@@ -57,7 +57,7 @@ chk("外层三文件清单", z.namelist() == ["README_ZENODO.md",
 # ========== 2. 论文 PDF ==========
 pdfb = z.read("SongJin_2026_LocalityCausesTractability_JournalVersion.pdf")
 d = pymupdf.open(stream=pdfb, filetype="pdf")
-chk("论文 18 页", d.page_count == 18, str(d.page_count))
+chk("论文 19 页", d.page_count == 19, str(d.page_count))
 t0 = d[0].get_text()
 chk("作者块 Song Jin", "Song Jin" in t0)
 chk("Independent Researcher", "Independent Researcher" in t0)
@@ -265,7 +265,7 @@ for _m in _mems:
 chk(f"快照全部成员 == HEAD 逐字节（{len(_mems) - len(_bad)}/{len(_mems)}）", not _bad, str(_bad[:5]))
 chk("包内 PDF == jair/main.pdf", pdfb == open("jair/main.pdf", "rb").read())
 rm_ = z.read("README_ZENODO.md").decode()
-chk("README 18 页声明", "(18 pages)" in rm_)
+chk("README 19 页声明", "(19 pages)" in rm_)
 chk("README 无过时引用", "10 pages" not in rm_ and "5b36f34b" not in rm_)
 chk("快照无 4.5 旧口径", "climbs from ${\\sim}28$ to ${\\sim}72{,}000$ conflicts --- \\textbf{4.5 orders" not in docs.get("./arxiv/main.tex", ""))
 ai = re.sub(r"\s+", " ", docs.get("./docs/AI_DISCLOSURE.md", "").replace(">", ""))
