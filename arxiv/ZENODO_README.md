@@ -2,8 +2,8 @@
 
 **Author:** Song Jin (Independent Researcher)
 **Version:** Journal version, prepared for journal submission. A compact
-version of this work remains archived in Zenodo versions 1-3; this record
-carries the full journal version, substantially expanded with complete
+version of this work remains archived in Zenodo versions 1-3; versions 4
+and later carry the full journal version, substantially expanded with complete
 threshold tables, per-arm dose-response details, censoring-sensitivity
 analyses, and the protocol appendix (including the JAIR Reproducibility
 Checklist).
