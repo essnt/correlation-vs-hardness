@@ -28,11 +28,11 @@ Written for non-technical readers: each term is first explained in plain languag
 - **Restarts**: The strategy of tearing the case down midway and starting over. *In this project*: experiments
   show it has little effect on search locality.
 - **probSAT**: A local-search-style solver (no reasoning; flips variables at random until it is satisfied).
-  *In this project*: compiled and held in reserve, as the comparison from "another family of algorithms."
+  *In this project*: compiled and held in reserve as a comparison with another family of algorithms.
 
 ### B. Graphs and structure
 
-- **VIG (variable interaction graph)**: The graph obtained by joining, pairwise, the variables that appear
+- **VIG (variable interaction graph)**: The graph obtained by pairwise joining the variables that appear
   together in each clause (condition). *In this project*: the carrier of the instance's "structure"; community
   structure and treewidth are both computed on this graph.
 - **Community structure / modularity**: How much the graph splits into small circles that are busy inside and
@@ -105,7 +105,7 @@ Written for non-technical readers: each term is first explained in plain languag
   without being solved."
 - **Repeated-measures ANOVA**: The same batch of seeds measured repeatedly for hardness at different r (a
   paired design); the analysis of variance tests whether r truly causes differences. partial η² is the
-  effect size (what proportion the difference accounts for).
+  effect size (the proportion of variance accounted for).
 - **Jonckheere–Terpstra (JT)**: A trend test for "hardness rises/falls monotonically with r," with Monte
   Carlo permutation used to compute the p-value.
 - **Paired Wilcoxon**: The main test of E3b — the paired comparison of original vs shuffled, same seed.

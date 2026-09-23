@@ -31,7 +31,7 @@ Checklist).
 
 ## One-paragraph abstract
 Holding the number of variables fixed, matching clause density relative to each
-radius's own threshold, and with clause-content statistics r-invariant by
+radius's own threshold, and keeping clause-content statistics r-invariant by
 construction, varying only the radius r within which clause variables are sampled
 from a 2-D
 torus changes CDCL SAT difficulty: the operational satisfiability

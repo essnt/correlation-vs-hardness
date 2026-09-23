@@ -20,7 +20,7 @@ difficulty.
   combination of structural metrics explains solving time significantly better
   than density alone.
 - **H2** (core): with n, α, literal degree distribution, clause content
-  distribution, and σ-redundancy all controlled, varying r alone still produces
+  distribution, and σ-satisfaction redundancy all controlled, varying r alone still produces
   a significant causal effect (2×2 factorial + paired design).
 - **H3** (exploratory): LLM branching-guide quality improves with stronger
   locality. (**Cut**: E6 hit the preregistered kill line; negative result
@@ -49,9 +49,10 @@ difficulty.
 - **H1 ladder**: across the main scan, structural-feature CV R² 0.66→0.976
   (random-family control shows zero gain); GBDT leave-one-r-out extrapolation
   0.76.
-- See docs/REPORT_zh.md (in-depth report, Chinese), docs/paper_draft_en.md
-  (English paper v0.2), docs/PRESPEC_AUDIT.md (preregistration audit),
-  docs/M2_LOG.md (full experiment log).
+- See docs/REPORT.md (in-depth report, English; Chinese original in
+  docs/REPORT_zh.md), docs/paper_draft_en.md (English paper v0.2),
+  docs/PRESPEC_AUDIT.md (preregistration audit), docs/M2_LOG.md (full
+  experiment log).
 
 ## Repository layout
 

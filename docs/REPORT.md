@@ -1,5 +1,5 @@
 # Does the "Locality Radius" of Variable Interactions Causally Determine SAT Solving Difficulty?
-## — An Intervention-Based Empirical Study (Chinese In-Depth Report · M3 Draft)
+## — An Intervention-Based Empirical Study (English In-Depth Report · M3 Draft)
 
 > **Status marker**: v1.2 (2026-09-18; v1.0 = 2026-09-10 initial complete version; since
 > updated by the Tobit-fit correction 2026-09-17 and the AMEND-5 sync 2026-09-18) — all
@@ -58,7 +58,7 @@ into three testable propositions:
 
 ### 1.2 Why Nobody Had Done This Experiment Before (Dedicated Collision-Check Findings, M0-3)
 - Giráldez-Cru & Levy have locality generators (IJCAI 2017 power-law/CA models) — but
-  these are **generative distributions**, not **single-parameter interventions**; and
+  these are **generative distributions**, not **single-parameter interventions**, and
   the CA model was proven by Mull-Fremont-Seshia (SAT 2016) to be w.h.p. exponentially
   hard when communities are few — that is, the model's "locality" does not produce
   "tractability".
