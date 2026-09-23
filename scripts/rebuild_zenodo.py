@@ -52,9 +52,16 @@ def main():
     shutil.rmtree(snap, ignore_errors=True)
     os.makedirs(snap)
     arc = subprocess.run(["git", "archive", "HEAD"], cwd=CWD, capture_output=True).stdout
-    # 解包经系统 tar（成员名来自 git archive 的 HEAD 内 tracked 路径，受控来源）；
-    # Python 级逐成员提取（tf.extract/extractall）被预提交扫描判为路径穿越模式，
-    # 故下沉至 tar 工具，Python 侧不再出现归档解包 sink
+    # 解包前置校验：成员名禁止绝对路径 / ".." 段 / 反斜杠，确保解包不越出
+    # 暂存目录（成员名来自 git archive 的 HEAD 内 tracked 路径，受控来源，
+    # 此校验为防御性双保险，正常永不触发）；解包经系统 tar 完成。
+    # Python 级逐成员提取（tf.extract/extractall）已被预提交扫描判为路径
+    # 穿越模式，故解包下沉至 tar 工具，Python 侧无归档解包 sink
+    with tarfile.open(fileobj=io.BytesIO(arc)) as tf:
+        for m in tf.getmembers():
+            name = m.name
+            if name.startswith("/") or "\\" in name or ".." in name.split("/"):
+                raise ValueError("unsafe archive member: " + name)
     subprocess.run(["tar", "-x", "-C", snap], input=arc, check=True)
     # 2) 排除
     for d in EXCLUDE_DOCS:
