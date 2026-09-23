@@ -10,7 +10,7 @@ Written for non-technical readers: each term is first explained in plain languag
 ### A. Solvers and search
 
 - **SAT (satisfiability)**: Given a large pile of conditions built from "or" propositions, can every variable be
-  assigned true or false so that all the conditions hold at once? It was the first problem proven NP-complete.
+  assigned true or false so that all the conditions hold at once? It was the first problem proven to be NP-complete.
   *In this project*: the "physical world" we use is SAT instances.
 - **CDCL (conflict-driven clause learning)**: The standard algorithm of modern SAT solvers. Like a detective
   working a case: guess a variable assignment → hit a contradiction → distill "why this crash happened" into a
@@ -69,7 +69,7 @@ Written for non-technical readers: each term is first explained in plain languag
   ≈2.14–2.27), invariant in r. *In this project*:
   the means of pinning down the "content distribution" — ruling out one confound.
 - **Degree-preserving swap (E3b)**: A shuffling technique that secretly swaps variables between two clauses
-  while keeping the occurrence count of every literal **not one more, not one fewer**. Effect: spatial
+  while keeping the occurrence count of every literal unchanged — **not one more, not one fewer**. Effect: spatial
   locality is destroyed while the degree sequence does not budge. *In this project*: the structure-destroying
   intervention — the "scalpel" of the causal test.
 - **2×2 factorial**: The four-cell contrast design of topology {preserved, destroyed} × content {original,

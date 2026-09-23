@@ -37,7 +37,7 @@
 ## 1. Research Question: From Philosophical Conjecture to Falsifiable Experiment (Frozen)
 
 ### 1.1 Diagnosis of the Original Conjecture
-The original conversation proposed "causation knows no absolute strong correlation": if no
+The original conjecture was that "causation knows no absolute strong correlation": if no
 strong long-range correlation exists among the variables of a combinatorial problem, the
 problem will not be too hard. In its original form the conjecture is unfalsifiable —
 "correlation", "locality", and "causation" are all unoperationalized. We translate it
@@ -346,7 +346,7 @@ boundary.)
 
 **Interpretation**: the two instances have the same variables, and every literal's
 occurrence count is identical literal-by-literal; under paired control, the only
-difference is "whether the variables still cluster in space". Destroying the clusters
+difference is whether the variables still cluster in space. Destroying the clusters
 raises difficulty by 1.2–1.8 orders of magnitude. **Locality is not a third variable
 co-occurring with difficulty; under our controls it behaves as the causal channel.** Combined with E1
 (treewidth alone does not produce hardness), this yields an asymmetric conclusion:
