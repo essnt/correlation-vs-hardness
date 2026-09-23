@@ -52,8 +52,14 @@ def main():
     shutil.rmtree(snap, ignore_errors=True)
     os.makedirs(snap)
     arc = subprocess.run(["git", "archive", "HEAD"], cwd=CWD, capture_output=True).stdout
+    snap_real = os.path.realpath(snap)
     with tarfile.open(fileobj=io.BytesIO(arc)) as tf:
-        tf.extractall(snap, filter="data")
+        # 逐成员提取并显式校验包含性（防路径穿越；filter="data" 之外的双保险）
+        for member in tf.getmembers():
+            dest = os.path.realpath(os.path.join(snap, member.name))
+            if os.path.commonpath([dest, snap_real]) != snap_real:
+                raise ValueError("path traversal in archive member: " + member.name)
+            tf.extract(member, snap, filter="data")
     # 2) 排除
     for d in EXCLUDE_DOCS:
         p = os.path.join(snap, "docs", d)
