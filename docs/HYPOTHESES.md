@@ -148,8 +148,8 @@ conflicts≥下限的子集）与 Tobit 版本交叉验证。
    CC-BY-4.0，Compact Version 标注）——与 JSAT（Episciences）依赖开放库
    先行存档的工作流直接吻合，且对新投稿作者无额外资格要求；JSAT 首选（其 2026 Episciences 模式明确依赖
    开放库先行存档，Zenodo 在官方接受列表内）——Zenodo 先行与 JSAT 工作流
-   天然吻合；投稿信需声明 Zenodo 紧凑版存在。作者：Song Jin, Independent
-   Researcher, j.song.cs@outlook.com。
+   天然吻合；投稿信需声明 Zenodo 紧凑版存在。作者：Jin Song（姓 Song，
+   名 Jin）, Independent Researcher, j.song.cs@outlook.com。
 5. **投稿路线更新（2026-09-17）**：期刊首选由 JSAT 改定 **JAIR**（评估
    依据：JSAT 刊期停摆 2022–24 仅 6 篇；JAIR 零费用 Diamond OA、活跃
    出刊、SAT 实证长期先例；预印本允许/强制模板与可复现性清单/单盲

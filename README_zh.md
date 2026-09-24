@@ -87,8 +87,8 @@ concept DOI，始终指向最新版本；首版（2026-09-15）的版本专属 D
 10.5281/zenodo.22777749。
 
 ```bibtex
-@misc{jin2026locality,
-  author       = {Song Jin},
+@misc{song2026locality,
+  author       = {Song, Jin},
   title        = {Locality Causes Tractability? An Intervention Study on the
                   Variable-Interaction Radius in Geometric Random Satisfiability},
   year         = {2026},

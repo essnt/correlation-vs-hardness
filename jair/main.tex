@@ -42,14 +42,14 @@
 Intervention Study on the Variable-Interaction Radius in Geometric Random
 Satisfiability}
 
-\author{Song Jin}
+\author{Jin Song}
 \email{j.song.cs@outlook.com}
 \affiliation{%
   \institution{Independent Researcher}
   \country{China}
 }
 
-\renewcommand{\shortauthors}{Jin}
+\renewcommand{\shortauthors}{Song}
 
 \begin{abstract}
 {\bf Background:} A widespread intuition holds that real-world computational
@@ -101,6 +101,12 @@ and the full audit trail are public.
 \end{abstract}
 
 \maketitle
+
+%% The class's metadata block in \maketitle expands \metadata@authors empty
+%% (probed: hyperref's pdfauthor key never reaches the Info dict under
+%% jair.cls), so the /Author entry is pinned via the pdfTeX primitive, after
+%% \maketitle, to match the printed byline exactly.
+\AtEndDocument{\pdfinfo{/Author (Jin Song)}}
 
 \section{Introduction}
 \label{sec:intro}

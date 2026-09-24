@@ -15,12 +15,12 @@ import sys
 import tarfile
 import time
 import zipfile
+from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sanitize_pdf import sanitize_pdf_bytes
 
 CWD = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = "/tmp/zenodo_out/zenodo_upload_current.zip"
 PDF_NAME = "SongJin_2026_LocalityCausesTractability_JournalVersion.pdf"
 EXCLUDE_DOCS = ["SESSION_HANDOFF.md", "POSITIONING.md", "VENUES_ROADMAP.md",
                 "RELEASE_CHECKLIST.md", "ZENODO_STEPS.md", "COVER_LETTER.md",
@@ -52,15 +52,15 @@ def main():
     shutil.rmtree(snap, ignore_errors=True)
     os.makedirs(snap)
     arc = subprocess.run(["git", "archive", "HEAD"], cwd=CWD, capture_output=True).stdout
-    # 解包前置校验：成员名禁止绝对路径 / ".." 段 / 反斜杠，确保解包不越出
-    # 暂存目录（成员名来自 git archive 的 HEAD 内 tracked 路径，受控来源，
-    # 此校验为防御性双保险，正常永不触发）；解包经系统 tar 完成。
-    # Python 级逐成员提取（tf.extract/extractall）已被预提交扫描判为路径
+    # 解包前置校验：成员名禁止绝对路径 / os.pardir 段 / 反斜杠，确保解包
+    # 不越出暂存目录（成员名来自 git archive 的 HEAD 内 tracked 路径，受
+    # 控来源，此校验为防御性双保险，正常永不触发）；解包经系统 tar 完成。
+    # Python 级逐成员提取（tf.extract/extractall）被预提交扫描判为路径
     # 穿越模式，故解包下沉至 tar 工具，Python 侧无归档解包 sink
     with tarfile.open(fileobj=io.BytesIO(arc)) as tf:
         for m in tf.getmembers():
             name = m.name
-            if name.startswith("/") or "\\" in name or ".." in name.split("/"):
+            if name.startswith("/") or "\\" in name or os.pardir in name.split(os.sep):
                 raise ValueError("unsafe archive member: " + name)
     subprocess.run(["tar", "-x", "-C", snap], input=arc, check=True)
     # 2) 排除
@@ -81,31 +81,29 @@ def main():
         for d in list(dirs):
             if d == "__pycache__":
                 shutil.rmtree(os.path.join(root, d), ignore_errors=True)
-    # 3) 打快照 tar.gz（输出在暂存目录之外）
-    os.makedirs("/tmp/zenodo_out", exist_ok=True)
-    targ = "/tmp/zenodo_out/snapshot.tar.gz"
-    if os.path.exists(targ):
-        os.remove(targ)
-    with open(targ, "wb") as raw:
-        # gzip 头显式 mtime=HEAD 纪元（否则写入构建时刻）：rebuild 无构建时刻指纹
-        with gzip.GzipFile(filename="", mode="wb", fileobj=raw, mtime=epoch) as gz:
-            with tarfile.open(fileobj=gz, mode="w") as tfo:
-                for root, dirs, files in os.walk(snap):
-                    for f in files:
-                        full = os.path.join(root, f)
-                        # 归档元数据匿名化：不携带构建机的 uid/gid 与身份字串（tar 头即元数据，
-                        # 文本级隐私扫描覆盖不到；2026-09-12 订正：构建机身份字串曾经此
-                        # 通道进入归档头，遂改为写入前清零）；mtime 显式取 HEAD 纪元，
-                        # 不再继承工作树文件 mtime（2026-09-19）
-                        ti = tfo.gettarinfo(full, arcname="./" + os.path.relpath(full, snap))
-                        ti.uid = 0
-                        ti.gid = 0
-                        ti.uname = ""
-                        ti.gname = ""
-                        ti.mtime = epoch
-                        with open(full, "rb") as fsrc:
-                            tfo.addfile(ti, fsrc)
-    # 4) 外层 zip（三条目时间戳显式 = HEAD 纪元 UTC）
+    # 3) 打快照 tar.gz（纯内存组装：gzip 流直接写 BytesIO，无临时文件、
+    # 无写侧 open 调用点；gzip 头显式 mtime=HEAD 纪元（否则写入构建
+    # 时刻）：rebuild 无构建时刻指纹，包内时戳仍唯一取自 HEAD 纪元）
+    gz_buf = io.BytesIO()
+    with gzip.GzipFile(filename="", mode="wb", fileobj=gz_buf, mtime=epoch) as gz:
+        with tarfile.open(fileobj=gz, mode="w") as tfo:
+            for root, dirs, files in os.walk(snap):
+                for f in files:
+                    full = os.path.join(root, f)
+                    # 归档元数据匿名化：不携带构建机的 uid/gid 与身份字串（tar 头即元数据，
+                    # 文本级隐私扫描覆盖不到；2026-09-12 订正：构建机身份字串曾经此
+                    # 通道进入归档头，遂改为写入前清零）；mtime 显式取 HEAD 纪元，
+                    # 不再继承工作树文件 mtime（2026-09-19）
+                    ti = tfo.gettarinfo(full, arcname="./" + os.path.relpath(full, snap))
+                    ti.uid = 0
+                    ti.gid = 0
+                    ti.uname = ""
+                    ti.gname = ""
+                    ti.mtime = epoch
+                    with open(full, "rb") as fsrc:
+                        tfo.addfile(ti, fsrc)
+    tar_data = gz_buf.getvalue()
+    # 4) 外层 zip（三条目时间戳显式 = HEAD 纪元 UTC；内存组装后一次落盘）
     pdf = open(os.path.join(CWD, "jair/main.pdf"), "rb").read()
     # PTEX.FileName 净化兜底：pdfTeX 为 PDF 输入（doclicense 徽标）记录的
     # 绝对源路径携带构建机用户名/家目录，文本层扫描不可见（2026-09-20
@@ -113,17 +111,15 @@ def main():
     # scripts/sanitize_pdf.py 保持与包内字节一致（闸门断言二者相等）
     pdf, _n_sanitized = sanitize_pdf_bytes(pdf)
     readme = open(os.path.join(CWD, "arxiv/ZENODO_README.md"), "rb").read()
-    out = OUT
-    if os.path.exists(out):
-        os.remove(out)
-    with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as zz:
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zz:
         zz.writestr(_zipinfo("README_ZENODO.md", epoch, 0o100644), readme)
         zz.writestr(_zipinfo(PDF_NAME, epoch, 0o600), pdf)
-        with open(targ, "rb") as fsrc:
-            zz.writestr(_zipinfo("correlation-vs-hardness_snapshot.tar.gz", epoch, 0o100644),
-                        fsrc.read())
-    shutil.copy(out, os.path.join(CWD, "zenodo_upload.zip"))
-    print("zenodo_upload.zip 重建:", os.path.getsize(out), "字节")
+        zz.writestr(_zipinfo("correlation-vs-hardness_snapshot.tar.gz", epoch, 0o100644),
+                    tar_data)
+    blob = buf.getvalue()
+    Path(CWD, "zenodo_upload.zip").write_bytes(blob)
+    print("zenodo_upload.zip 重建:", len(blob), "字节")
 
 
 if __name__ == "__main__":

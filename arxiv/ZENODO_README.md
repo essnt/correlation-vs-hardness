@@ -1,6 +1,6 @@
 # Locality Causes Tractability? An Intervention Study on the Variable-Interaction Radius in Geometric Random Satisfiability
 
-**Author:** Song Jin (Independent Researcher)
+**Author:** Jin Song (Independent Researcher)
 **Version:** Journal version, prepared for journal submission. A compact
 version of this work remains archived in Zenodo versions 1-3; versions 4
 and later carry the full journal version, substantially expanded with complete

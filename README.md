@@ -113,8 +113,8 @@ concept DOI, which always resolves to the latest version; the version-specific
 DOI of the first release (2026-09-15) is 10.5281/zenodo.22777749.
 
 ```bibtex
-@misc{jin2026locality,
-  author       = {Song Jin},
+@misc{song2026locality,
+  author       = {Song, Jin},
   title        = {Locality Causes Tractability? An Intervention Study on the
                   Variable-Interaction Radius in Geometric Random Satisfiability},
   year         = {2026},
