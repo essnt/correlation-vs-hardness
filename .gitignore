@@ -32,3 +32,17 @@ jair/main.run.xml
 jair/main.pdf
 jair/main.spl
 jair/comment.cut
+
+# LaTeX build artifacts of the Constraints submission version (same scheme
+# as jair/: sources tracked, the compiled PDF stays a build artifact)
+constraints/main.aux
+constraints/main.bbl
+constraints/main.bcf
+constraints/main.blg
+constraints/main.fdb_latexmk
+constraints/main.fls
+constraints/main.log
+constraints/main.out
+constraints/main.run.xml
+constraints/main.pdf
+constraints/main.spl
