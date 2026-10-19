@@ -17,6 +17,9 @@
 %% acmart-only figure accessibility macro: no-op here so figure blocks stay
 %% verbatim from the JAIR version.
 \providecommand{\Description}[1]{}
+%% The class's \orcid logo macro points at an Orcidlogo.eps that the template
+%% package does not ship; fall back to a text marker so \orcid stays usable.
+\renewcommand{\orcidlogo}{\,{\scriptsize ORCID}}
 
 \begin{document}
 
@@ -24,12 +27,12 @@
 Intervention Study on the Variable-Interaction Radius in Geometric Random
 Satisfiability}
 
-\author*[1]{\fnm{Jin} \sur{Song}}\email{j.song.cs@outlook.com}
+\author*[1]{\fnm{Jin} \sur{Song}\orcid{https://orcid.org/0009-0000-1407-0905}}\email{j.song.cs@outlook.com}
 \affil*[1]{\orgname{Independent Researcher}, \country{China}}
 
 \abstract{A widespread intuition in constraint solving holds that real-world
 instances are easy because their ``causes act locally'': when variables
-interact only within small neighbourhoods, solvers should scale.
+interact only within small neighborhoods, solvers should scale.
 Observational evidence supports the intuition, but observation cannot
 separate locality from the many other regularities real instances carry. We
 translate the intuition into a falsifiable, interventional claim and test it
@@ -49,8 +52,9 @@ $\eta^2\approx0.99$). Third, the swap raises difficulty by
 $16$--$68\times$ ($p\le7\times10^{-10}$) and flips 53 of the 82 resolved
 instance pairs; the ratio is a composite spanning those status changes
 (within the 29 status-stable pairs it persists at $\times 11$ and
-$\times 1.8$ per offset arm); exploratory mediation attributes ${\sim}94\%$
-of the effect to community-structure restructuring. Locality is not merely
+$\times 1.8$ per offset arm); post-hoc, exploratory causal mediation
+analysis is consistent with ${\sim}94\%$ of the effect flowing through
+community-structure restructuring. Locality is not merely
 correlated with tractability --- under our controls it behaves as the causal
 channel. Claims are scoped to $n=400$, direct CNF, and CDCL-family solvers.}
 
@@ -202,7 +206,7 @@ CDCL with restarts finds them in polynomial time --- the theoretical face of
 our E1 result (\S\ref{sec:e1}: width-controlled instances are flat and
 trivial at all $k$).
 Correlation decay~\cite{weitz2006} and the overlap-gap property
-(see \citep{gamarnik2021}) delineate where local information provably suffices
+(see \citealp{gamarnik2021}) delineate where local information provably suffices
 or fails; we use these as interpretive scaffolding only, since practical CDCL
 carries components outside these models.
 
