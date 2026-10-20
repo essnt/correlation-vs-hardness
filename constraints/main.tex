@@ -210,6 +210,24 @@ Correlation decay~\cite{weitz2006} and the overlap-gap property
 or fails; we use these as interpretive scaffolding only, since practical CDCL
 carries components outside these models.
 
+\paragraph{Structural tractability in constraint programming.}
+The constraint-programming community built the canonical
+structure--tractability bridge on the primal side: tree clustering compiles
+constraint networks of bounded treewidth into acyclic join trees solvable in
+polynomial time \citep{dechter1989}, and hypertree decompositions push the
+tractable frontier to hypergraph covers \citep{gottlob2002}. These are
+worst-case guarantees over the constraint graph; our width-controlled family
+(E1, \S\ref{sec:e1}) is the satisfiability instance of the same guarantee,
+observed from the solver side. The empirical tradition then mapped where
+difficulty actually concentrates: search cost peaks at a constrainedness
+transition in binary CSPs \citep{prosser1996}, and the random-CSP literature
+--- including work in this journal --- traced how model flaws entangle
+benchmark structure with apparent hardness \citep{gent2001}. Our design sits
+in that lineage with one change of instrument: instead of mapping the
+transition observationally, we move it with a controlled structural knob
+(\S\ref{sec:s0}) and perturb structure under an exact degree-preserving
+intervention (\S\ref{sec:e3b}).
+
 \section{Problem Setup and Instance Generators}
 \label{sec:setup}
 
