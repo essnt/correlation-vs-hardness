@@ -1,15 +1,16 @@
-%% Constraints (Springer) submission version, adapted from the JAIR version
-%% after JAIR's editorial decision (2026-10-17). Content, results, tables and
-%% figures are unchanged from the JAIR version (public 23dcb02); changes are
-%% limited to: Springer Nature template (sn-jnl, author-year reference style
-%% sn-mathphys-ay), an unstructured abstract recast for a constraint-solving
-%% readership, Springer back matter (Acknowledgements + Declarations), and
-%% removal of the JAIR-specific reproducibility checklist appendix (the
-%% journal-agnostic Reproducibility Statement section is retained).
-\documentclass[pdflatex,sn-mathphys-ay]{sn-jnl}
+%% Constraints (Springer) submission version. Content, results, tables and
+%% figures are identical to the publicly archived journal version (concept
+%% DOI 10.5281/zenodo.22777748); adaptation is limited to: Springer Nature
+%% template (sn-jnl, numbered sn-basic reference style), an unstructured
+%% abstract recast for a constraint-solving readership, Springer back matter
+%% (Acknowledgements + Statements and Declarations), and removal of the
+%% journal-specific reproducibility checklist appendix (the journal-agnostic
+%% Reproducibility Statement section is retained).
+\documentclass[pdflatex,sn-basic,Numbered]{sn-jnl}
 
 \usepackage{booktabs}
 \usepackage{graphicx}
+\graphicspath{{figures/}{./}}
 \usepackage{amsmath,amssymb}
 \usepackage[title]{appendix}
 
@@ -20,6 +21,9 @@
 %% The class's \orcid logo macro points at an Orcidlogo.eps that the template
 %% package does not ship; fall back to a text marker so \orcid stays usable.
 \renewcommand{\orcidlogo}{\,{\scriptsize ORCID}}
+%% The table counter restarts inside the appendices, so bare \arabic{table}
+%% hyperref anchors collide with body tables; prefix the section letter.
+\AtBeginDocument{\renewcommand{\theHtable}{\thesection.\arabic{table}}}
 
 \begin{document}
 
@@ -28,19 +32,18 @@ Intervention Study on the Variable-Interaction Radius in Geometric Random
 Satisfiability}
 
 \author*[1]{\fnm{Jin} \sur{Song}\orcid{https://orcid.org/0009-0000-1407-0905}}\email{j.song.cs@outlook.com}
-\affil*[1]{\orgname{Independent Researcher}, \country{China}}
+\affil*[1]{\orgname{Independent Researcher}, \city{Guangzhou}, \country{China}}
 
 \abstract{A widespread intuition in constraint solving holds that real-world
 instances are easy because their ``causes act locally'': when variables
-interact only within small neighborhoods, solvers should scale.
-Observational evidence supports the intuition, but observation cannot
-separate locality from the many other regularities real instances carry. We
-translate the intuition into a falsifiable, interventional claim and test it
-on conflict-driven clause-learning (CDCL) SAT solvers: holding the number of
-variables fixed, matching clause density to each radius's own satisfiability
-threshold, and keeping clause-content statistics invariant by construction,
-we vary only the radius within which clause variables are drawn from a 2-D
-torus. A locality-kernel generator sweeps nine radius levels with
+interact only within small neighborhoods, solvers should scale. But
+observation cannot separate locality from the many other regularities real
+instances carry. We turn the intuition into a falsifiable, interventional
+claim and test it on conflict-driven clause-learning (CDCL) SAT solvers:
+with variable count fixed, density matched to each radius's own
+satisfiability threshold, and clause-content statistics invariant by
+construction, we vary only the radius from which clause variables are drawn.
+A locality-kernel generator sweeps nine radius levels on a 2-D torus with
 preregistered threshold-matched offsets, 30 paired seeds and two solvers; a
 degree-preserving swap destroys spatial locality while holding every
 literal's occurrence count fixed. Three findings. First, the operational
@@ -51,15 +54,15 @@ the radius among decided instances ($F(8,216)=2808.5$; partial
 $\eta^2\approx0.99$). Third, the swap raises difficulty by
 $16$--$68\times$ ($p\le7\times10^{-10}$) and flips 53 of the 82 resolved
 instance pairs; the ratio is a composite spanning those status changes
-(within the 29 status-stable pairs it persists at $\times 11$ and
-$\times 1.8$ per offset arm); post-hoc, exploratory causal mediation
-analysis is consistent with ${\sim}94\%$ of the effect flowing through
-community-structure restructuring. Locality is not merely
-correlated with tractability --- under our controls it behaves as the causal
-channel. Claims are scoped to $n=400$, direct CNF, and CDCL-family solvers.}
+($\times 11/\times 1.8$ within the 29 status-stable pairs); post-hoc,
+exploratory causal mediation analysis is consistent with ${\sim}94\%$ of the
+effect flowing through community-structure restructuring. Locality is not
+merely correlated with tractability --- under our controls it behaves as the
+causal channel. Claims are scoped to $n=400$, direct CNF, and CDCL-family
+solvers.}
 
 \keywords{SAT, CDCL, locality, causal inference, phase transition,
-preregistration, reproducibility}
+preregistration}
 
 \maketitle
 
@@ -102,7 +105,7 @@ The remedy is standard in the empirical sciences and rare in SAT difficulty
 research: hold everything else fixed and turn one knob. We operationalize the
 locality conjecture as a dose--response experiment. A \emph{locality-kernel
 generator} samples each clause's variables uniformly from an $r$-ball on a
-discrete 2-D torus and draws polarities from a standardized content
+continuous 2-D unit torus and draws polarities from a standardized content
 distribution whose statistics are $r$-invariant by construction
 ($\sigma$-redundancy histograms identical across $r$ in pilots). Literal-degree
 means equal $3\alpha$ exactly, varying across $r$ only through the
@@ -113,7 +116,8 @@ quantity the philosophical conjecture is about.
 
 \paragraph{Contributions.}
 \begin{enumerate}
-\item \textbf{The first controlled intervention scan of locality radius.}
+\item \textbf{The first threshold-matched, preregistered intervention scan
+of locality radius.}
 Nine $r$ levels $\times$ three preregistered offsets $\Delta$ above each radius's
 \emph{own} operational threshold $\ac{r}$ $\times$ 30 paired seeds $\times$ two
 solvers, with per-instance structural metrics (treewidth bracketed by min-fill
@@ -145,7 +149,13 @@ triggers under which we would have reported ``density dominates''.
 All claims concern CDCL-family solvers on direct CNF encodings at $n=400$ with
 conflict-count difficulty. We make no claim about \textsc{P} versus
 \textsc{NP} (\S\ref{sec:discussion}). Machine-independence is obtained by
-using conflict counts, not wall-clock, as the primary measure.
+using conflict counts, not wall-clock, as the primary measure. Two design
+limits are stated up front and carried openly through the analysis
+(\S\ref{sec:threats}): threshold matching makes the mean literal degree
+co-vary with $r$ by construction, and beyond the measurability boundary the
+high-radius cells censor; the causal attribution therefore rests on the
+exact degree-preserving intervention (E3b) rather than on the dose--response
+curve alone.
 
 \section{Related Work}
 \label{sec:related}
@@ -182,7 +192,9 @@ locality yields small unsatisfiable subformulas findable in polynomial time ---
 the strongest existing theorem-level support for ``locality $\Rightarrow$
 tractability'', and the regime map our generator navigates.
 Gir\'aldez-Cru and Levy's locality-based generator
-variants~\cite{giraldez2017};
+variants~\cite{giraldez2017} showed empirically that CDCL solvers exploit
+exactly this locality --- the observation our intervention design turns into
+a controlled question.
 \citet{mull2016} then proved average-case hardness for
 community-attachment instances with few communities, and showed
 experimentally that \emph{community size, not formula size, dominates
@@ -206,7 +218,7 @@ CDCL with restarts finds them in polynomial time --- the theoretical face of
 our E1 result (\S\ref{sec:e1}: width-controlled instances are flat and
 trivial at all $k$).
 Correlation decay~\cite{weitz2006} and the overlap-gap property
-(see \citealp{gamarnik2021}) delineate where local information provably suffices
+(see [\citealp{gamarnik2021}]) delineate where local information provably suffices
 or fails; we use these as interpretive scaffolding only, since practical CDCL
 carries components outside these models.
 
@@ -219,21 +231,23 @@ tractable frontier to hypergraph covers \citep{gottlob2002}. These are
 worst-case guarantees over the constraint graph; our width-controlled family
 (E1, \S\ref{sec:e1}) is the satisfiability instance of the same guarantee,
 observed from the solver side. The empirical tradition then mapped where
-difficulty actually concentrates: search cost peaks at a constrainedness
-transition in binary CSPs \citep{prosser1996}, and the random-CSP literature
+difficulty actually concentrates: controlled random-CSP studies located a
+search-cost peak at the constrainedness transition in binary CSPs
+\citep{prosser1996}, and the random-CSP literature
 --- including work in this journal --- traced how model flaws entangle
 benchmark structure with apparent hardness \citep{gent2001}. Our design sits
-in that lineage with one change of instrument: instead of mapping the
-transition observationally, we move it with a controlled structural knob
-(\S\ref{sec:s0}) and perturb structure under an exact degree-preserving
-intervention (\S\ref{sec:e3b}).
+in that lineage with one change of instrument: rather than scanning a
+generator parameter and correlating it with cost, we match dose at each
+radius's own transition before comparing difficulty
+(\S\ref{sec:s0}), and perturb structure directly under an exact
+degree-preserving intervention (\S\ref{sec:e3b}).
 
 \section{Problem Setup and Instance Generators}
 \label{sec:setup}
 
 \paragraph{Locality kernel (\texttt{geo\_random}).}
-Fix $n=400$ variables placed uniformly on a discrete 2-D torus of side
-$\sqrt{n}$. Each of $m=\alpha n$ clauses: pick a centre uniformly, collect the
+Fix $n=400$ variables placed uniformly at random on a continuous 2-D unit
+torus. Each of $m=\alpha n$ clauses: pick a centre uniformly, collect the
 variables within torus distance $r$ (up to 1000 attempts to find a ball
 containing at least three variables), sample 3 distinct variables from that
 ball, and draw polarities uniformly
@@ -391,7 +405,7 @@ censoring & 2.1\% & 0\% & 0\% & 0\% & 0\% & 92.5\% & 98.8\% & 100\% & 100\%\\
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.85\linewidth]{figures/fig_s0_alphac.png}
+\includegraphics[width=0.85\linewidth]{fig_s0_alphac.png}
 \caption{Left: the operational threshold $\ac{r}$, resolved-only caliber
 (AMEND-2; $\triangle$ marks radii whose grid has no $0.5$-crossing, carried at
 their lattice-nearest pilot values). Right: censoring fraction per radius
@@ -480,7 +494,7 @@ resolved $n$ & 30 & 30 & 30 & 30 & 30 & 9/30 & 2/30\\
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.95\linewidth]{figures/fig_e3a_dose.png}
+\includegraphics[width=0.95\linewidth]{fig_e3a_dose.png}
 \caption{Left: dose--response of difficulty to the locality radius at matched
 threshold offsets (mean $\pm$ s.e.m., CaDiCaL; $\Delta{=}{+}0.8$ endpoints
 $1.29$ at $r{=}0.06$ and $5.77$ at $r{=}0.8$). Right: paired
@@ -520,7 +534,7 @@ intact, which is where the gradient evidence lives.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.9\linewidth]{figures/fig_km.png}
+\includegraphics[width=0.9\linewidth]{fig_km.png}
 \caption{Kaplan--Meier estimates of time-to-decision (conflicts; CaDiCaL,
 $\Delta$-pooled). Inclusion per \S\ref{sec:method}: budget-capped runs
 enter as censored at the $10^6$-conflict budget; \textsc{walltimeout} rows
@@ -875,10 +889,11 @@ configurations.
 
 The author thanks the SAT competition organizers and the maintainers of the
 public benchmark archives from which the real-instance corpus was drawn, and
-the developers of CaDiCaL, Glucose, and probSAT, whose tools made the
-interventional measurements possible.
+the developers of CaDiCaL and Glucose, whose tools made the interventional
+measurements possible, and of probSAT, which ships with the snapshot for the
+registered out-of-family prediction.
 
-\section*{Declarations}
+\section*{Statements and Declarations}
 
 \begin{itemize}
 \item \textbf{Funding:} Not applicable; no external funding was received.
@@ -1172,9 +1187,9 @@ undecided), so the carried values keep an unbounded-bias caveat.
 
 \paragraph{Locality kernel (\texttt{geo\_random}).}
 \begin{enumerate}
-    \item Place the $n$ variables uniformly at random on the discrete
-    $\sqrt{n} \times \sqrt{n}$ torus (seeded RNG; identical seeds reproduce
-    the instance byte-for-byte).
+    \item Place the $n$ variables uniformly at random on the continuous unit
+    torus $[0,1)^2$ with wraparound distance (seeded RNG; identical seeds
+    reproduce the instance byte-for-byte).
     \item For each of the $m = \alpha n$ clauses, attempt up to 1000 times:
     sample a centre uniformly; collect the variables within torus distance
     $r$; if the ball contains at least three variables, sample 3 distinct
