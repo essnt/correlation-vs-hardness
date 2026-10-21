@@ -1,11 +1,14 @@
-%% Constraints (Springer) submission version. Content, results, tables and
-%% figures are identical to the publicly archived journal version (concept
-%% DOI 10.5281/zenodo.22777748); adaptation is limited to: Springer Nature
-%% template (sn-jnl, numbered sn-basic reference style), an unstructured
-%% abstract recast for a constraint-solving readership, Springer back matter
-%% (Acknowledgements + Statements and Declarations), and removal of the
-%% journal-specific reproducibility checklist appendix (the journal-agnostic
-%% Reproducibility Statement section is retained).
+%% Constraints (Springer) submission version. This article adapts the
+%% journal-formatted version deposited at Zenodo (concept DOI
+%% 10.5281/zenodo.22777748; v7 = 10.5281/zenodo.22938201) for Constraints:
+%% Springer Nature template (sn-jnl, numbered sn-basic reference style), an
+%% unstructured abstract recast for a constraint-solving readership, Springer
+%% back matter (Acknowledgements + Statements and Declarations), and removal
+%% of the journal-specific reproducibility checklist appendix (the
+%% journal-agnostic Reproducibility Statement section is retained). Results,
+%% numbers, tables and figure files are unchanged; a small set of wording
+%% corrections relative to v7 is listed in the cover letter ("Differences
+%% from the deposited version").
 \documentclass[pdflatex,sn-basic,Numbered]{sn-jnl}
 
 \usepackage{booktabs}
@@ -34,31 +37,32 @@ Satisfiability}
 \author*[1]{\fnm{Jin} \sur{Song}\orcid{https://orcid.org/0009-0000-1407-0905}}\email{j.song.cs@outlook.com}
 \affil*[1]{\orgname{Independent Researcher}, \city{Guangzhou}, \country{China}}
 
-\abstract{A widespread intuition in constraint solving holds that real-world
-instances are easy because their ``causes act locally'': when variables
-interact only within small neighborhoods, solvers should scale. But
-observation cannot separate locality from the many other regularities real
-instances carry. We turn the intuition into a falsifiable, interventional
-claim and test it on conflict-driven clause-learning (CDCL) SAT solvers:
-with variable count fixed, density matched to each radius's own
-satisfiability threshold, and clause-content statistics invariant by
-construction, we vary only the radius from which clause variables are drawn.
-A locality-kernel generator sweeps nine radius levels on a 2-D torus with
-preregistered threshold-matched offsets, 30 paired seeds and two solvers; a
-degree-preserving swap destroys spatial locality while holding every
-literal's occurrence count fixed. Three findings. First, the operational
-satisfiability boundary is not radius-invariant: below density 2.5 at radius
-0.06, near the classical ${\approx}4.3$ region by radius 0.22. Second, at
-threshold-matched density, difficulty spans 3.4 orders of magnitude across
-the radius among decided instances ($F(8,216)=2808.5$; partial
-$\eta^2\approx0.99$). Third, the swap raises difficulty by
-$16$--$68\times$ ($p\le7\times10^{-10}$) and flips 53 of the 82 resolved
-instance pairs; the ratio is a composite spanning those status changes
-($\times 11/\times 1.8$ within the 29 status-stable pairs); post-hoc,
-exploratory causal mediation analysis is consistent with ${\sim}94\%$ of the
-effect flowing through community-structure restructuring. Locality is not
-merely correlated with tractability --- under our controls it behaves as the
-causal channel. Claims are scoped to $n=400$, direct CNF, and CDCL-family
+\abstract{A popular intuition holds that constraint instances are easy
+because their ``causes act locally'': variables interacting only in
+small neighborhoods should let solvers scale. But observation cannot
+separate locality from the other regularities instances carry. We turn
+it into a falsifiable, interventional claim and test it on conflict-driven
+clause-learning (CDCL) Boolean satisfiability (SAT) solvers: with variable
+count fixed, density matched to each radius's own satisfiability threshold,
+and clause-content statistics invariant by construction, we vary the radius
+from which clause variables are drawn. A locality-kernel generator sweeps
+nine radii on a 2-D torus with preregistered threshold-matched
+offsets, 30 paired seeds and two solvers; a degree-preserving swap destroys
+spatial locality while holding every literal occurrence count fixed. Three
+findings. First, the operational satisfiability boundary is not
+radius-invariant: below density 2.5 at radius 0.06, near the classical
+${\approx}4.3$ region by radius 0.22. Second, at matched density,
+difficulty spans 3.4 orders of magnitude across radius among decided
+instances ($F(8,216)=2808.5$; partial $\eta^2\approx0.99$). Third, the swap
+raises difficulty by $16$--$68\times$ ($p\le7\times10^{-10}$) and flips 53
+of the 82 resolved pairs, all toward satisfiability; within the nine
+status-stable sat--sat pairs the elevation is
+$\times10.7$. Exploratory mediation (four collinear mediators)
+is consistent with ${\sim}94\%$ of the effect flowing through
+community restructuring. Under these controls, a degree-preserving
+structure-destroying intervention raises difficulty at matched density ---
+consistent with locality acting as the causal channel. Claims are scoped to
+$n=400$, direct conjunctive-normal-form (CNF) encodings, and CDCL-family
 solvers.}
 
 \keywords{SAT, CDCL, locality, causal inference, phase transition,
@@ -116,8 +120,8 @@ quantity the philosophical conjecture is about.
 
 \paragraph{Contributions.}
 \begin{enumerate}
-\item \textbf{The first threshold-matched, preregistered intervention scan
-of locality radius.}
+\item \textbf{To our knowledge, the first threshold-matched, preregistered
+intervention scan of locality radius.}
 Nine $r$ levels $\times$ three preregistered offsets $\Delta$ above each radius's
 \emph{own} operational threshold $\ac{r}$ $\times$ 30 paired seeds $\times$ two
 solvers, with per-instance structural metrics (treewidth bracketed by min-fill
@@ -193,8 +197,9 @@ the strongest existing theorem-level support for ``locality $\Rightarrow$
 tractability'', and the regime map our generator navigates.
 Gir\'aldez-Cru and Levy's locality-based generator
 variants~\cite{giraldez2017} showed empirically that CDCL solvers exploit
-exactly this locality --- the observation our intervention design turns into
-a controlled question.
+exactly this locality; their locality knob reshapes the generative model,
+whereas our design matches dose at each radius's own threshold and
+intervenes on structure directly.
 \citet{mull2016} then proved average-case hardness for
 community-attachment instances with few communities, and showed
 experimentally that \emph{community size, not formula size, dominates
@@ -223,14 +228,16 @@ or fails; we use these as interpretive scaffolding only, since practical CDCL
 carries components outside these models.
 
 \paragraph{Structural tractability in constraint programming.}
-The constraint-programming community built the canonical
+The constraint-programming community built the standard
 structure--tractability bridge on the primal side: tree clustering compiles
 constraint networks of bounded treewidth into acyclic join trees solvable in
 polynomial time \citep{dechter1989}, and hypertree decompositions push the
 tractable frontier to hypergraph covers \citep{gottlob2002}. These are
 worst-case guarantees over the constraint graph; our width-controlled family
-(E1, \S\ref{sec:e1}) is the satisfiability instance of the same guarantee,
-observed from the solver side. The empirical tradition then mapped where
+(E1, \S\ref{sec:e1}) is a satisfiability-side test bed for the same width
+guarantee, observed from the solver side (at the tested density the family
+degenerates to trivial cores rather than spanning a width ladder,
+\S\ref{sec:e1}). The empirical tradition then mapped where
 difficulty actually concentrates: controlled random-CSP studies located a
 search-cost peak at the constrainedness transition in binary CSPs
 \citep{prosser1996}, and the random-CSP literature
@@ -247,7 +254,8 @@ degree-preserving intervention (\S\ref{sec:e3b}).
 
 \paragraph{Locality kernel (\texttt{geo\_random}).}
 Fix $n=400$ variables placed uniformly at random on a continuous 2-D unit
-torus. Each of $m=\alpha n$ clauses: pick a centre uniformly, collect the
+torus. Each of $m=\alpha n$ clauses: pick the position of a uniformly chosen
+variable as the center, collect the
 variables within torus distance $r$ (up to 1000 attempts to find a ball
 containing at least three variables), sample 3 distinct variables from that
 ball, and draw polarities uniformly
@@ -255,7 +263,8 @@ ball, and draw polarities uniformly
 and sparse inter-cluster coupling; $r\to\infty$ recovers approximately uniform
 random 3-SAT. Because the torus diameter is ${\sqrt{2}}/{2}\approx0.71$, the
 $r{=}0.8$ and $r{=}1.5$ levels (whose $r$-ball spans all $n$ variables)
-generate identical clause sets; sensitivity analyses treat them as one level.
+generate identical clause sets (nine nominal levels, eight distinct);
+sensitivity analyses treat them as one level.
 A \emph{planted} variant draws polarities from
 $\sigma$-satisfaction modes built on a global assignment $\sigma$: for the
 $k$ positions a clause satisfies $\sigma$ on, a cardinality is drawn uniformly
@@ -384,9 +393,9 @@ $0.5$-crossing (Fig.~\ref{fig:alphac}):
 
 \begin{table}[h]
 \centering
-\caption{Operational threshold vs.\ locality radius. $^{*}$measurement-saturated
+\caption{Operational threshold vs.\ locality radius. $^{a}$measurement-saturated
 radii: the crossing is unidentifiable; the table carries the pilot coarse
-value, flagged low-confidence, with spot-checks per AMEND-2. $^{\dagger}$the
+value, flagged low-confidence, with spot-checks per AMEND-2. $^{b}$the
 SAT rate never reaches 0.5 on the explored grid ($\alpha\in[2.5,3.1]$, rate
 ${\sim}0.31$ at the grid floor declining to ${\sim}0.13$): the boundary at
 $r=0.06$ is bracketed from above, not pinpointed. The complete per-cell grid
@@ -395,7 +404,7 @@ $r=0.06$ is bracketed from above, not pinpointed. The complete per-cell grid
 \toprule
 $r$ & 0.06 & 0.08 & 0.11 & 0.15 & 0.22 & 0.3 & 0.5 & 0.8 & 1.5\\
 \midrule
-$\ac{r}$ & $<2.5^{\dagger}$ & 3.35 & 3.82 & 4.20 & 4.23 & 4.40$^{*}$ & 4.70$^{*}$ & 4.60$^{*}$ & 4.60$^{*}$\\
+$\ac{r}$ & $<2.5^{b}$ & 3.35 & 3.82 & 4.20 & 4.23 & 4.40$^{a}$ & 4.70$^{a}$ & 4.60$^{a}$ & 4.60$^{a}$\\
 censoring & 2.1\% & 0\% & 0\% & 0\% & 0\% & 92.5\% & 98.8\% & 100\% & 100\%\\
 \bottomrule
 \end{tabular}
@@ -422,9 +431,13 @@ at radius 0.06 to 100 percent at radius 0.8 and above.}
 
 Three observations. \emph{(i)}~The operational threshold is not
 $r$-invariant. At $r=0.06$ the SAT rate is already only ${\sim}0.31$ at
-density 2.5 and declines gently through 3.1 (censoring $\le2.1\%$): the
-boundary is bracketed below density 2.5. By $r=0.22$ it has risen past 4.2
---- a displacement of \emph{at least} 1.7 density units. Locality does not
+density 2.5 and declines gently through 3.1 (censoring $\le2.1\%$; the 2.5
+cell itself is 5/16 satisfiable, 95\% CI $[0.11,0.59]$, and a seed bootstrap
+places the grid-wide $0.5$-crossing below density 2.5 in 86\% of resamples):
+the boundary is bracketed below density 2.5 at the point estimate. By
+$r=0.22$ it has risen past 4.2
+--- a point-estimate displacement of 1.7 density units (seed-bootstrap
+robust lower bound ${\approx}0.8$). Locality does not
 merely re-scale difficulty around a fixed threshold, it \emph{moves the
 threshold itself}. \emph{(ii)}~The curve saturates near the classical
 random-3-SAT threshold region \citep{mezard2002} ($\alpha_c \to 4.267$ as $n\to\infty$),
@@ -476,7 +489,7 @@ plateaus --- half or more undecided at $r\ge0.5$, about a quarter at $r=0.3$.
 \begin{table}[h]
 \centering
 \caption{Dose--response at $\Delta=+0.2$ (the near-threshold arm, CaDiCaL).
-$^{*}$means over surviving (easier) instances only; the censoring-aware
+$^{a}$means over surviving (easier) instances only; the censoring-aware
 Jonckheere--Terpstra bounds the underlying trend. The complete per-radius
 grid for all seven $(\Delta, \text{solver})$ arms is given in
 Appendix~\ref{app:e3atable}.}
@@ -484,7 +497,7 @@ Appendix~\ref{app:e3atable}.}
 \toprule
 $r$ & 0.06 & 0.08 & 0.11 & 0.15 & 0.22 & 0.3 & 0.5\\
 \midrule
-mean $\log_{10}$ conflicts & 1.45 & 1.68 & 2.30 & 3.02 & 4.86 & 5.87$^{*}$ & 5.93$^{*}$\\
+mean $\log_{10}$ conflicts & 1.45 & 1.68 & 2.30 & 3.02 & 4.86 & 5.87$^{a}$ & 5.93$^{a}$\\
 resolved $n$ & 30 & 30 & 30 & 30 & 30 & 9/30 & 2/30\\
 \bottomrule
 \end{tabular}
@@ -586,10 +599,64 @@ to 33 and 49 because the large-radius cells saturate the budget in either
 arm (at $+0.2$ the original arm decides $9/30$ and $0/30$ at $r{=}0.3$ and
 $r{=}1.5$, the swap arm $0/30$ at both and $3/30$ at $r{=}0.15$).
 
-Together with E1 (\S\ref{sec:e1}), whose width-controlled instances stay flat
-and trivial at every treewidth cap, the asymmetry is sharp: what CDCL
-difficulty responds to is \emph{local geometry}, not any global topological
-summary.
+\paragraph{Composition of the effect.}
+The 82 resolved pairs decompose by $(\Delta, r)$ as in
+Table~\ref{tab:e3bcomp}: at
+$\Delta{=}{+}0.2$, 30 pairs at $r{=}0.08$ (21 flips, mean $\log_{10}$
+goes $1.68\to2.75$, 29/30 harder) and 3 at $r{=}0.15$ (3 flips,
+$2.94\to5.37$, 3/3 harder); at $\Delta{=}{+}0.6$, 29 pairs at $r{=}0.08$
+(29 flips, $1.57\to4.49$, 29/29 harder), 8 at $r{=}0.3$ (no flips,
+$5.46\to5.94$, 7/8 harder), and 12 at $r{=}1.5$ (no flips,
+
+\begin{table}[h]
+\centering
+\caption{E3b composition: resolved pairs by $(\Delta, r)$. All 53 flips
+are \textsc{unsat}$\to$\textsc{sat}; the $r{=}1.5$ cell is the
+sham-like arm (modularity $0.169$ before and after).}
+\begin{tabular}{lcccccc}
+\toprule
+$\Delta$ & $r$ & resolved & flips & mean $\log_{10}$ orig & mean $\log_{10}$ swapped & swap harder\\
+\midrule
+$+0.2$ & 0.08 & 30 & 21 & 1.68 & 2.75 & 29/30\\
+$+0.2$ & 0.15 & 3 & 3 & 2.94 & 5.37 & 3/3\\
+$+0.6$ & 0.08 & 29 & 29 & 1.57 & 4.49 & 29/29\\
+$+0.6$ & 0.3 & 8 & 0 & 5.46 & 5.94 & 7/8\\
+$+0.6$ & 1.5 & 12 & 0 & 5.84 & 5.94 & 9/12\\
+\bottomrule
+\end{tabular}
+\label{tab:e3bcomp}
+\end{table}
+
+Every one of the 53 flips goes
+\textsc{unsat}$\to$\textsc{sat}; none goes the other way, and 50 of the 53
+sit at $r{=}0.08$. The 29 status-stable pairs are therefore not one
+stratum: the 9 sat--sat pairs at $r{=}0.08$ are the clean local evidence
+($\times10.7$, 9/9 harder); the 20 unsat--unsat pairs split into 8
+near-ceiling pairs at $r{=}0.3$ and 12 pairs at $r{=}1.5$, where the
+original and swapped instances are both effectively uniform random
+(modularity $0.169$ before and after --- no locality to destroy) and the
+residual swap effect is $+0.100$ log units ($\times1.26$; Wilcoxon
+$p=0.021$; 9/12 pairs harder), read as the budget-ceiling null limb. A
+censoring-aware direction test over all 240 pairs (a censored row counted
+as harder than any decided counterpart) gives 171 harder against 9 easier
+(sign test $p\approx6\times10^{-40}$); the 82-pair criterion excludes 94
+pairs with a decided original and a censored swap arm, so the excluded
+stratum is conservative for the effect size.
+
+\paragraph{Intervention check.}
+The swap destroys the target structure as intended: paired modularity
+falls from a mean of $0.423$ to $0.180$ (by radius, $0.756\to0.201$ at
+$r{=}0.08$; $0.528\to0.178$ at $r{=}0.15$; $0.239\to0.173$ at $r{=}0.3$;
+$0.169\to0.169$ at $r{=}1.5$), clustering falls from $0.261$ to $0.110$,
+the spectral gap rises from $0.327$ to $0.621$, the mean primal degree
+moves from $22.4$ to $26.3$, and the swap chain accepts $98.6$--$99.2\%$
+of proposals. The swapped instance is not a draw from the original
+family, so these are intervention checks, not a re-parameterization.
+
+Together with E1 (\S\ref{sec:e1}), whose width-controlled instances stay
+flat and trivial wherever the solver terminates, the asymmetry is sharp: in
+this design CDCL difficulty responds to local geometry rather than to the
+width cap itself.
 
 \section{Results IV: The Width-Controlled Control Family (E1)}
 \label{sec:e1}
@@ -604,7 +671,16 @@ density $\alpha = 4.0$, in two arms: a \emph{planted} arm (a satisfying
 assignment built into the instance) and an \emph{unplanted} arm. Matched
 random 3-SAT provides the density control (E2).
 
-Table~\ref{tab:e1} summarizes the outcome: flat and trivial. The unplanted
+Table~\ref{tab:e1} summarizes the outcome: flat and trivial wherever the
+solver terminates. Five of the 480 $k$-tree runs exhausted a
+600\,s wall guard without a decision (one each at $k{=}3$, $n{=}300$ and
+$k{=}16$, $n{=}300$ unplanted, $k{=}20$, $n{=}600$ unplanted, and $k{=}5$,
+$n{=}300$ and $k{=}16$, $n{=}300$ planted; the E1 stage used a 600\,s
+guard, while the main scan and S0 use 300\,s), so the ``flat and trivial''
+reading covers the 475 runs that resolve --- within the family's median
+7--10 conflicts, but with a ${\sim}1\%$ tail that deserves the
+propagation-explosion explanation the guarded protocol records as
+\textsc{walltimeout}. The unplanted
 arm is uniformly \textsc{unsat} at this density and refuted within at most 20 conflicts (typically single
 digits), with per-$k$ medians (pooling both
 sizes) confined to $7$--$10$ across the entire $k$ range (no trend in
@@ -617,8 +693,9 @@ what the width backbone predicts (\S\ref{sec:related}: short proofs exist
 and CDCL finds them), and the contrast with the locality scan is the point:
 at a density where width-bounded families never leave the tens of
 conflicts, the geometric family spans $10^{1.45}$--$10^{4.86}$ at its
-\emph{lowest} matched offset (\S\ref{sec:e3a}). What difficulty responds to
-is local geometry, not any global topological summary --- and planting a
+\emph{lowest} matched offset (\S\ref{sec:e3a}). E1 thus contrasts the two
+regimes rather than isolating width as a difficulty axis --- at this density
+the $k$-trees degenerate to trivial cores --- and planting a
 solution, the classical tractability crutch, trivializes the width-bounded
 family completely.
 
@@ -649,7 +726,7 @@ Table~\ref{tab:mediation}. The frozen protocol named treewidth as the
 mediator; Appendix~\ref{app:protocol} (AMEND-5) records the adaptation of
 the mediator set and quantifies the width path through the recorded
 treewidth bounds (both CIs exclude zero). Because the adaptation postdates
-the outcome data (AMEND-5, at independent-review disposition), we read the
+the outcome data (AMEND-5, at an audit prior to unblinding), we read the
 whole mediation block as \emph{exploratory, supportive} mechanism evidence,
 not a confirmatory test.
 
@@ -680,16 +757,31 @@ clustering & 2.19 & $[2.02, 2.44]$ & $1.06$\\
 
 The four mediators are estimated marginally (one two-step path each); several
 share the same instance graphs, so the shares are not additive across
-mediators.
+mediators. Two caveats bound this block. First, the mediators are strongly
+collinear with the design: modularity correlates $-0.96$ with the outcome and
+$-0.91$ with the threshold-matched density, and the density itself (and its
+surface correlate, mean degree) carries about $50\%$ and $72\%$ of the total
+effect --- the mediation path runs substantially through the matched dose.
+Second, placebo mediators such as $r^2$ or $\sqrt r$ can return shares
+outside $[0,100\%]$ under the same estimator, so the shares are consistency
+checks, not mechanism fractions; only the exploratory reading above is
+supported.
 
 The H1 feature ladder: on the main-scan data, ridge-CV $R^2$ rises from
 $0.610$ (size features) and $0.664$ (size+density) to $\mathbf{0.976}$ with
-structural features: on controlled families, structure carries predictive
-power that observation on random families cannot see (random-family baseline, the E2 control of \S\ref{sec:e1}:
-$0.90$ with zero structural gain). The preregistered nested OLS
-$F$-test on the same subset confirms the ladder: $F(60,1283)=297.8$,
-$p<10^{-4}$ for the structural block beyond size+density. A
-gradient-boosted predictor with leave-one-$r$-out extrapolation (training
+structural features. The rise is carried by the threshold-matched design
+cells rather than by the structural metrics as such: $(r,\Delta)$ cell
+dummies alone reach $R^2=0.976$ (within $0.001$ of the full model), and the
+structural metrics add about $0.1\%$ of variance within cells --- the
+structural features mostly encode $r$. Structure's evidentiary role is
+therefore the extrapolation test below, where cell identity cannot
+generalize by construction; the random-family baseline (the E2 control of
+\S\ref{sec:e1}) shows $0.90$ with zero structural gain. The preregistered
+nested OLS $F$-test on the same subset ($F(60,1283)=297.8$, $p<10^{-4}$ for
+the structural block beyond size and density) pools both engines on the same
+instances ($df_2=1283$ of 1350 rows), so we read it as descriptive of the
+controlled families rather than as independent confirmation of the metrics.
+A gradient-boosted predictor with leave-one-$r$-out extrapolation (training
 never sees the target radius) reaches $R^2 = 0.76$: structural features
 generalize to unseen locality levels.
 
@@ -704,8 +796,9 @@ artifact in the 1996 legacy DIMACS dialect, silently truncating these files;
 they were re-solved after the fix, with the full trail in the repository log).
 The combinatorial challenge instances mostly exceed the wall guard (hard
 anchor); file-name labels match our determinations on every checkable Heule
-instance, though one legacy \texttt{-yes} file is in fact \textsc{unsat}. Our
-generator's difficulty spectrum spans the middle of the real spectrum from
+instance, though one legacy \texttt{-yes} file is in fact \textsc{unsat}. Among
+the instances decided within budget, our
+generator's difficulty spectrum overlaps the middle of the real spectrum, from
 textbook-easy to competition-hard. The industrial-diversity caveat stands
 (\S\ref{sec:threats}).
 
@@ -836,13 +929,13 @@ difficulty phase transition changes --- exactly what a locality-causal story
 predicts, and what a density-only story has no reason to produce.
 
 \paragraph{Intervention as a community practice.}
-Structure--difficulty research has leaned on observational regression for two
-decades --- with the field's own flagship study concluding that no structural
+Much of structure--difficulty research has leaned on observational
+regression, with the field's own flagship study concluding that no structural
 measure is strongly predictive of CDCL performance in the
 aggregate~\cite{zulkoski2018}.
 Intervention designs (one knob, everything else pinned, preregistered
-decision rules, censoring declared) are the standard remedy in every
-empirical science that has faced the same impasse. The generator, the swap
+decision rules, censoring declared) are a standard remedy in empirical
+sciences that have faced the same impasse. The generator, the swap
 chain, the statistical protocol and the audit trail are released so that the
 next conjecture can be tested the same way.
 
@@ -854,14 +947,16 @@ and citation verification, implementing the generators, solvers, and
 statistical pipelines, executing the experiment matrix, and manuscript
 preparation (full disclosure in the accompanying Zenodo snapshot, DOI:
 10.5281/zenodo.22777748).
-A compact version of this work was deposited on Zenodo to timestamp the
-results; the present article is the full journal version, substantially
-expanded with complete threshold tables, per-arm dose--response details,
-censoring-sensitivity analyses, and the protocol appendix.
+A journal-formatted version of this work was deposited on Zenodo (v7) to
+timestamp the results; the present article adapts that version for
+Constraints. Results, numbers and figure files are unchanged; the
+differences --- template, abstract form, reference style, back matter, and a
+small set of wording corrections (listed in the cover letter, ``Differences
+from the deposited version'') --- do not alter any finding.
 
 All CDCL experiments ran CPU-only on a consumer x86-64 laptop under Linux
-(WSL2), Python 3.14 with pinned dependencies (requirements.txt); per the
-project's privacy policy the machine is documented in this anonymized form.
+(WSL2), Python 3.14 with pinned dependencies (requirements.txt); the machine
+is documented in this anonymized form.
 All instances are deterministically generated from
 $(\text{family}, \text{params}, \text{seed})$ tuples; the result store keys
 rows by $(\text{family}, \text{params}, \text{seed}, \text{solver})$ with
@@ -1146,7 +1241,7 @@ distribution-preserving operationalization on the unsatisfiable carrier; the
 interaction test was deferred rather than shipped ill-defined. AMEND-4:
 terminology normalization and the formal disposition record for the deferred
 content arm (it remains deferred as a scope definition; the frozen hypothesis
-text is unchanged). AMEND-5 (2026-09-18, at independent-review disposition):
+text is unchanged). AMEND-5 (2026-09-18, at an audit prior to unblinding):
 mediation-path adaptation record and width-path quantification (next
 paragraph); frozen hypothesis text unchanged.
 
@@ -1191,10 +1286,11 @@ undecided), so the carried values keep an unbounded-bias caveat.
     torus $[0,1)^2$ with wraparound distance (seeded RNG; identical seeds
     reproduce the instance byte-for-byte).
     \item For each of the $m = \alpha n$ clauses, attempt up to 1000 times:
-    sample a centre uniformly; collect the variables within torus distance
+    pick the position of a uniformly chosen variable as the center; collect
+    the variables within torus distance
     $r$; if the ball contains at least three variables, sample 3 distinct
     variables from it and continue to the polarity draw; otherwise resample
-    the centre.
+    the center.
     \item Polarity draw. \texttt{planted=False}: uniform over the 8 sign
     patterns. \texttt{planted=True}: draw a global assignment $\sigma$; for
     each clause, draw the number of $\sigma$-satisfied positions uniformly
