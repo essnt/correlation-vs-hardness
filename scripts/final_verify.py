@@ -76,13 +76,15 @@ chk("E3b 构成表在 PDF 内", "Composition of the effect" in full)
 chk("干预检查在 PDF 内", "Intervention check" in full)
 chk("中介稳健性措辞", "consistency check, not a mechanism fraction" in full)
 chk("复合干预归属", "composite intervention" in full)
-chk("PDF 无构建机身份字串残留", _S not in full)
+chk("PDF 无构建机身份字串残留（GitHub URL 豁免）",
+    _S not in full.replace("https://github.com/essnt/correlation-vs-hardness", ""))
 chk("PDF 无本机路径", _HP not in full)
 chk("PDF 无硬件型号", _RX not in full)
 chk("PDF 无 LaTeX 残留", not re.findall(r"\\cite|\\ref|\\label|\?\?", full))
 chk("PDF 嵌图 3 张", sum(len(pg.get_images()) for pg in d) == 3)
 # 对象字典层扫描：/PTEX.FileName 类构建机路径不在文本层，须扫原始字节
-chk("外层 PDF 原始字节无构建机身份/路径", _S.encode() not in pdfb and _HP.encode() not in pdfb)
+_pdfb_scan = pdfb.replace(b"https://github.com/essnt/correlation-vs-hardness", b"")
+chk("外层 PDF 原始字节无构建机身份/路径", _S.encode() not in _pdfb_scan and _HP.encode() not in pdfb)
 # 常见错拼与重复词
 typos = re.findall(r"\b(teh|recieve|seperate|occured|adress)\b", full, re.I)
 chk("常见错拼", not typos, str(typos))
@@ -131,7 +133,10 @@ full_snap = "\n".join(t for n, t in docs.items() if n not in SELF_SCRIPTS)
 for term in [_S, _HP, _RX, _NB, _TF, _TF2,
              _XS, _FJS, _QZ, _YTY, _JZ, _ZBR,
              _AIS]:
-    chk(f"快照无『{term}』", full_snap.count(term) == 0, f"×{full_snap.count(term)}")
+    _scan = (full_snap.replace("https://github.com/essnt/correlation-vs-hardness", "")
+             if term == _S else full_snap)
+    chk(f"快照无『{term}』" + ("（GitHub URL 豁免）" if term == _S else ""),
+        _scan.count(term) == 0, f"×{_scan.count(term)}")
 chk("快照无 sk- 密钥", not re.findall(_SK, full_snap))
 chk("快照无云服务密钥字样", _OAI not in full_snap and _ORR not in full_snap)
 other_mail = re.findall(r"[a-zA-Z0-9._%+-]+@(?:gmail|qq|163|hotmail)\.", full_snap)
