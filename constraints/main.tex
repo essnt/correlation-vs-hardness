@@ -5,10 +5,11 @@
 %% unstructured abstract recast for a constraint-solving readership, Springer
 %% back matter (Acknowledgements + Statements and Declarations), and removal
 %% of the journal-specific reproducibility checklist appendix (the
-%% journal-agnostic Reproducibility Statement section is retained). Results,
-%% numbers, tables and figure files are unchanged; a small set of wording
-%% corrections relative to v7 is listed in the cover letter ("Differences
-%% from the deposited version").
+%% journal-agnostic Reproducibility Statement section is retained). The
+%% headline results and figure files are unchanged; relative to v7 the
+%% manuscript adds re-presentations and robustness analyses of the same
+%% deposited data (including Table 4) and a small set of wording corrections,
+%% all listed in the cover letter ("Differences from the deposited version").
 \documentclass[pdflatex,sn-basic,Numbered]{sn-jnl}
 
 \usepackage{booktabs}
@@ -57,11 +58,11 @@ instances ($F(8,216)=2808.5$; partial $\eta^2\approx0.99$). Third, the swap
 raises difficulty by $16$--$68\times$ ($p\le7\times10^{-10}$) and flips 53
 of the 82 resolved pairs, all toward satisfiability; within the nine
 status-stable sat--sat pairs the elevation is
-$\times10.7$. Exploratory mediation (four collinear mediators)
-is consistent with ${\sim}94\%$ of the effect flowing through
-community restructuring. Under these controls, a degree-preserving
+$\times10.7$. Exploratory mediation over four collinear mediators yields a
+${\sim}94\%$ community-restructuring share (a consistency check, not a
+mechanism fraction). Under these controls, a degree-preserving
 structure-destroying intervention raises difficulty at matched density ---
-consistent with locality acting as the causal channel. Claims are scoped to
+consistent with spatial locality contributing to the causal channel. Claims are scoped to
 $n=400$, direct conjunctive-normal-form (CNF) encodings, and CDCL-family
 solvers.}
 
@@ -636,7 +637,8 @@ near-ceiling pairs at $r{=}0.3$ and 12 pairs at $r{=}1.5$, where the
 original and swapped instances are both effectively uniform random
 (modularity $0.169$ before and after --- no locality to destroy) and the
 residual swap effect is $+0.100$ log units ($\times1.26$; Wilcoxon
-$p=0.021$; 9/12 pairs harder), read as the budget-ceiling null limb. A
+$p=0.021$; 9/12 pairs harder), read as the budget-ceiling null limb and as
+an upper bound on the swap operator's residual side effects. A
 censoring-aware direction test over all 240 pairs (a censored row counted
 as harder than any decided counterpart) gives 171 harder against 9 easier
 (sign test $p\approx6\times10^{-40}$); the 82-pair criterion excludes 94
@@ -651,7 +653,9 @@ $0.169\to0.169$ at $r{=}1.5$), clustering falls from $0.261$ to $0.110$,
 the spectral gap rises from $0.327$ to $0.621$, the mean primal degree
 moves from $22.4$ to $26.3$, and the swap chain accepts $98.6$--$99.2\%$
 of proposals. The swapped instance is not a draw from the original
-family, so these are intervention checks, not a re-parameterization.
+family, so these are intervention checks, not a re-parameterization; the
+swap is a composite intervention, and the paired contrast is attributed to
+that bundle rather than to spatial locality alone.
 
 Together with E1 (\S\ref{sec:e1}), whose width-controlled instances stay
 flat and trivial wherever the solver terminates, the asymmetry is sharp: in
@@ -808,8 +812,11 @@ textbook-easy to competition-hard. The industrial-diversity caveat stands
 \paragraph{Construct.}
 ``Locality radius $r$'' is one spatial operationalization on a 2-D torus host;
 other hosts and other notions may disagree. Our claim is about $r$ as defined.
-Difficulty is conflict counts under CDCL --- a proxy for, not a definition of,
-hardness.
+At small $r$ the generator conditions on a nonempty $r$-ball (up to 1000
+attempts), which can induce local-density heterogeneity; this is a residual
+construct threat. Difficulty is conflict counts under CDCL --- a proxy for,
+not a definition of, hardness; it does not meter propagation or inprocessing
+work.
 
 \paragraph{Internal.}
 Five controls close the confounding routes we identified: the variable count
@@ -846,9 +853,15 @@ each) the per-cell worst-case maximum degree spans $24$--$31$ across $r$
 criterion laid down in the frozen H2 premise; the per-cell standard
 deviation stays within it ($3.75 \to 3.85$, ${\sim}3\%$). We disclose this
 deviation rather than silently incur it. It does not carry the causal
-attribution, which rests on the E3b swap alone: that intervention preserves
+attribution, which rests on the E3b swap: that intervention preserves
 the literal occurrence counts of every instance \emph{exactly}, so the
-$16$--$68\times$ paired difficulty shift cannot be carried by degrees. We do
+$16$--$68\times$ paired difficulty shift cannot be carried by the
+literal-occurrence sequence. The swap is nevertheless a composite
+intervention: it also changes higher-order primal-graph statistics (mean
+primal degree $22.4\to26.3$, clustering, spectral gap, and modularity;
+\S\ref{sec:e3b}), so the causal attribution is to the structure-destroying
+intervention bundle, of which spatial locality is the targeted component,
+not to spatial locality as a single isolated invariant. We do
 not lean on the direction of the residual shape drift, because the two tail
 readings point opposite ways: absolute tails grow toward the \emph{large}-$r$
 end (where heavier tails are typically the \emph{easier} regime for CDCL),
@@ -949,10 +962,11 @@ preparation (full disclosure in the accompanying Zenodo snapshot, DOI:
 10.5281/zenodo.22777748).
 A journal-formatted version of this work was deposited on Zenodo (v7) to
 timestamp the results; the present article adapts that version for
-Constraints. Results, numbers and figure files are unchanged; the
-differences --- template, abstract form, reference style, back matter, and a
-small set of wording corrections (listed in the cover letter, ``Differences
-from the deposited version'') --- do not alter any finding.
+Constraints. The headline results and figure files are unchanged; relative
+to v7 the manuscript adds re-presentations and robustness analyses of the
+same deposited data (including Table~\ref{tab:e3bcomp}) and a small set of
+wording corrections, all listed in the cover letter (``Differences from the
+deposited version''); the additions do not alter any headline finding.
 
 All CDCL experiments ran CPU-only on a consumer x86-64 laptop under Linux
 (WSL2), Python 3.14 with pinned dependencies (requirements.txt); the machine
