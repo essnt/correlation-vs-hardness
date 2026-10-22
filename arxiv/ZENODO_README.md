@@ -1,33 +1,69 @@
 # Locality Causes Tractability? An Intervention Study on the Variable-Interaction Radius in Geometric Random Satisfiability
 
 **Author:** Jin Song (Independent Researcher)
-**Version:** Journal version, prepared for journal submission. A compact
-version of this work remains archived in Zenodo versions 1-3; versions 4
-and later carry the full journal version, substantially expanded with complete
-threshold tables, per-arm dose-response details, censoring-sensitivity
-analyses, and the protocol appendix (including the JAIR Reproducibility
-Checklist).
-**License:** PDF & text: CC-BY-4.0. Code in the snapshot: MIT, except the bundled probSAT tool (`tools/probsat/`), which retains its original research-use license (see `tools/probsat/LICENSE`).
+**Version:** Constraints submission version (v8). A compact version of this
+work remains archived in Zenodo versions 1-3; versions 4-7 carry the JAIR
+journal version, substantially expanded with complete threshold tables,
+per-arm dose-response details, censoring-sensitivity analyses, and the
+protocol appendix. Version 8 adapts that journal version for Springer
+*Constraints* (sn-jnl template, numbered references, unstructured abstract,
+Statements and Declarations back matter, a Related Work paragraph on
+structural tractability in constraint programming) and adds re-presentations
+and robustness analyses of the same deposited data. The headline results and
+the three figure files are unchanged.
+**License:** PDF & text: CC-BY-4.0. Code in the snapshot: MIT, except the
+bundled probSAT tool (`tools/probsat/`), which retains its original
+research-use license (see `tools/probsat/LICENSE`). The `constraints/`
+directory contains the Springer Nature `sn-jnl` class, `sn-basic.bst`,
+`sn-mathphys-ay.bst`, and LPPL-licensed `.sty` dependencies; these template
+files are redistributed under the LaTeX Project Public License (LPPL),
+separate from the MIT-licensed research code.
 
 ## Contents
-1. `SongJin_2026_LocalityCausesTractability_JournalVersion.pdf` - the paper (19 pages).
+1. `SongJin_2026_LocalityCausesTractability_ConstraintsVersion.pdf` - the paper (25 pages).
 2. `correlation-vs-hardness_snapshot.tar.gz` - full snapshot of the research repository:
    - `src/cvh/` generators, solver harness (resume-per-row), metrics, statistics
    - `experiments/` every experiment script (S0, E1-E6, E4, E5, spotcheck)
    - `results/` SQLite databases (all raw solve runs), analysis JSON, figures
-   - `docs/` preregistration (HYPOTHESES.md + AMEND-1–5), prespecification audit
+   - `docs/` preregistration (HYPOTHESES.md + AMEND-1-5), prespecification audit
      (PRESPEC_AUDIT.md), experiment log (M2_LOG.md), full report (REPORT.md;
      Chinese original REPORT_zh.md), reader's guide (REPORT_GUIDE.md;
      Chinese original REPORT_zh_导读.md), literature notes, AI-use
      disclosure (AI_DISCLOSURE.md)
    - `data/external/e4prime/` external-instance manifest for E4-prime (SHA256 per
-     instance; the third-party benchmark files themselves are not redistributed —
+     instance; the third-party benchmark files themselves are not redistributed -
      refetch them from the public suites and verify against the manifest)
    - `scripts/` verification & packaging utilities (final_verify, rebuild_zenodo)
    - `tools/probsat/` bundled third-party probSAT solver (research-use license)
    - `tests/` unit tests; `LICENSE` + third-party license notices
-   - `jair/` LaTeX source of the journal version (official JAIR author kit format)
+   - `constraints/` LaTeX source of the Constraints version (sn-jnl class,
+     sn-basic.bst, LPPL-licensed dependencies, figures)
+   - `jair/` LaTeX source of the JAIR journal version (official JAIR author kit format)
    - `arxiv/` LaTeX source of the compact version (archived in Zenodo v1-v3)
+
+## Changes in v8 relative to v7
+- **Constraints presentation:** Springer sn-jnl template with numbered
+  references, unstructured abstract, Statements and Declarations back matter,
+  removal of the JAIR-specific reproducibility-checklist appendix, and a new
+  Related Work paragraph on structural tractability in constraint programming
+  (four references).
+- **Re-presentations and robustness analyses of the same deposited data:** a
+  new Table 4 (E3b composition by (Delta, r)), the r=1.5 sham-arm analysis,
+  the 240-pair censoring-aware direction test, the intervention-check metrics,
+  the S0 alpha_c confidence interval and seed-bootstrap statement, the H1
+  cell-dummy baseline with its extrapolation positioning, the mediation
+  collinearity/placebo caveat, and the five-row E1 600 s wall-timeout
+  disclosure. No new experiments were run and no headline result was
+  recomputed.
+- **Text-level corrections:** the instance-geometry description now says
+  "continuous 2-D unit torus" (v7 said "discrete ... torus of side sqrt(n)";
+  implementation and diameter are unchanged); the contribution claim now
+  reads "first threshold-matched, preregistered intervention scan" and the
+  IJCAI 2017 locality-generator sentence is completed; two Introduction
+  sentences state the two disclosed design limits up front; the abstract
+  opening now reads "a popular intuition".
+- No existing table or figure was altered; the three figure files are
+  byte-identical to v7.
 
 ## One-paragraph abstract
 Holding the number of variables fixed, matching clause density relative to each
@@ -42,10 +78,13 @@ q<=1e-4; partial eta^2~0.99). A degree-preserving swap that destroys locality ra
 difficulty 16-68x (p<=7e-10) and flips 53 of the 82 resolved pairs'
 satisfiability; the ratio is a composite spanning those status changes
 (within the 29 status-stable pairs the elevation persists, 11x/1.8x per
-arm, p<=3.9e-3); post-hoc, exploratory causal mediation analysis is consistent
-with ~94% of the effect flowing through
-community-structure restructuring. Scope: n=400, direct CNF, CDCL solvers.
+arm, p<=3.9e-3). The swap is a composite intervention, so the paired contrast
+is attributed to the structure-destroying bundle rather than to spatial
+locality alone; post-hoc, exploratory mediation over four collinear mediators
+yields a ~94% community-restructuring share, a consistency check rather than
+a mechanism fraction. Scope: n=400, direct CNF, CDCL solvers.
 
 ## Reproduce
-Every figure regenerates from the SQLite stores via committed scripts; see
-README inside the snapshot. Contact: j.song.cs@outlook.com
+Every figure regenerates from the SQLite stores via committed scripts; the
+Constraints source is in `constraints/` and compiles against the pinned TeX
+environment used for the deposit. Contact: j.song.cs@outlook.com

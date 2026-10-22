@@ -51,13 +51,13 @@ blob = open("zenodo_upload.zip", "rb").read()
 z = zipfile.ZipFile(io.BytesIO(blob))
 chk("外层 zip CRC", z.testzip() is None)
 chk("外层三文件清单", z.namelist() == ["README_ZENODO.md",
-    "SongJin_2026_LocalityCausesTractability_JournalVersion.pdf",
+    "SongJin_2026_LocalityCausesTractability_ConstraintsVersion.pdf",
     "correlation-vs-hardness_snapshot.tar.gz"], str(z.namelist()))
 
 # ========== 2. 论文 PDF ==========
-pdfb = z.read("SongJin_2026_LocalityCausesTractability_JournalVersion.pdf")
+pdfb = z.read("SongJin_2026_LocalityCausesTractability_ConstraintsVersion.pdf")
 d = pymupdf.open(stream=pdfb, filetype="pdf")
-chk("论文 19 页", d.page_count == 19, str(d.page_count))
+chk("论文 25 页", d.page_count == 25, str(d.page_count))
 t0 = d[0].get_text()
 chk("作者块 Jin Song（且无旧序残留）", "Jin Song" in t0 and "Song Jin" not in t0)
 chk("Independent Researcher", "Independent Researcher" in t0)
@@ -66,12 +66,16 @@ chk("无占位符", all(t0.count(p) == 0 for p in ["[Author Name]", "[Affiliatio
 chk("PDF 时间戳 UTC（无构建机时区指纹）", "Z" in (d.metadata.get("creationDate") or ""),
     str(d.metadata.get("creationDate")))
 full = "\n".join(pg.get_text() for pg in d)
-chk("期刊版声明", "full journal version" in full)
-chk("可复现性清单在 PDF 内", "Reproducibility Checklist for JAIR" in full)
+chk("Constraints 适配声明", "adapts that version for Constraints" in full)
+chk("Statements and Declarations 在 PDF 内", "Statements and Declarations" in full)
 chk("AMEND-4 在 PDF 内", "AMEND-4" in full)
 chk("AMEND-5 在 PDF 内", "AMEND-5" in full)
 chk("中介题注 adapted rule", "by the adapted rule" in full)
 chk("协议附录在 PDF 内", "Preregistration and Audit Protocol" in full)
+chk("E3b 构成表在 PDF 内", "Composition of the effect" in full)
+chk("干预检查在 PDF 内", "Intervention check" in full)
+chk("中介稳健性措辞", "consistency check, not a mechanism fraction" in full)
+chk("复合干预归属", "composite intervention" in full)
 chk("PDF 无构建机身份字串残留", _S not in full)
 chk("PDF 无本机路径", _HP not in full)
 chk("PDF 无硬件型号", _RX not in full)
@@ -253,6 +257,7 @@ chk("E2 随机对照 a=4.0 中位 21011", statistics.median([x[0] for x in r2]) 
 # ========== 6. 跨文档一致性 ==========
 chk("快照 tex == HEAD", docs.get("./arxiv/main.tex") == os.popen("git show HEAD:arxiv/main.tex").read())
 chk("快照 jair tex == HEAD", docs.get("./jair/main.tex") == os.popen("git show HEAD:jair/main.tex").read())
+chk("快照 constraints tex == HEAD", docs.get("./constraints/main.tex") == os.popen("git show HEAD:constraints/main.tex").read())
 chk("快照 HYPOTHESES == HEAD", docs.get("./docs/HYPOTHESES.md") == os.popen("git show HEAD:docs/HYPOTHESES.md").read())
 # 快照全部成员逐字节对 HEAD（含二进制；路径以 argv 传入，中文文件名不受 core.quotepath 影响）
 _mems = [m for m in tf.getmembers() if m.isfile()]
@@ -263,9 +268,9 @@ for _m in _mems:
     if tf.extractfile(_m).read() != _want:
         _bad.append(_rel)
 chk(f"快照全部成员 == HEAD 逐字节（{len(_mems) - len(_bad)}/{len(_mems)}）", not _bad, str(_bad[:5]))
-chk("包内 PDF == jair/main.pdf", pdfb == open("jair/main.pdf", "rb").read())
+chk("包内 PDF == constraints/main.pdf", pdfb == open("constraints/main.pdf", "rb").read())
 rm_ = z.read("README_ZENODO.md").decode()
-chk("README 19 页声明", "(19 pages)" in rm_)
+chk("README 25 页声明", "(25 pages)" in rm_)
 chk("README 无过时引用", "10 pages" not in rm_ and "5b36f34b" not in rm_)
 chk("快照无 4.5 旧口径", "climbs from ${\\sim}28$ to ${\\sim}72{,}000$ conflicts --- \\textbf{4.5 orders" not in docs.get("./arxiv/main.tex", ""))
 ai = re.sub(r"\s+", " ", docs.get("./docs/AI_DISCLOSURE.md", "").replace(">", ""))

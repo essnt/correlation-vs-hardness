@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """从当前 HEAD 重建 Zenodo 上传包（zenodo_upload.zip）。
-结构: README_ZENODO.md + 论文 PDF（期刊版）+ correlation-vs-hardness_snapshot.tar.gz
+结构: README_ZENODO.md + 论文 PDF（Constraints 版）+ correlation-vs-hardness_snapshot.tar.gz
 快照排除: EXCLUDE_DOCS 内部文档 13 个、docs/papers/*.pdf、
           zenodo_upload.zip 自身、egg-info、缓存。
 时戳: tar 成员 mtime / gzip MTIME / zip 条目 date_time 统一取自 HEAD 提交纪元
@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sanitize_pdf import sanitize_pdf_bytes
 
 CWD = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PDF_NAME = "SongJin_2026_LocalityCausesTractability_JournalVersion.pdf"
+PDF_NAME = "SongJin_2026_LocalityCausesTractability_ConstraintsVersion.pdf"
 EXCLUDE_DOCS = ["SESSION_HANDOFF.md", "POSITIONING.md", "VENUES_ROADMAP.md",
                 "RELEASE_CHECKLIST.md", "ZENODO_STEPS.md", "COVER_LETTER.md",
                 "VALUE_ASSESSMENT.md", "REVIEW_CHECKLIST.md", "LESSONS_LEARNED.md",
@@ -104,10 +104,10 @@ def main():
                         tfo.addfile(ti, fsrc)
     tar_data = gz_buf.getvalue()
     # 4) 外层 zip（三条目时间戳显式 = HEAD 纪元 UTC；内存组装后一次落盘）
-    pdf = open(os.path.join(CWD, "jair/main.pdf"), "rb").read()
+    pdf = open(os.path.join(CWD, "constraints/main.pdf"), "rb").read()
     # PTEX.FileName 净化兜底：pdfTeX 为 PDF 输入（doclicense 徽标）记录的
     # 绝对源路径携带构建机用户名/家目录，文本层扫描不可见（2026-09-20
-    # 隐私核验发现）——嵌入前等长原地改写；工作树 jair/main.pdf 亦须运行
+    # 隐私核验发现）——嵌入前等长原地改写；工作树 constraints/main.pdf 亦须运行
     # scripts/sanitize_pdf.py 保持与包内字节一致（闸门断言二者相等）
     pdf, _n_sanitized = sanitize_pdf_bytes(pdf)
     readme = open(os.path.join(CWD, "arxiv/ZENODO_README.md"), "rb").read()
