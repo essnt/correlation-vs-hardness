@@ -74,7 +74,8 @@ chk("中介题注 adapted rule", "by the adapted rule" in full)
 chk("协议附录在 PDF 内", "Preregistration and Audit Protocol" in full)
 chk("E3b 构成表在 PDF 内", "Composition of the effect" in full)
 chk("干预检查在 PDF 内", "Intervention check" in full)
-chk("中介稳健性措辞", "consistency check, not a mechanism fraction" in full)
+chk("中介稳健性措辞", "consistencycheck,notamechanismfraction"
+    in re.sub(r"\s+", "", full.replace("-\n", "")))
 chk("复合干预归属", "composite intervention" in full)
 chk("PDF 无构建机身份字串残留（GitHub URL 豁免）",
     _S not in full.replace("https://github.com/essnt/correlation-vs-hardness", ""))
