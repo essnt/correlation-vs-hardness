@@ -8,8 +8,10 @@
 %% journal-agnostic Reproducibility Statement section is retained). The
 %% headline results and figure files are unchanged; relative to v7 the
 %% manuscript adds re-presentations and robustness analyses of the same
-%% deposited data (including Table 4) and a small set of wording corrections,
-%% all listed in the cover letter ("Differences from the deposited version").
+%% deposited data (including Table 4) and a set of wording corrections and
+%% disclosure refinements, listed in the cover letter ("Differences from the
+%% deposited version") with the full line-level diff auditable in the public
+%% repository.
 \documentclass[pdflatex,sn-basic,Numbered]{sn-jnl}
 
 \usepackage{booktabs}
@@ -39,12 +41,12 @@ Satisfiability}
 \affil*[1]{\orgname{Independent Researcher}, \city{Guangzhou}, \country{China}}
 
 \abstract{A popular intuition holds that constraint instances are easy
-because their ``causes act locally'': variables interacting only in
+because their ``causes act locally'': variables interacting in
 small neighborhoods should let solvers scale. But observation cannot
 separate locality from the other regularities instances carry. We turn
 it into a falsifiable, interventional claim and test it on conflict-driven
 clause-learning (CDCL) Boolean satisfiability (SAT) solvers: with variable
-count fixed, density matched to each radius's own satisfiability threshold,
+count fixed, density matched to each radius's satisfiability threshold,
 and clause-content statistics invariant by construction, we vary the radius
 from which clause variables are drawn. A locality-kernel generator sweeps
 nine radii on a 2-D torus with preregistered threshold-matched
@@ -139,8 +141,8 @@ saturates beyond measurable range at $r\ge0.3$; the \emph{measurability
 boundary itself} tracks $r$.
 \item \textbf{A structure-destruction intervention (E3b).} A degree-preserving
 swap chain destroys spatial locality while keeping the literal degree sequence
-exactly fixed; paired Wilcoxon tests isolate the causal contribution of
-spatial structure.
+exactly fixed; paired Wilcoxon tests probe the causal contribution of the
+structure-destroying bundle.
 \item \textbf{Topology $\times$ content decomposition}, with the content arm's
 operationalization registered openly as an amendment (AMEND-3) rather than
 shipped ill-defined.
@@ -376,8 +378,8 @@ width-path quantification). A prespecification-vs-implementation audit
 records every deviation found by item-by-item inspection --- including one
 material bug (walltimeout rows initially counted as \textsc{unsat} in
 threshold estimation) fixed \emph{before} the main scan fired, and the
-post-freeze fourth dosing offset $\Delta{=}{+}0.6$ at 4 of the 9 radii
-(deviation E3b-$\Delta$). One exploratory
+post-freeze fourth dosing offset $\Delta{=}{+}0.6$ at 4 of the 9 radii,
+run on CaDiCaL only (deviation E3b-$\Delta$). One exploratory
 arm (E6: LLM-proposed branching orderings as a candidate content channel) was
 cut at its preregistered stop-line after showing no $r$-gradient signal
 relative to its baseline; the cut is documented in the frozen preregistration
@@ -437,8 +439,7 @@ cell itself is 5/16 satisfiable, 95\% CI $[0.11,0.59]$, and a seed bootstrap
 places the grid-wide $0.5$-crossing below density 2.5 in 86\% of resamples):
 the boundary is bracketed below density 2.5 at the point estimate. By
 $r=0.22$ it has risen past 4.2
---- a point-estimate displacement of 1.7 density units (seed-bootstrap
-robust lower bound ${\approx}0.8$). Locality does not
+--- a displacement of \emph{at least} 1.7 density units. Locality does not
 merely re-scale difficulty around a fixed threshold, it \emph{moves the
 threshold itself}. \emph{(ii)}~The curve saturates near the classical
 random-3-SAT threshold region \citep{mezard2002} ($\alpha_c \to 4.267$ as $n\to\infty$),
@@ -454,8 +455,9 @@ spot-checks (\S\ref{sec:threats}).
 \label{sec:e3a}
 
 The main scan places 9 radii $\times$ 3 offsets above each radius's own
-$\ac{r}$, 30 paired seeds, two solvers: 1740 runs, of which 1350 resolved
-and 390 censored (Table~\ref{tab:e3afull}). The store additionally carries
+$\ac{r}$, 30 paired seeds, two solvers: 1740 runs (the fourth, post-freeze
+offset $\Delta{=}{+}0.6$ contributed 120 CaDiCaL-only runs), of which 1350
+resolved and 390 censored (Table~\ref{tab:e3afull}). The store additionally carries
 the 240 swap-arm rows of \S\ref{sec:e3b} (86 resolved, 154 censored), for
 1980 runs with zero errored rows and 544 censored overall (27.5\%,
 concentrated at $r\ge0.3$); of those 544, 535 hit the $10^6$-conflict
@@ -572,9 +574,9 @@ fixed while destroying spatial locality. Paired Wilcoxon signed-rank:
 
 \begin{table}[h]
 \centering
-\caption{E3b paired results. 53 of the 82 resolved pairs flip satisfiability
-status under the swap (24 of 33 pairs at $\Delta{=}{+}0.2$; 29 of 49 at
-$\Delta{=}{+}0.6$).}
+\caption{E3b paired results (CaDiCaL). 53 of the 82 resolved pairs flip
+satisfiability status under the swap (24 of 33 pairs at $\Delta{=}{+}0.2$;
+29 of 49 at $\Delta{=}{+}0.6$).}
 \begin{tabular}{lccccc}
 \toprule
 $\Delta$ & pairs & original mean logc & swapped mean logc & ratio & $p$\\
@@ -611,8 +613,8 @@ $5.46\to5.94$, 7/8 harder), and 12 at $r{=}1.5$ (no flips,
 
 \begin{table}[h]
 \centering
-\caption{E3b composition: resolved pairs by $(\Delta, r)$. All 53 flips
-are \textsc{unsat}$\to$\textsc{sat}; the $r{=}1.5$ cell is the
+\caption{E3b composition: resolved pairs by $(\Delta, r)$, CaDiCaL. All 53
+flips are \textsc{unsat}$\to$\textsc{sat}; the $r{=}1.5$ cell is the
 sham-like arm (modularity $0.169$ before and after).}
 \begin{tabular}{lcccccc}
 \toprule
@@ -642,8 +644,9 @@ an upper bound on the swap operator's residual side effects. A
 censoring-aware direction test over all 240 pairs (a censored row counted
 as harder than any decided counterpart) gives 171 harder against 9 easier
 (sign test $p\approx6\times10^{-40}$); the 82-pair criterion excludes 94
-pairs with a decided original and a censored swap arm, so the excluded
-stratum is conservative for the effect size.
+pairs with a decided original and a censored swap arm (alongside 60 doubly
+censored and 4 reverse-censoring pairs), so the excluded stratum is
+conservative for the effect size.
 
 \paragraph{Intervention check.}
 The swap destroys the target structure as intended: paired modularity
@@ -964,9 +967,11 @@ A journal-formatted version of this work was deposited on Zenodo (v7) to
 timestamp the results; the present article adapts that version for
 Constraints. The headline results and figure files are unchanged; relative
 to v7 the manuscript adds re-presentations and robustness analyses of the
-same deposited data (including Table~\ref{tab:e3bcomp}) and a small set of
-wording corrections, all listed in the cover letter (``Differences from the
-deposited version''); the additions do not alter any headline finding.
+same deposited data (including Table~\ref{tab:e3bcomp}) and a set of
+wording corrections and disclosure refinements, listed in the cover letter
+(``Differences from the deposited version'') with the full line-level diff
+auditable in the public repository; the additions do not alter any headline
+finding.
 
 All CDCL experiments ran CPU-only on a consumer x86-64 laptop under Linux
 (WSL2), Python 3.14 with pinned dependencies (requirements.txt); the machine

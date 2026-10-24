@@ -145,7 +145,7 @@ def main():
                                 ("size+density+structure", SIZE + DENS + STRUCT)]:
                 X, y = design(rows, feats)
                 if len(y) < 2 * X.shape[1]:
-                    rep[fam][name] = {"n": len(y), "k": X.shape[1], "note": "n<2k, 跳过"}
+                    rep[fam][name] = {"n": len(y), "k": X.shape[1], "note": "n<2k, skipped"}
                     continue
                 rep[fam][name] = {
                     "n": len(y), "k": X.shape[1],

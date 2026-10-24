@@ -52,17 +52,38 @@ the MIT-licensed research code.
   the 240-pair censoring-aware direction test, the intervention-check metrics,
   the S0 alpha_c confidence interval and seed-bootstrap statement, the H1
   cell-dummy baseline with its extrapolation positioning, the mediation
-  collinearity/placebo caveat, and the five-row E1 600 s wall-timeout
-  disclosure. No new experiments were run and no headline result was
-  recomputed.
-- **Text-level corrections:** the instance-geometry description now says
-  "continuous 2-D unit torus" (v7 said "discrete ... torus of side sqrt(n)";
-  implementation and diameter are unchanged); the contribution claim now
-  reads "first threshold-matched, preregistered intervention scan" and the
-  IJCAI 2017 locality-generator sentence is completed; two Introduction
-  sentences state the two disclosed design limits up front; the abstract
-  opening now reads "a popular intuition".
-- No existing table or figure was altered; the three figure files are
+  collinearity/placebo caveat, the five-row E1 600 s wall-timeout
+  disclosure, and two added Threats sentences on the Construct paragraph
+  (residual threat from conditioning on non-empty radius balls; conflict
+  counts do not measure propagation/inprocessing work). No new experiments
+  were run and no headline result was recomputed.
+- **Text-level corrections and disclosure refinements:** the instance-geometry
+  description now says "continuous 2-D unit torus" (v7 said "discrete ...
+  torus of side sqrt(n)"; implementation and diameter are unchanged); the
+  contribution claim now reads "first threshold-matched, preregistered
+  intervention scan" and the IJCAI 2017 locality-generator sentence is
+  completed; two Introduction sentences state the two disclosed design limits
+  up front; the abstract opening now reads "a popular intuition"; the
+  abstract conclusion is weakened to "consistent with spatial locality
+  contributing to the causal channel" (v7: "it behaves as the causal
+  channel") and the contribution bullet now says the paired Wilcoxon tests
+  "probe the causal contribution of the structure-destroying bundle" (v7:
+  "isolate the causal contribution of spatial structure"); the E4 placement
+  claim is narrowed to "among the instances decided within budget ... overlaps
+  the middle" (v7: "spans the middle"); the nested OLS F-test is now read as
+  "descriptive ... not independent confirmation" (v7: "confirms the ladder");
+  the E1 conclusion sentence was restructured and several Discussion/E4
+  wordings tightened; the AMEND-5 timing now reads "at an audit prior to
+  unblinding" (v7: "at independent-review disposition"); the generator's
+  clause-center description is corrected to "pick the position of a uniformly
+  chosen variable as the center" (v7: "pick a centre uniformly"; Sec. 3 and
+  Appendix D) — a textual correction of the description, the implementation
+  is unchanged; solver-scope disclosures were refined (the post-freeze
+  Delta=+0.6 arm and the E3b swap arm are labeled CaDiCaL-only), the
+  240-pair direction-test exclusion count is completed (82 + 94 + 60 + 4),
+  and two redundant words were dropped from the abstract.
+- No table values or figure files were altered (table footnote markers were
+  normalized from symbols to letters); the three figure files are
   byte-identical to v7.
 
 ## One-paragraph abstract

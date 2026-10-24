@@ -48,7 +48,7 @@
    "size+density+structure": {
     "n": 86,
     "k": 67,
-    "note": "n<2k, 跳过"
+    "note": "n<2k, skipped"
    },
    "nested_F_test_H1": {
     "F": 0.3,
