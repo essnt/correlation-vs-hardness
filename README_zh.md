@@ -27,19 +27,25 @@
   （1.45→4.86；计删失下界则 ≥4.5）；F(8,216)=2808.5（p≈1e-213），
   JT p≤1e-4（FDR 后 q≤1e-4），partial η²≈0.99。
 - **E3b 手术刀**：度保持交换摧毁局部性 ⇒ 难度 ×16–68（p≤7e-10），82 个
-  已判定对中 53 对 sat/unsat 翻转；该比值为涵盖状态翻转的复合量（29 个
-  状态稳定对内抬升持续：×11/×1.8 每臂，p≤3.9e-3）。
+  已判定对中 53 对翻转（全部 UNSAT→SAT）；该比值为涵盖状态翻转的复合量
+  （9 个状态稳定 sat–sat 对内抬升 ×10.7；(Δ,r) 构成见论文表 4；交换为
+  复合干预，归因于结构摧毁 bundle）。
 - **中介（探索性；后设中介集按 AMEND-5）**：modularity ACME 3.06
-  [2.84,3.37]（占总效应 ~94%），四通道 CI 全不含 0。
-- **H1 阶梯**：主扫描上结构特征 CV R² 0.66→0.976（随机族对照零增益）；
-  GBDT 留一 r 外推 0.76。
-- 详见 docs/REPORT_zh.md（中文深度报告）、docs/paper_draft_en.md（英文论文
-  v0.2）、docs/PRESPEC_AUDIT.md（预注册审计）、docs/M2_LOG.md（全程记录）。
+  [2.84,3.37]（社区重构份额 ~94%——一致性检验而非机制占比；四中介共线），
+  四通道 CI 全不含 0。
+- **H1 阶梯**：主扫描上结构特征 CV R² 0.66→0.976（(r,Δ) 单元格哑变量单独
+  即达 0.976；随机族对照零增益）；GBDT 留一 r 外推 0.76。
+- 详见 docs/REPORT_zh.md（中文深度报告）、docs/PRESPEC_AUDIT.md（预注册
+  审计）、docs/M2_LOG.md（全程记录）；论文源在 constraints/（Constraints
+  投稿版）、jair/（期刊版）、arxiv/（紧凑版）。
 
 ## 目录结构
 
 ```
 docs/          预注册、审计、文献笔记、报告
+constraints/   Constraints 投稿版论文（LaTeX + 图）
+jair/          期刊版论文（LaTeX；编译 PDF 不入库）
+arxiv/         紧凑版论文
 src/cvh/       核心库（生成器 / 指标 / 求解器封装 / 统计分析）
 experiments/   实验脚本（E1–E6）
 data/          实例与基准（内容寻址，git 忽略大文件）
@@ -81,7 +87,8 @@ probSAT 二进制为可选构建（需 C 编译器），缺失时相关测试自
 
 ## 引用（Citation）
 
-本仓库的存档版本（论文压缩版 + 完整快照）已在 Zenodo 发布：
+本仓库的存档版本（论文 + 完整研究快照；最新版为 Constraints 投稿版）
+已在 Zenodo 发布：
 **DOI 10.5281/zenodo.22777748**（https://zenodo.org/records/22777748）——
 concept DOI，始终指向最新版本；首版（2026-09-15）的版本专属 DOI 为
 10.5281/zenodo.22777749。

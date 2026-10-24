@@ -40,24 +40,30 @@ difficulty.
   JT p≤1e-4 (q≤1e-4 after FDR), partial η²≈0.99.
 - **E3b scalpel**: degree-preserving swaps that destroy locality raise
   difficulty ×16–68 (p≤7e-10), flipping 53 of the 82 resolved pairs'
-  satisfiability; the ratio is a composite spanning those status changes
-  (within the 29 status-stable pairs the elevation persists, ×11/×1.8 per
-  arm, p≤3.9e-3).
+  satisfiability, all UNSAT→SAT; the ratio is a composite spanning those
+  status changes (within the nine status-stable sat–sat pairs the elevation
+  is ×10.7; the (Δ,r) composition is Table 4 of the paper, and the swap is a
+  composite intervention attributed to the structure-destroying bundle).
 - **Mediation (exploratory, post-hoc mediator set per AMEND-5)**: modularity
-  ACME 3.06 [2.84,3.37] (~94% of total effect);
-  all four channels' CIs exclude 0.
+  ACME 3.06 [2.84,3.37] (~94% community-restructuring share — a consistency
+  check, not a mechanism fraction; the four mediators are collinear); all
+  four channels' CIs exclude 0.
 - **H1 ladder**: across the main scan, structural-feature CV R² 0.66→0.976
-  (random-family control shows zero gain); GBDT leave-one-r-out extrapolation
-  0.76.
+  ((r,Δ) cell dummies alone reach 0.976; random-family control shows zero
+  gain); GBDT leave-one-r-out extrapolation 0.76.
 - See docs/REPORT.md (in-depth report, English; Chinese original in
-  docs/REPORT_zh.md), docs/paper_draft_en.md (English paper v0.2),
-  docs/PRESPEC_AUDIT.md (preregistration audit), docs/M2_LOG.md (full
-  experiment log).
+  docs/REPORT_zh.md), docs/PRESPEC_AUDIT.md (preregistration audit),
+  docs/M2_LOG.md (full experiment log); the paper sources live in
+  constraints/ (Constraints submission version), jair/ (journal version),
+  and arxiv/ (compact version).
 
 ## Repository layout
 
 ```
 docs/          preregistration, prespecification audit, literature notes, reports
+constraints/   Constraints submission version of the paper (LaTeX + figures)
+jair/          journal version of the paper (LaTeX; compiled PDF not tracked)
+arxiv/         compact version of the paper
 src/cvh/       core library (generators / metrics / solver harness / statistics)
 experiments/   experiment scripts (E1–E6)
 data/          instances and benchmarks (content-addressed; large files git-ignored)
@@ -106,8 +112,9 @@ platforms, and the CDCL solver is bundled with the python-sat wheel.
 
 ## Citation
 
-An archived version of this repository (compact paper + full snapshot) is
-published on Zenodo:
+An archived version of this repository (paper + full research snapshot; the
+latest version carries the Constraints submission version) is published on
+Zenodo:
 **DOI 10.5281/zenodo.22777748** (https://zenodo.org/records/22777748) — the
 concept DOI, which always resolves to the latest version; the version-specific
 DOI of the first release (2026-09-15) is 10.5281/zenodo.22777749.

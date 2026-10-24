@@ -14,10 +14,10 @@ the three figure files are unchanged.
 **License:** PDF & text: CC-BY-4.0. Code in the snapshot: MIT, except the
 bundled probSAT tool (`tools/probsat/`), which retains its original
 research-use license (see `tools/probsat/LICENSE`). The `constraints/`
-directory contains the Springer Nature `sn-jnl` class, `sn-basic.bst`,
-`sn-mathphys-ay.bst`, and LPPL-licensed `.sty` dependencies; these template
-files are redistributed under the LaTeX Project Public License (LPPL),
-separate from the MIT-licensed research code.
+directory contains the Springer Nature `sn-jnl` class and bst files (LaTeX
+Project Public License) plus their `.sty` dependencies, each redistributed
+under the permissive LaTeX license stated in its own header, separate from
+the MIT-licensed research code.
 
 ## Contents
 1. `SongJin_2026_LocalityCausesTractability_ConstraintsVersion.pdf` - the paper (25 pages).
