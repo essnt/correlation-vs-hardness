@@ -99,8 +99,8 @@ experiment methodology and the full record are in docs/REPORT_zh.md
 (§13 reproduction guide). The result databases ship with the repository:
 re-running experiment scripts resumes and automatically skips jobs that
 already carry a verdict (`status.sh` reconciles progress); the tracked
-repository content (code plus all result databases) is about 5 MB, and a
-fresh clone including the full git history is about 9 MB (past revisions
+repository content (code plus all result databases) is about 6 MB, and a
+fresh clone including the full git history is about 10 MB (past revisions
 of the result databases and packaged artifacts dominate the history).
 
 Platform notes: the paths above run on Linux / macOS / Windows
