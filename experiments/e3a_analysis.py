@@ -20,7 +20,6 @@ from cvh.analysis import (load_runs, rm_anova, jonckheere_terpstra,  # noqa: E40
 
 DB = ROOT / "results/m2_main.db"
 OUT = ROOT / "results/e3a_analysis.json"
-DELTAS = [0.2, 0.4, 0.8]
 
 
 def ok(df):
@@ -126,7 +125,6 @@ def main():
             rep[f"mediation_{med[2:]}"] = mediation_imai(s["p_r"].values, s[med].values,
                                                          s["logc"].values, n_boot=1000)
 
-    # ---------- 删失敏感性：Tobit（把删失行带上限纳入） ----------
     # ---------- 删失敏感性：Tobit（预算删失行带上限纳入） ----------
     # walltimeout 行无冲突口径（conflicts=None），按 AMEND-2 语义排除在
     # 冲突空间分析之外——把它们带进似然只会产生 NaN（2026-09-17 独立

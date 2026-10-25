@@ -142,12 +142,6 @@ def clustering_coef(g: nx.Graph) -> float:
 # solution-space geometry proxies
 # --------------------------------------------------------------------------- #
 
-def backbone_fraction(inst) -> float | None:
-    """Fraction of variables fixed across sampled solutions (WalkSAT samples;
-    pilot-stage: returns None until sampler lands in M1-d)."""
-    return None
-
-
 def sigma_redundancy_hist(inst) -> list[int]:
     """For planted instances: how many of the 3 literals sigma satisfies, per
     clause.  Measured per-radius mean 2.18–2.24, r-invariant (per-instance

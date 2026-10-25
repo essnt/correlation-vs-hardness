@@ -68,7 +68,7 @@ def fig_r3b_moneyplot():
     ax.set_xticks([0.06, 0.08, 0.15, 0.3, 0.5, 1.5])
     ax.set_xticklabels(["0.06", "0.08", "0.15", "0.3", "0.5", "1.5"])
     ax.set_xlabel("locality radius r (log scale) — larger r = weaker causal locality")
-    ax.set_ylabel(r"median $\log_{10}$(conflicts+1), Cadical")
+    ax.set_ylabel(r"median $\log_{10}$(conflicts+1), CaDiCaL")
     ax.set_title("Difficulty vs. locality at matched excess density\n"
                  "(geo_random, n=400, 20 seeds/cell)", fontsize=11)
     ax.legend(frameon=False, fontsize=9)

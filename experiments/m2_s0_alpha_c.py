@@ -1,7 +1,7 @@
 """M2-S0: unified fine estimation of the operational threshold alpha_c(r).
 
 Initial crossing points are interpolated from the round-3 coarse matrix
-(8 seeds, alpha step 0.25), tolerating pure cells (all-sat / all-unsat) and
+(8 seeds per cell over a mixed-step alpha grid spanning 3.0-7.0), tolerating pure cells (all-sat / all-unsat) and
 skipping budget-censored runs (which carry no verdict).  Each r is then
 refined on a +/-0.1 window (step 0.05) with 16 fresh seeds at a raised
 conflict budget of 1e7 (AMEND-1: threshold estimation needs low censoring;

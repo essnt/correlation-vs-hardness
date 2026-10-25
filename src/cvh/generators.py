@@ -13,8 +13,6 @@ Families
                      geo_random main arm is uncapped)
 - tw_controlled    : E1 — clauses fill a random k-tree / partial k-tree skeleton,
                      treewidth bounded by construction
-- ps_reference     : Giráldez-Cru & Levy style locality model (coupled heterogeneity),
-                     reimplemented minimally for the related-work comparison only
 
 Conventions: variables are 1..n; a clause is a list of signed ints; the planted
 assignment σ maps var -> bool; a literal l is satisfied by σ iff (l>0) == σ[|l|].
@@ -171,65 +169,6 @@ def _hidden_polarity(clause_vars, sigma, beta) -> list[int]:
             out.append(v if sigma[v - 1] else -v)      # sigma-true, beta-false
         else:
             out.append(v if not beta[v - 1] else -v)   # sigma-false, beta-false
-    return out
-
-
-def double_planted(n: int, alpha: float, r: float, blob_frac: float,
-                   seed: int) -> Instance:
-    """E3c: two planted assignments that AGREE on most of the torus and differ
-    on a spatial blob.  Every clause is satisfied by both sigma1 and sigma2
-    (anchor literals drawn from the agreement region), so the formula is
-    typically UNSAT with the frustration localised near the blob — 'locally
-    satisfiable, globally contradictory'.  r controls how tightly clauses
-    anchor; blob_frac controls the disagreement mass."""
-    rng = random.Random(seed)
-    coords = [(rng.random(), rng.random()) for _ in range(n)]
-    sigma1 = _sample_sigma(n, rng)
-    # blob = points within radius of a random centre (torus metric)
-    cx, cy = rng.random(), rng.random()
-    blob_radius = math.sqrt(blob_frac / math.pi)          # area ~ blob_frac
-    sigma2 = list(sigma1)
-    for i, p in enumerate(coords):
-        if _torus_dist2((cx, cy), p) <= blob_radius ** 2:
-            sigma2[i] = not sigma2[i]
-    agree = [i + 1 for i in range(n) if sigma1[i] == sigma2[i]]
-    if len(agree) < 3:
-        raise ValueError("blob_frac too large: no agreement region")
-    m = round(alpha * n)
-    deg = [0] * (n + 1)
-    clauses = []
-    for _ in range(m):
-        for _attempt in range(1000):
-            c = coords[rng.randrange(n)]
-            near = [i for i, p in enumerate(coords, 1)
-                    if _torus_dist2(c, p) <= r ** 2]
-            if len(near) < 3:
-                continue
-            vs = rng.sample(near, 3)
-            if max(deg[v] for v in vs) <= _deg_cap(n, m):
-                break
-        for v in vs:
-            deg[v] += 1
-        clauses.append(_both_planted_polarity(vs, sigma1, sigma2, agree, rng))
-    return Instance(clauses, n, "double_planted",
-                    {"alpha": alpha, "m": m, "r": r, "blob_frac": blob_frac},
-                    seed, sigma=sigma1)
-
-
-def _both_planted_polarity(clause_vars, sigma1, sigma2, agree, rng) -> list[int]:
-    """Polarity pattern satisfied by both sigma1 and sigma2: needs >=1 literal
-    at an agreement position with polarity matching the common value."""
-    ag_pos = [i for i, v in enumerate(clause_vars) if v in set(agree)]
-    if not ag_pos:                                  # rare at small r; retry logic upstream
-        ag_pos = [rng.randrange(3)]
-    chosen = rng.sample(ag_pos, rng.randint(1, len(ag_pos)))
-    out = []
-    for i, v in enumerate(clause_vars):
-        common = sigma1[v - 1]                       # == sigma2[v-1] on agreement
-        if i in chosen:
-            out.append(v if common else -v)          # true under both
-        else:
-            out.append(v if rng.random() < 0.5 else -v)  # free: true under one
     return out
 
 

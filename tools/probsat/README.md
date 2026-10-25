@@ -10,7 +10,8 @@ harness in `src/cvh/solver.py`.
 - Source obtained from GitHub mirror: <https://github.com/adrianopolus/probSAT>
   (commit on `master` as of 2026-09-09).  `probSAT.c` self-reports
   **version SC13.2** (the SAT Competition 2013 version).
-- License: upstream `LICENSE` file kept in this directory (MIT).
+- License: upstream `LICENSE` file kept in this directory (research-use
+  license: non-commercial use, no competition submissions).
 
 ## Local modifications
 

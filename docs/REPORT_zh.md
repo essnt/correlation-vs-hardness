@@ -126,7 +126,7 @@ OGP（Gamarnik 等）说明高维/全连接体制中局部算法与稳定性障�
 - 求解器：CaDiCaL（主）+ Glucose（稳健性）；子进程隔离 + 冲突预算截断
   （基建史见 M2_LOG：interrupt 死锁→预算截断→spawn 隔离）。
 - 结构度量（src/cvh/metrics.py）：树宽用 min-fill 上界 + 退化度下界（区间呈现，
-  构造族用 k 作上界）；社区（Leiden 固定分辨率）；谱隙；模ularity；σ-冗余度直方图。
+  构造族用 k 作上界）；社区（Leiden 固定分辨率）；谱隙；模块度；σ-冗余度直方图。
 
 ### 3.3 统计（src/cvh/analysis.py）
 Tobit 回归（自实现，处理删失）、Kaplan–Meier、重复测量 ANOVA、

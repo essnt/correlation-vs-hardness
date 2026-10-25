@@ -58,7 +58,8 @@ $p\le 3.9\times10^{-3}$); post-hoc, exploratory
 causal mediation analysis is consistent with ${\sim}94\%$ of the radius effect
 flowing through community-structure
 restructuring (ACME 3.06, bootstrap CI $[2.84, 3.37]$). Locality is not merely
-correlated with tractability --- under our controls it behaves as the causal channel.
+correlated with tractability --- under our controls the evidence is consistent
+with spatial locality contributing to the causal channel.
 All claims are scoped to $n=400$, direct CNF encodings, and CDCL-family
 solvers; we discuss what this does and does not say about P versus NP. Code,
 seeds, data, preregistration, and the full audit trail are public.
@@ -99,7 +100,7 @@ The remedy is standard in the empirical sciences and rare in SAT difficulty
 research: hold everything else fixed and turn one knob. We operationalize the
 locality conjecture as a dose--response experiment. A \emph{locality-kernel
 generator} samples each clause's variables uniformly from an $r$-ball on a
-discrete 2-D torus and draws polarities from a standardized content
+continuous 2-D unit torus and draws polarities from a standardized content
 distribution whose statistics are $r$-invariant by construction
 ($\sigma$-redundancy histograms identical across $r$ in pilots). Literal-degree
 means equal $3\alpha$ exactly, varying across $r$ only through the
@@ -110,7 +111,8 @@ quantity the philosophical conjecture is about.
 
 \paragraph{Contributions.}
 \begin{enumerate}
-\item \textbf{The first controlled intervention scan of locality radius.}
+\item \textbf{To our knowledge, the first threshold-matched, preregistered
+intervention scan of locality radius.}
 Nine $r$ levels $\times$ three preregistered offsets $\Delta$ above each radius's
 \emph{own} operational threshold $\ac{r}$ $\times$ 30 paired seeds $\times$ two
 solvers, with per-instance structural metrics (treewidth bracketed by min-fill
@@ -127,8 +129,8 @@ saturates beyond measurable range at $r\ge0.3$; the \emph{measurability
 boundary itself} tracks $r$.
 \item \textbf{A structure-destruction intervention (E3b).} A degree-preserving
 swap chain destroys spatial locality while keeping the literal degree sequence
-exactly fixed; paired Wilcoxon tests isolate the causal contribution of
-spatial structure.
+exactly fixed; paired Wilcoxon tests probe the causal contribution of the
+structure-destroying bundle.
 \item \textbf{Topology $\times$ content decomposition}, with the content arm's
 operationalization registered openly as an amendment (AMEND-3) rather than
 shipped ill-defined.
@@ -177,8 +179,8 @@ make random $k$-SAT easy (superpolynomial resolution size), whereas geometric
 locality yields small unsatisfiable subformulas findable in polynomial time ---
 the strongest existing theorem-level support for ``locality $\Rightarrow$
 tractability'', and the regime map our generator navigates. Gir\'aldez-Cru
-and Levy's locality-based generator variants~\cite{giraldez2017};
-Mull et al.~\cite{mull2016} then proved average-case hardness for
+and Levy's locality-based generator variants~\cite{giraldez2017} showed
+empirically that CDCL solvers exploit exactly this locality. Mull et al.~\cite{mull2016} then proved average-case hardness for
 community-attachment instances with few communities, and showed
 experimentally that \emph{community size, not formula size, dominates
 runtime}: instances differing $55\times$ in variables but matched in community
@@ -208,8 +210,9 @@ carries components outside these models.
 \label{sec:setup}
 
 \paragraph{Locality kernel (\texttt{geo\_random}).}
-Fix $n=400$ variables placed uniformly on a discrete 2-D torus of side
-$\sqrt{n}$. Each of $m=\alpha n$ clauses: pick a centre uniformly, collect the
+Fix $n=400$ variables placed uniformly at random on a continuous 2-D unit
+torus. Each of $m=\alpha n$ clauses: pick the position of a uniformly chosen
+variable as the center, collect the
 variables within torus distance $r$ (up to 1000 attempts to find a ball
 containing at least three variables), sample 3 distinct variables from that
 ball, and draw polarities uniformly
@@ -331,13 +334,13 @@ $0.5$-crossing (Fig.~\ref{fig:alphac}):
 \toprule
 $r$ & 0.06 & 0.08 & 0.11 & 0.15 & 0.22 & 0.3 & 0.5 & 0.8 & 1.5\\
 \midrule
-$\ac{r}$ & $<2.5^{\dagger}$ & 3.35 & 3.82 & 4.20 & 4.23 & 4.40$^{*}$ & 4.70$^{*}$ & 4.60$^{*}$ & 4.60$^{*}$\\
+$\ac{r}$ & $<2.5^{b}$ & 3.35 & 3.82 & 4.20 & 4.23 & 4.40$^{a}$ & 4.70$^{a}$ & 4.60$^{a}$ & 4.60$^{a}$\\
 censoring & 2.1\% & 0\% & 0\% & 0\% & 0\% & 92.5\% & 98.8\% & 100\% & 100\%\\
 \bottomrule
 \end{tabular}
-\caption{Operational threshold vs.\ locality radius. $^{*}$measurement-saturated
+\caption{Operational threshold vs.\ locality radius. $^{a}$measurement-saturated
 radii: the crossing is unidentifiable; the table carries the pilot coarse
-value, flagged low-confidence, with spot-checks per AMEND-2. $^{\dagger}$the
+value, flagged low-confidence, with spot-checks per AMEND-2. $^{b}$the
 SAT rate never reaches 0.5 on the explored grid ($\alpha\in[2.5,3.1]$, rate
 ${\sim}0.31$ at the grid floor declining to ${\sim}0.13$): the boundary at
 $r=0.06$ is bracketed from above, not pinpointed.}
@@ -348,8 +351,8 @@ $r=0.06$ is bracketed from above, not pinpointed.}
 \centering
 \includegraphics[width=0.85\linewidth]{figures/fig_s0_alphac.png}
 \caption{Left: the operational threshold $\ac{r}$, resolved-only caliber
-(AMEND-2; $\triangle$ marks radii whose grid has no $0.5$-crossing, carried at
-their lattice-nearest pilot values). Right: censoring fraction per radius
+(AMEND-2; $\triangle$ marks the $r{=}0.06$ lattice-nearest anchor, the one
+radius whose grid has no $0.5$-crossing). Right: censoring fraction per radius
 (budget + walltime) --- the measurability boundary itself tracks $r$.}
 \label{fig:alphac}
 \end{figure}
@@ -516,7 +519,8 @@ Imai et al.~\cite{imai2011} causal mediation of the $r \to$ difficulty path (boo
 though marginal single-mediator fits can also produce this pattern under
 misspecification, so no claim rests on it); mean degree $2.34\ [2.15, 2.60]$; clustering
 $2.19\ [2.02, 2.44]$. All CIs exclude zero; the mediator set was adapted
-after the outcomes were known (AMEND-5), so the block is read as
+after the outcome data was collected (AMEND-5, at an audit prior to
+unblinding), so the block is read as
 exploratory, supportive mechanism evidence rather than a confirmatory test,
 and the confirmatory weight rests with E3b.
 
@@ -674,13 +678,13 @@ difficulty phase transition changes --- exactly what a locality-causal story
 predicts, and what a density-only story has no reason to produce.
 
 \paragraph{Intervention as a community practice.}
-Structure--difficulty research has leaned on observational regression for two
-decades --- with the field's own flagship study concluding that no structural
+Much of structure--difficulty research has leaned on observational
+regression --- with the field's own flagship study concluding that no structural
 measure is strongly predictive of CDCL performance in the
 aggregate~\cite{zulkoski2018}.
 Intervention designs (one knob, everything else pinned, preregistered
-decision rules, censoring declared) are the standard remedy in every
-empirical science that has faced the same impasse. The generator, the swap
+decision rules, censoring declared) are a standard remedy in empirical
+sciences that have faced the same impasse. The generator, the swap
 chain, the statistical protocol and the audit trail are released so that the
 next conjecture can be tested the same way.
 
@@ -701,7 +705,7 @@ version-controlled. The full experiment matrix, budgets, the preregistration
 with numbered amendments, and the prespecification-vs-implementation audit are
 in the repository.
 
-\begin{thebibliography}{18}\small
+\begin{thebibliography}{19}\small
 
 \bibitem{marques2009} J.~Marques-Silva, I.~Lynce, S.~Malik. Conflict-driven
 clause learning SAT solvers. In \emph{Handbook of Satisfiability}, 2nd ed.,

@@ -9,7 +9,7 @@ ridge baseline（experiments/e5_baseline.py）对比 R² 增量。
 - 特征重要性报告（哪些结构量携带预测信息）。
 数据：results/m2_main.db（E3a/E3b 主扫描）。删失行（walltimeout/budget）剔除，
 与 baseline 口径一致；删失敏感性由 Tobit/KM 负责。
-产出: results/e5_gbdt.json + results/figures/fig_e5_importance.png
+产出: results/e5_gbdt.json（特征重要性图需 permutation importance，未启用）
 """
 import json
 import os
