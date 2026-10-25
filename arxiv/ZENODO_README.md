@@ -68,7 +68,10 @@ the MIT-licensed research code.
   contributing to the causal channel" (v7: "it behaves as the causal
   channel") and the contribution bullet now says the paired Wilcoxon tests
   "probe the causal contribution of the structure-destroying bundle" (v7:
-  "isolate the causal contribution of spatial structure"); the E4 placement
+  "isolate the causal contribution of spatial structure"); the abstract's
+  E3b presentation now reads "within the nine status-stable sat--sat pairs
+  the elevation is x10.7" (v7: "within the 29 status-stable pairs ... 11x
+  and 1.8x per offset arm"), drawn from the new Table 4; the E4 placement
   claim is narrowed to "among the instances decided within budget ... overlaps
   the middle" (v7: "spans the middle"); the nested OLS F-test is now read as
   "descriptive ... not independent confirmation" (v7: "confirms the ladder");
