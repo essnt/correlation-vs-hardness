@@ -97,7 +97,8 @@ the MIT-licensed research code.
   figures). As an archived record it otherwise keeps its v7 wording: the
   abstract opening and the per-arm stratified E3b presentation, and the E4,
   nested-F, E1-conclusion, up-front-design-limit, and solver-scope (CaDiCaL)
-  refinements, and the Methods-section AI-disclosure pointer, are
+  refinements, the Methods-section AI-disclosure pointer, and the
+  post-semicolon contrast clause of the completed IJCAI-2017 sentence, are
   journal-version only.
 - No table values or figure files were altered (table footnote markers were
   normalized from symbols to letters); the three figure files are
