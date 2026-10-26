@@ -42,8 +42,10 @@ The built binary `probSAT` is **not committed** (see root `.gitignore`).
 ./probSAT [options] <DIMACS CNF instance> [<seed>]
 ```
 
-Defaults: break-only polynomial function (`--fct 0`, `--eps 1.0`,
-k-dependent `--cb` = 2.06 for 3-SAT), no wall-clock limit (`maxTries`/
+Defaults: break-only polynomial function (`--fct 0`); for 3-SAT the
+upstream `setupParameters` overrides both constants when `--cb` is not
+given on the command line (`--cb` = 2.06 and `--eps` = 0.9; the bare
+`--eps` default is 1.0), no wall-clock limit (`maxTries`/
 `maxFlips` effectively unbounded).  Seed is the second positional argument;
 `seed=0` is accepted (`srand(0)`, deterministic) with a benign warning.
 
