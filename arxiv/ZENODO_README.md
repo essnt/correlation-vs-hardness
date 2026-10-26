@@ -84,17 +84,21 @@ the MIT-licensed research code.
   is unchanged; solver-scope disclosures were refined (the post-freeze
   Delta=+0.6 arm and the E3b swap arm are labeled CaDiCaL-only), the
   240-pair direction-test exclusion count is completed (82 + 94 + 60 + 4),
-  and two redundant words were dropped from the abstract.
+  two redundant words were dropped from the abstract, inline citations of
+  Tables 1 and 2 were added in the running text, and a one-sentence pointer
+  to the AI-use disclosure was added at the end of the Methods section.
 - The compact version's source (`arxiv/`) received the same textual
   corrections where the two versions share text (instance geometry, generator
   center selection, completed IJCAI-2017 sentence, contribution hedge with the
   "probe the structure-destroying bundle" wording, the abstract's weakened
   conclusion, Discussion softening, AMEND-5 timing, the singular Figure 1
-  caption, table footnote markers); its PDF was recompiled (13 pages, 3
+  caption, the added inline citations of Tables 1 and 2, table footnote
+  markers); its PDF was recompiled (13 pages, 3
   figures). As an archived record it otherwise keeps its v7 wording: the
   abstract opening and the per-arm stratified E3b presentation, and the E4,
   nested-F, E1-conclusion, up-front-design-limit, and solver-scope (CaDiCaL)
-  refinements are journal-version only.
+  refinements, and the Methods-section AI-disclosure pointer, are
+  journal-version only.
 - No table values or figure files were altered (table footnote markers were
   normalized from symbols to letters); the three figure files are
   byte-identical to v7.
