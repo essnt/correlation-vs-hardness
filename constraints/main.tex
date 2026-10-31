@@ -12,6 +12,11 @@
 %% disclosure refinements, listed in the cover letter ("Differences from the
 %% deposited version") with the full line-level diff auditable in the public
 %% repository.
+%% 2026-10-31 (reframe): the abstract now leads with the transferable
+%% preregistered interventional framework and one introductory sentence
+%% states its portability; no data, number, figure, or adjudicated
+%% disclosure sentence was altered, and the full line-level diff remains
+%% auditable in the public repository.
 \documentclass[pdflatex,sn-basic,Numbered]{sn-jnl}
 
 \usepackage{booktabs}
@@ -40,33 +45,35 @@ Satisfiability}
 \author*[1]{\fnm{Jin} \sur{Song}\orcid{https://orcid.org/0009-0000-1407-0905}}\email{j.song.cs@outlook.com}
 \affil*[1]{\orgname{Independent Researcher}, \city{Guangzhou}, \country{China}}
 
-\abstract{A popular intuition holds that constraint instances are easy
-because their ``causes act locally'': variables interacting in
-small neighborhoods should let solvers scale. But observation cannot
-separate locality from the other regularities instances carry. We turn
-it into a falsifiable, interventional claim and test it on conflict-driven
-clause-learning (CDCL) Boolean satisfiability (SAT) solvers: with variable
-count fixed, density matched to each radius's satisfiability threshold,
-and clause-content statistics invariant by construction, we vary the radius
-from which clause variables are drawn. A locality-kernel generator sweeps
-nine radii on a 2-D torus with preregistered threshold-matched
-offsets, 30 paired seeds and two solvers; a degree-preserving swap destroys
-spatial locality while holding every literal occurrence count fixed. Three
-findings. First, the operational satisfiability boundary is not
-radius-invariant: below density 2.5 at radius 0.06, near the classical
-${\approx}4.3$ region by radius 0.22. Second, at matched density,
-difficulty spans 3.4 orders of magnitude across radius among decided
-instances ($F(8,216)=2808.5$; partial $\eta^2\approx0.99$). Third, the swap
-raises difficulty by $16$--$68\times$ ($p\le7\times10^{-10}$) and flips 53
-of the 82 resolved pairs, all toward satisfiability; within the nine
-status-stable sat--sat pairs the elevation is
-$\times10.7$. Exploratory mediation over four collinear mediators yields a
-${\sim}94\%$ community-restructuring share (a consistency check, not a
-mechanism fraction). Under these controls, a degree-preserving
-structure-destroying intervention raises difficulty at matched density ---
-consistent with spatial locality contributing to the causal channel. Claims are scoped to
-$n=400$, direct conjunctive-normal-form (CNF) encodings, and CDCL-family
-solvers.}
+\abstract{Real instances in combinatorial search are solved far faster
+than worst-case analysis predicts; observational studies attribute the
+gap to structural properties. But structure and difficulty are
+confounded by construction: correlations alone cannot separate them. We
+introduce a preregistered interventional framework for causal claims
+about solver behavior: generate paired instances from matched
+distributions, destroy one property while every other statistic is fixed
+by construction, and test response under censoring-aware statistics. We
+instantiate it on Boolean satisfiability. A locality-kernel generator
+draws clause variables from a tunable ``locality radius'' on a 2-D
+torus; a degree-preserving swap chain destroys spatial locality while
+holding every literal's occurrence count exactly fixed. Sweeping nine
+radii at threshold-matched density with 30 paired seeds and two solvers:
+the operational satisfiability boundary is not radius-invariant (below
+density 2.5 at radius 0.06, near the classical ${\approx}4.3$ region by
+radius 0.22); at matched density, difficulty spans 3.4 orders of
+magnitude across radius among decided instances
+($F(8,216)=2808.5$; partial $\eta^2\approx0.99$); and the swap raises
+difficulty by $16$--$68\times$ ($p\le7\times10^{-10}$), flipping 53 of
+the 82 resolved pairs all toward satisfiability. Within the nine
+status-stable sat--sat pairs, the elevation is $\times10.7$; exploratory
+mediation over four collinear mediators attributes a ${\sim}94\%$
+community-restructuring share, a consistency check, not a mechanism
+fraction. Under these controls, a degree-preserving,
+structure-destroying intervention raises difficulty at matched density,
+consistent with spatial locality contributing to the causal channel.
+Claims are scoped to $n=400$, direct conjunctive-normal-form (CNF)
+encodings, and CDCL-family solvers; the framework transfers to further
+structure--difficulty claims.}
 
 \keywords{SAT, CDCL, locality, causal inference, phase transition,
 preregistration}
@@ -119,7 +126,11 @@ means equal $3\alpha$ exactly, varying across $r$ only through the
 threshold-matched density $\alpha$, and the intervention arm's
 degree-preserving swap holds the degree profile exactly fixed. The knob $r$ has a physical
 reading: it is the \emph{spatial span of variable interaction} --- the exact
-quantity the philosophical conjecture is about.
+quantity the philosophical conjecture is about. The design is deliberately
+portable: the same recipe (matched dosing, a degree-preserving
+structure-destroying intervention, censoring-aware statistics) tests any
+claim of the form ``structural property $P$ affects solver $A$ on instance
+family $F$'' that currently rests on correlation alone.
 
 \paragraph{Contributions.}
 \begin{enumerate}
